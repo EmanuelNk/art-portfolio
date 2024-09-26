@@ -42,7 +42,7 @@ body {
   border: 2px solid var(--border-color); /* Add a border around the image */
   /* box-shadow: 0 4px 8px var(--shadow-color); /* Add a subtle shadow for depth */
   border-radius: 0px; /* Round the corners of the image */
-  padding: 20px; /* Add some padding around the image */
+  padding: 5%; /* Add some padding around the image */
   transition: transform var(--transition-time) ease, filter var(--transition-time) ease, opacity var(--transition-time) ease, brightness var(--transition-time) ease; /* Smooth transition for transformations, filter, opacity, and brightness */
 }
 
@@ -54,4 +54,34 @@ body {
   filter: blur(2px) brightness(var(--blur-brightness)); /* Apply blur effect and darken non-centered slides */
   opacity: var(--blur-opacity); /* Reduce opacity of non-centered slides */
   transform: scale(var(--blur-scale)); /* Scale down non-centered slides */
+}
+
+.custom-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  background: none;
+  border: none;
+  font-size: 2.5rem;
+  color: #333;
+  cursor: pointer;
+  opacity: 1; /* Make the arrows always visible */
+}
+
+.custom-arrow:hover {
+  background: none; /* Remove background on hover */
+  color: #000; /* Optional: change color on hover */
+}
+
+.custom-arrow:focus {
+  outline: none;
+}
+
+.custom-arrow-prev {
+  left: 15px; /* Adjust as needed */
+}
+
+.custom-arrow-next {
+  right: 15px; /* Adjust as needed */
 }

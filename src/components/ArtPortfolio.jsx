@@ -41,6 +41,31 @@ function ArtPortfolio() {
     setIsModalOpen(false);
   };
 
+  const renderArrowPrev = (onClickHandler, hasPrev, label) =>
+    hasPrev && (
+      <button
+        type="button"
+        onClick={onClickHandler}
+        className="custom-arrow custom-arrow-prev"
+        aria-label={label}
+      >
+        &#10094; {/* Left arrow symbol */}
+      </button>
+    );
+
+  const renderArrowNext = (onClickHandler, hasNext, label) =>
+    hasNext && (
+      <button
+        type="button"
+        onClick={onClickHandler}
+        className="custom-arrow custom-arrow-next"
+        aria-label={label}
+      >
+        &#10095; {/* Right arrow symbol */}
+      </button>
+    );
+
+
   return (
     <div className="art-portfolio">
       <div className="description" style={{ textAlign: 'center' }}>
@@ -68,7 +93,9 @@ function ArtPortfolio() {
           centerSlidePercentage={50}
           verticalSwipe={'natural'}
           labels= {{ leftArrow: 'Previous', rightArrow: 'Next' }}
-          
+          renderArrowPrev={renderArrowPrev}
+          renderArrowNext={renderArrowNext}
+          showIndicators={false}
         >
           {artPieces.map((artPiece, index) => (
             <div key={index}>
