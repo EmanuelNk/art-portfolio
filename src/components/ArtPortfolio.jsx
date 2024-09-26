@@ -58,6 +58,15 @@ function ArtPortfolio() {
           selectedItem={currentIndex}
           onChange={handleChange}
           onClickItem={handleImageClick}
+          transitionTime={1500}
+          stopOnHover={true}
+          swipeable={true}
+          emulateTouch={true}
+          autoPlay={true}
+          interval={5000}
+          centerMode={true}
+          centerSlidePercentage={50}
+          verticalSwipe={'natural'}
         >
           {artPieces.map((artPiece, index) => (
             <div key={index}>

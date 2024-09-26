@@ -24,7 +24,7 @@ body {
 }
   
 .carousel-container {
-  width: 75%;
+  width: 100%;
   background-color: #dbd6cf;
   margin: 50px auto ; /* Add top margin to create a gap */
   border-radius: 10px; /* Round the corners */
@@ -48,7 +48,7 @@ body {
   height: 500px; /* Set a fixed height */
   object-fit: contain; /* Maintain aspect ratio and contain the image within the area */
   border: 2px solid #ffffff; /* Add a border around the image */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase the shadow for more depth */
+  /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); Increase the shadow for more depth */
   border-radius: 0px; /* Round the corners of the image */
   transition: transform 0.3s ease; /* Smooth transition for transformations */
 }
