@@ -1,0 +1,11 @@
+:root {
+    --primary-color: #6d4f4f;
+    --secondary-color: #a3a09d;
+    --background-color: rgb(224, 218, 210);
+    --border-color: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --blur-opacity: 0.5;
+    --blur-brightness: 0.5;
+    --blur-scale: 0.85;
+    --transition-time: 1s;
+  }
