@@ -1,13 +1,11 @@
 /* ArtPortfolio.css */
-
 /* Import a custom web font from Google Fonts (optional) */
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap');
 @import '../styles/variables.css';
 
-
-/* Set the global font as roboto mono for the entire application */
+/* Set the global font as Marcellus SC for the entire application */
 body {
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Marcellus SC', serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -15,21 +13,30 @@ body {
   box-shadow: 0 4px 8px var(--shadow-color); /* Add a subtle shadow for depth */
 }
 
+.description {
+  font-size: 18px; /* Adjust the font size */
+  color: var(--primary-color); /* Change the text color */
+  text-align: center; /* Center the text */
+  margin-top: 10px; /* Add some space above the text */
+  background-color: var(--background-color); /* Add a semi-transparent background */
+  padding: 10px; /* Add some padding */
+  border-radius: 5px; /* Round the corners */
+}
 .carousel-container {
   width: 90%;
   background-color: var(--secondary-color);
-  margin: 50px auto 0; /* Add top margin to create a gap */
+  margin: 20px auto 0; /* Add top margin to create a gap */
   box-shadow: inset 0 8px 16px var(--shadow-color); /* Add a more visible drop shadow to the carousel, inwards */
   border-radius: 10px; /* Round the corners of the carousel */
 }
 
 
 .legend {
-  font-size: 16px; /* Adjust the font size */
+  font-size: 20px; /* Adjust the font size */
   font-weight: bold; 
   color: var(--primary-color); /* Change the text color */
   text-align: center; /* Center the text */
-  margin-top: 10px; /* Add some space above the text */
+  margin: 30px 0; /* Add some space around the text */
   background-color: var(--background-color); /* Add a semi-transparent background */
   padding: 10px; /* Add some padding */
   border-radius: 5px; /* Round the corners */

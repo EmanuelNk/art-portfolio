@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import './ArtPortfolio.css';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Modal from './Modal/Modal';
+import aboutMeTextURL from '../assets/text/aboutMe.txt';
+import AboutMe from './AboutMe/AboutMe';
 
 const artPieces = [
   {
     url: 'https://picsum.photos/id/239/1000/700',
-    description: 'This is a description for Art Piece 1'
+    description: 'This Is A Description For Art Piece 1'
   },
   {
     url: 'https://picsum.photos/id/240/1000/800',
@@ -15,11 +17,11 @@ const artPieces = [
   },
   {
     url: 'https://picsum.photos/id/241/1200/600',
-    description: 'A landscape painting'
+    description: 'A Landscape Painting'
   },
   {
     url: 'https://picsum.photos/id/242/1000',
-    description: 'Some random art piece'
+    description: 'Some Random Art Piece'
   },
   // Add more images as needed
 ];
@@ -27,6 +29,19 @@ const artPieces = [
 function ArtPortfolio() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [aboutMeText, setAboutMeText] = useState('');
+
+  // Fetch the text file content when the component mounts
+  useEffect(() => {
+    fetch(aboutMeTextURL)
+      .then((response) => response.text())
+      .then((text) => {
+        setAboutMeText(text);
+      })
+      .catch((error) => {
+        console.error('Error fetching the about me text:', error);
+      });
+  }, []);
 
   const handleChange = (index) => {
     setCurrentIndex(index);
@@ -83,16 +98,16 @@ function ArtPortfolio() {
           selectedItem={currentIndex}
           onChange={handleChange}
           onClickItem={handleImageClick}
-          transitionTime={1000}
+          transitionTime={2000}
           stopOnHover={true}
           swipeable={true}
           emulateTouch={true}
           autoPlay={true}
-          interval={5000}
+          interval={7000}
           centerMode={true}
           centerSlidePercentage={50}
           verticalSwipe={'natural'}
-          labels= {{ leftArrow: 'Previous', rightArrow: 'Next' }}
+          labels={{ leftArrow: 'Previous', rightArrow: 'Next' }}
           renderArrowPrev={renderArrowPrev}
           renderArrowNext={renderArrowNext}
           showIndicators={false}
@@ -117,6 +132,7 @@ function ArtPortfolio() {
         onClose={handleCloseModal}
         imageUrl={artPieces[currentIndex].url}
       />
+      <AboutMe text={aboutMeText} />
     </div>
   );
 }
