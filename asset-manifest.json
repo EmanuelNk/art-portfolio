@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/art-portfolio/static/css/main.1177207f.css",
+    "main.js": "/art-portfolio/static/js/main.9d49d836.js",
+    "static/js/453.a59e1ba8.chunk.js": "/art-portfolio/static/js/453.a59e1ba8.chunk.js",
+    "static/media/profile.jpeg": "/art-portfolio/static/media/profile.feeb6758f13e41c26462.jpeg",
+    "static/media/aboutMe.txt": "/art-portfolio/static/media/aboutMe.586362138d0f944eed55.txt",
+    "index.html": "/art-portfolio/index.html",
+    "main.1177207f.css.map": "/art-portfolio/static/css/main.1177207f.css.map",
+    "main.9d49d836.js.map": "/art-portfolio/static/js/main.9d49d836.js.map",
+    "453.a59e1ba8.chunk.js.map": "/art-portfolio/static/js/453.a59e1ba8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1177207f.css",
+    "static/js/main.9d49d836.js"
+  ]
+}
