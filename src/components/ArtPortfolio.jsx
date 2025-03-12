@@ -6,25 +6,23 @@ import Modal from './Modal/Modal';
 import aboutMeTextURL from '../assets/text/aboutMe.txt';
 import AboutMe from './AboutMe/AboutMe';
 import Header from './Header/Header';
+import art1 from '../assets/images/art/art1.JPG';
+import art2 from '../assets/images/art/art2.JPG';
+import art4 from '../assets/images/art/art4.jpg';
 
 const artPieces = [
   {
-    url: 'https://picsum.photos/id/239/1000/700',
-    description: 'This Is A Description For Art Piece 1'
+    url: art1,
+    description: 'Kotel Man'
   },
   {
-    url: 'https://picsum.photos/id/240/1000/800',
-    description: 'Art Piece 2 Description'
+    url: art2,
+    description: 'The Rebbe'
   },
   {
-    url: 'https://picsum.photos/id/241/1200/600',
-    description: 'A Landscape Painting'
-  },
-  {
-    url: 'https://picsum.photos/id/242/1000',
-    description: 'Some Random Art Piece'
-  },
-  // Add more images as needed
+    url: art4,
+    description: 'Anniversary'
+  }
 ];
 
 function ArtPortfolio() {
@@ -96,7 +94,7 @@ function ArtPortfolio() {
   return (
     <div className="art-portfolio">
       <Header />
-      <div className="content-wrapper">
+      <div id="title" className="content-wrapper">
         <div className="description" style={{ textAlign: 'center' }}>
           <h1>Devorah Morrison Nafcha</h1>
           <p>Swipe or use the arrows to explore the gallery.</p>

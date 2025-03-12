@@ -106,11 +106,11 @@ body {
 /* Add responsive styles for mobile devices */
 @media (max-width: 768px) {
   .custom-arrow {
-    opacity: 0.7; /* Increase the opacity for better visibility on mobile */
+    opacity: 0.5; /* Increase the opacity for better visibility on mobile */
     font-size: 3rem; /* Make arrows larger on mobile */
-    background-color: rgba(255, 255, 255, 0.2); /* Add a subtle background */
-    padding: 0 8px; /* Add some padding to create a larger touch target */
-    border-radius: 50%; /* Make it a circle */
+    background-color: transparent; /* Remove the background */
+    padding: 0 0px; /* Add some padding to create a larger touch target */
+    border-radius: 0; /* Remove the circle shape */
     top: 50%; /* Ensure arrows are vertically centered */
   }
   
