@@ -5,6 +5,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Modal from './Modal/Modal';
 import aboutMeTextURL from '../assets/text/aboutMe.txt';
 import AboutMe from './AboutMe/AboutMe';
+import Header from './Header/Header';
 
 const artPieces = [
   {
@@ -83,56 +84,61 @@ function ArtPortfolio() {
 
   return (
     <div className="art-portfolio">
-      <div className="description" style={{ textAlign: 'center' }}>
-        <h1>Devorah Morrison Nafcha</h1>
-        <p>Swipe or use the arrows to explore the gallery.</p>
+      <Header />
+      <div className="content-wrapper">
+        <div className="description" style={{ textAlign: 'center' }}>
+          <h1>Devorah Morrison Nafcha</h1>
+          <p>Swipe or use the arrows to explore the gallery.</p>
+        </div>
+        <div id="gallery" className="carousel-container">
+          <Carousel
+            showArrows={true}
+            infiniteLoop={true}
+            showThumbs={false}
+            showStatus={false}
+            useKeyboardArrows={true}
+            dynamicHeight={true}
+            selectedItem={currentIndex}
+            onChange={handleChange}
+            onClickItem={handleImageClick}
+            transitionTime={2000}
+            stopOnHover={true}
+            swipeable={true}
+            emulateTouch={true}
+            autoPlay={true}
+            interval={7000}
+            centerMode={true}
+            centerSlidePercentage={50}
+            verticalSwipe={'natural'}
+            labels={{ leftArrow: 'Previous', rightArrow: 'Next' }}
+            renderArrowPrev={renderArrowPrev}
+            renderArrowNext={renderArrowNext}
+            showIndicators={false}
+          >
+            {artPieces.map((artPiece, index) => (
+              <div key={index}>
+                <img
+                  src={artPiece.url}
+                  alt={`Art Piece ${index + 1}`}
+                  onClick={handleImageClick}
+                  style={{ cursor: 'pointer' }}
+                />
+              </div>
+            ))}
+          </Carousel>
+        </div>
+        <div className="description-container">
+          <p className="legend">{artPieces[currentIndex].description}</p>
+        </div>
+        <Modal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          imageUrl={artPieces[currentIndex].url}
+        />
+        <div id="about-me">
+          <AboutMe text={aboutMeText} />
+        </div>
       </div>
-      <div className="carousel-container">
-        <Carousel
-          showArrows={true}
-          infiniteLoop={true}
-          showThumbs={false}
-          showStatus={false}
-          useKeyboardArrows={true}
-          dynamicHeight={true}
-          selectedItem={currentIndex}
-          onChange={handleChange}
-          onClickItem={handleImageClick}
-          transitionTime={2000}
-          stopOnHover={true}
-          swipeable={true}
-          emulateTouch={true}
-          autoPlay={true}
-          interval={7000}
-          centerMode={true}
-          centerSlidePercentage={50}
-          verticalSwipe={'natural'}
-          labels={{ leftArrow: 'Previous', rightArrow: 'Next' }}
-          renderArrowPrev={renderArrowPrev}
-          renderArrowNext={renderArrowNext}
-          showIndicators={false}
-        >
-          {artPieces.map((artPiece, index) => (
-            <div key={index}>
-              <img
-                src={artPiece.url}
-                alt={`Art Piece ${index + 1}`}
-                onClick={handleImageClick}
-                style={{ cursor: 'pointer' }}
-              />
-            </div>
-          ))}
-        </Carousel>
-      </div>
-      <div className="description-container">
-        <p className="legend">{artPieces[currentIndex].description}</p>
-      </div>
-      <Modal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        imageUrl={artPieces[currentIndex].url}
-      />
-      <AboutMe text={aboutMeText} />
     </div>
   );
 }
