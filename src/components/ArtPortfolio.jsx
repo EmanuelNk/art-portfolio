@@ -31,6 +31,7 @@ function ArtPortfolio() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [aboutMeText, setAboutMeText] = useState('');
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   // Fetch the text file content when the component mounts
   useEffect(() => {
@@ -42,6 +43,16 @@ function ArtPortfolio() {
       .catch((error) => {
         console.error('Error fetching the about me text:', error);
       });
+  }, []);
+
+  // Add responsive listener for screen size changes
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const handleChange = (index) => {
@@ -97,7 +108,7 @@ function ArtPortfolio() {
             showThumbs={false}
             showStatus={false}
             useKeyboardArrows={true}
-            dynamicHeight={true}
+            dynamicHeight={!isMobile}
             selectedItem={currentIndex}
             onChange={handleChange}
             onClickItem={handleImageClick}
@@ -108,7 +119,7 @@ function ArtPortfolio() {
             autoPlay={true}
             interval={7000}
             centerMode={true}
-            centerSlidePercentage={50}
+            centerSlidePercentage={isMobile ? 85 : 50}
             verticalSwipe={'natural'}
             labels={{ leftArrow: 'Previous', rightArrow: 'Next' }}
             renderArrowPrev={renderArrowPrev}

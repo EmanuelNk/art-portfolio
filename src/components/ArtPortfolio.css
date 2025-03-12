@@ -102,3 +102,74 @@ body {
 .custom-arrow-next {
   right: 15px; /* Adjust as needed */
 }
+
+/* Add responsive styles for mobile devices */
+@media (max-width: 768px) {
+  .custom-arrow {
+    opacity: 0.7; /* Increase the opacity for better visibility on mobile */
+    font-size: 3rem; /* Make arrows larger on mobile */
+    background-color: rgba(255, 255, 255, 0.2); /* Add a subtle background */
+    padding: 0 8px; /* Add some padding to create a larger touch target */
+    border-radius: 50%; /* Make it a circle */
+    top: 50%; /* Ensure arrows are vertically centered */
+  }
+  
+  .carousel .slide.selected img {
+    transform: scale(1.1); /* Make the selected image slightly larger on mobile */
+  }
+  
+  /* Adjust the centerSlidePercentage for mobile */
+  .carousel-container .carousel {
+    width: 100%;
+    height: 100%; /* Take full height of container */
+  }
+  
+  /* Fixed height for carousel container on mobile */
+  .carousel-container {
+    height: 400px; /* Set a fixed height for the container based on portrait orientation */
+    overflow: hidden; /* Hide overflow to maintain the fixed height */
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+  }
+  
+  /* Create fixed dimensions for the carousel slide area */
+  .carousel .slider-wrapper {
+    height: 100%; /* Take full height of the container */
+    display: flex;
+    align-items: center; /* Center content vertically */
+  }
+  
+  .carousel .slider {
+    height: 100%; /* Take full height of the wrapper */
+    display: flex;
+    align-items: center; /* Center content vertically */
+  }
+  
+  .carousel .slide {
+    height: 100%; /* Each slide takes full height */
+    display: flex !important; /* Override any inline styles */
+    align-items: center !important; /* Force vertical centering */
+    justify-content: center !important; /* Force horizontal centering */
+  }
+  
+  /* Ensure the slide divs are full height to allow centering */
+  .carousel .slide > div {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Override the carousel image height for mobile */
+  .carousel-container img {
+    height: auto; /* Allow the height to be determined by the aspect ratio */
+    max-height: 350px; /* Slightly reduced to ensure it fits within the container */
+    padding: 2%; /* Reduce padding to show more of the image */
+    width: auto; /* Allow width to adjust based on aspect ratio */
+    max-width: 95%; /* Prevent images from being too wide */
+    object-fit: contain; /* Ensure the image is fully visible */
+    margin: 0 auto; /* Center horizontally */
+  }
+}
