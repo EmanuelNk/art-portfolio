@@ -164,17 +164,17 @@ function ArtPortfolio() {
         <div id="contact" className="contact-section">
           <h2>Contact</h2>
           <div className="contact-icons">
-            <a href="tel:+1234567890" title="Call me">
+            <a href="tel:+972533464716" title="Call me">
               <FaPhone className="contact-icon" />
-              <span>Call</span>
+              {/* <span>Call</span> */}
             </a>
-            <a href="mailto:your.email@example.com" title="Email me">
+            <a href="mailto:Ariellamorrison03@gmail.com" title="Email me">
               <FaEnvelope className="contact-icon" />
-              <span>Email</span>
+              {/* <span>Email</span> */}
             </a>
-            <a href="https://instagram.com/your-instagram" target="_blank" rel="noopener noreferrer" title="Follow me on Instagram">
+            <a href="https://www.instagram.com/mad_sketched_" target="_blank" rel="noopener noreferrer" title="Follow me on Instagram">
               <FaInstagram className="contact-icon" />
-              <span>Instagram</span>
+              {/* <span>Instagram</span> */}
             </a>
           </div>
         </div>
