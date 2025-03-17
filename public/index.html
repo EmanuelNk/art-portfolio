@@ -2,19 +2,31 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.svg?v=3" type="image/svg+xml" />
+    <link rel="alternate icon" href="%PUBLIC_URL%/favicon.ico?v=3" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
       content="Devorah Morrison Nafcha's Art Portfolio"
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png?v=3" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json?v=3" />
+    <!-- Force favicon refresh -->
+    <script>
+      // This script forces browsers to reload the favicon
+      var link = document.querySelector("link[rel~='icon']");
+      if (link) {
+        var href = link.href;
+        var timeStamp = new Date().getTime();
+        link.href = href.split("?")[0] + "?t=" + timeStamp;
+        console.log("Favicon updated:", link.href);
+      }
+    </script>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
