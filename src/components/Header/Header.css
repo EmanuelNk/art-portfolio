@@ -71,6 +71,26 @@
   width: 100%;
 }
 
+.contact-icons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.contact-icons a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-icons a:hover {
+  color: #000;
+}
+
+.contact-icon {
+  font-size: 1.5rem;
+}
+
 @media (max-width: 768px) {
   .header-content {
     flex-direction: column;
@@ -84,5 +104,9 @@
   .main-nav ul li {
     margin-left: 15px;
     margin-right: 15px;
+  }
+
+  .contact-icons {
+    display: none;
   }
 } 

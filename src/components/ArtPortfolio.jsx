@@ -9,6 +9,7 @@ import Header from './Header/Header';
 import art1 from '../assets/images/art/art1.JPG';
 import art2 from '../assets/images/art/art2.JPG';
 import art4 from '../assets/images/art/art4.jpg';
+import { FaPhone, FaEnvelope, FaInstagram } from 'react-icons/fa';
 
 const artPieces = [
   {
@@ -74,7 +75,7 @@ function ArtPortfolio() {
         className="custom-arrow custom-arrow-prev"
         aria-label={label}
       >
-        &#10094; {/* Left arrow symbol */}
+        &#10094;
       </button>
     );
 
@@ -86,17 +87,17 @@ function ArtPortfolio() {
         className="custom-arrow custom-arrow-next"
         aria-label={label}
       >
-        &#10095; {/* Right arrow symbol */}
+        &#10095;
       </button>
     );
-
 
   return (
     <div className="art-portfolio">
       <Header />
       <div id="title" className="content-wrapper">
         <div className="description" style={{ textAlign: 'center' }}>
-          <h1>Devorah Morrison Nafcha</h1>
+          <h1>Hi, I'm Devorah</h1>
+          <h3>portrait artist</h3>
           <p>Swipe or use the arrows to explore the gallery.</p>
         </div>
         <div id="gallery" className="carousel-container">
@@ -146,6 +147,23 @@ function ArtPortfolio() {
         />
         <div id="about-me">
           <AboutMe text={aboutMeText} />
+        </div>
+        <div id="contact" className="contact-section">
+          <h2>Contact</h2>
+          <div className="contact-icons">
+            <a href="tel:+1234567890" title="Call me">
+              <FaPhone className="contact-icon" />
+              <span>Call</span>
+            </a>
+            <a href="mailto:your.email@example.com" title="Email me">
+              <FaEnvelope className="contact-icon" />
+              <span>Email</span>
+            </a>
+            <a href="https://instagram.com/your-instagram" target="_blank" rel="noopener noreferrer" title="Follow me on Instagram">
+              <FaInstagram className="contact-icon" />
+              <span>Instagram</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>

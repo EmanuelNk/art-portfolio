@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaInstagram, FaEnvelope, FaPhone } from 'react-icons/fa';
 import './Header.css';
 
 function Header() {
@@ -19,8 +20,20 @@ function Header() {
           <ul>
             <li><button onClick={() => scrollToSection('title')}>Gallery</button></li>
             <li><button onClick={() => scrollToSection('about-me')}>About Me</button></li>
+            <li><button onClick={() => scrollToSection('contact')}>Contact</button></li>
           </ul>
         </nav>
+        <div className="contact-icons">
+          <a href="tel:+972533464716" title="Call me">
+            <FaPhone className="contact-icon" />
+          </a>
+          <a href="mailto:enafcha@gmail.com" title="Email me">
+            <FaEnvelope className="contact-icon" />
+          </a>
+          <a href="https://www.instagram.com/mad_sketched_?igsh=cGlmYXJmd2tjdHRt" target="_blank" rel="noopener noreferrer" title="Follow me on Instagram">
+            <FaInstagram className="contact-icon" />
+          </a>
+        </div>
       </div>
     </header>
   );
