@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import './ArtPortfolio.css';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
@@ -14,15 +14,18 @@ import { FaPhone, FaEnvelope, FaInstagram } from 'react-icons/fa';
 const artPieces = [
   {
     url: art1,
-    description: 'Kotel Man'
+    title: 'Kotel Man',
+    description: 'A portrait of a man standing in front of the Kotel in Jerusalem at Tisha B\'Av, the day of mourning for the destruction of the First and Second Temples.'
   },
   {
     url: art2,
-    description: 'The Rebbe'
+    title: 'The Rebbe',
+    description: 'A portrait of the Lubavitcher Rebbe, the founder of the Chabad-Lubavitch movement.'
   },
   {
     url: art4,
-    description: 'Anniversary'
+    title: 'Anniversary',
+    description: 'A portrait I gave my parents for their anniversary.'
   }
 ];
 
@@ -31,6 +34,7 @@ function ArtPortfolio() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [aboutMeText, setAboutMeText] = useState('');
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const carouselRef = useRef(null);
 
   // Fetch the text file content when the component mounts
   useEffect(() => {
@@ -61,10 +65,18 @@ function ArtPortfolio() {
   const handleImageClick = () => {
     console.log(`Image at index ${currentIndex} clicked`);
     setIsModalOpen(true);
+    // Stop the carousel when opening the modal
+    if (carouselRef.current) {
+      carouselRef.current.setState({ autoPlay: false });
+    }
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    // Resume the carousel when closing the modal
+    if (carouselRef.current) {
+      carouselRef.current.setState({ autoPlay: true });
+    }
   };
 
   const renderArrowPrev = (onClickHandler, hasPrev, label) =>
@@ -99,9 +111,11 @@ function ArtPortfolio() {
           <h1>Hi, I'm Devorah</h1>
           <h3>portrait artist</h3>
           <p>Swipe or use the arrows to explore the gallery.</p>
+          <p> Click on an image to learn more about the piece.</p>
         </div>
         <div id="gallery" className="carousel-container">
           <Carousel
+            ref={carouselRef}
             showArrows={true}
             infiniteLoop={true}
             showThumbs={false}
@@ -138,12 +152,14 @@ function ArtPortfolio() {
           </Carousel>
         </div>
         <div className="description-container">
-          <p className="legend">{artPieces[currentIndex].description}</p>
+          <p className="legend">{artPieces[currentIndex].title}</p>
         </div>
         <Modal
           isOpen={isModalOpen}
           onClose={handleCloseModal}
           imageUrl={artPieces[currentIndex].url}
+          title={artPieces[currentIndex].title}
+          description={artPieces[currentIndex].description}
         />
         <div id="about-me">
           <AboutMe text={aboutMeText} />
