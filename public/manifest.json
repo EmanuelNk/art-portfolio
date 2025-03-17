@@ -10,7 +10,7 @@
     {
       "src": "favicon.svg",
       "type": "image/svg+xml",
-      "sizes": "150x150"
+      "sizes": "any"
     },
     {
       "src": "logo192.png",
