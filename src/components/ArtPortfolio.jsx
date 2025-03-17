@@ -14,18 +14,18 @@ import { FaPhone, FaEnvelope, FaInstagram } from 'react-icons/fa';
 const artPieces = [
   {
     url: art1,
-    title: 'Kotel Man',
-    description: 'A portrait of a man standing in front of the Kotel in Jerusalem at Tisha B\'Av, the day of mourning for the destruction of the First and Second Temples.'
+    title: 'Temple Mourning',
+    description: "This portrait is of a man at the western wall during Tisha B'Av. It holds a special place in my heart. I started it on October 2nd 2024, working on it between bomb shelter runs. The reference for this piece is part of @_noamphotography's collection."
   },
   {
     url: art2,
     title: 'The Rebbe',
-    description: 'A portrait of the Lubavitcher Rebbe, the founder of the Chabad-Lubavitch movement.'
+    description: 'This portrait is one of my favorites. I created it during a visit to my hometown in the States—where my art journey began. I was twenty when I drew this, and by then I had been drawing portraits for over 7 years. It captures a special moment in my growth as an artist.'
   },
   {
     url: art4,
     title: 'Anniversary',
-    description: 'A portrait I gave my parents for their anniversary.'
+    description: "This portrait is a huge milestone for me as an artist, filled with sentimental value. It celebrates my parents’ love and marks several personal milestones—it’s my first portrait from my first apartment and the first where I really pushed my attention to detail. I know my 12-year-old self would be amazed by how far I’ve come."
   }
 ];
 
@@ -34,6 +34,7 @@ function ArtPortfolio() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [aboutMeText, setAboutMeText] = useState('');
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const carouselRef = useRef(null);
 
   // Fetch the text file content when the component mounts
@@ -65,18 +66,14 @@ function ArtPortfolio() {
   const handleImageClick = () => {
     console.log(`Image at index ${currentIndex} clicked`);
     setIsModalOpen(true);
-    // Stop the carousel when opening the modal
-    if (carouselRef.current) {
-      carouselRef.current.setState({ autoPlay: false });
-    }
+    // Stop the carousel autoplay when opening the modal
+    setIsAutoPlaying(false);
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    // Resume the carousel when closing the modal
-    if (carouselRef.current) {
-      carouselRef.current.setState({ autoPlay: true });
-    }
+    // Resume the carousel autoplay when closing the modal
+    setIsAutoPlaying(true);
   };
 
   const renderArrowPrev = (onClickHandler, hasPrev, label) =>
@@ -127,13 +124,13 @@ function ArtPortfolio() {
             onClickItem={handleImageClick}
             transitionTime={2000}
             stopOnHover={true}
-            swipeable={true}
-            emulateTouch={true}
-            autoPlay={true}
+            swipeable={!isModalOpen}
+            emulateTouch={!isModalOpen}
+            autoPlay={isAutoPlaying}
             interval={7000}
             centerMode={true}
             centerSlidePercentage={isMobile ? 85 : 50}
-            verticalSwipe={'natural'}
+            verticalSwipe={isModalOpen ? 'none' : 'natural'}
             labels={{ leftArrow: 'Previous', rightArrow: 'Next' }}
             renderArrowPrev={renderArrowPrev}
             renderArrowNext={renderArrowNext}
