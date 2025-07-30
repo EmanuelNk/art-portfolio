@@ -2,7 +2,7 @@
   "name": "art-portfolio",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://emanuelnk.github.io/art-portfolio",
+  "homepage": "https://devorah-art.com",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
