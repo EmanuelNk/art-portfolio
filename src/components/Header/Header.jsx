@@ -27,10 +27,10 @@ function Header() {
           <a href="tel:+972533464716" title="Call me">
             <FaPhone className="contact-icon" />
           </a>
-          <a href="mailto:enafcha@gmail.com" title="Email me">
+          <a href="mailto:Ariellamorrison03@gmail.com" title="Email me">
             <FaEnvelope className="contact-icon" />
           </a>
-          <a href="https://www.instagram.com/mad_sketched_?igsh=cGlmYXJmd2tjdHRt" target="_blank" rel="noopener noreferrer" title="Follow me on Instagram">
+          <a href="https://www.instagram.com/mad_sketched_" target="_blank" rel="noopener noreferrer" title="Follow me on Instagram">
             <FaInstagram className="contact-icon" />
           </a>
         </div>
