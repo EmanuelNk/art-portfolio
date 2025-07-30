@@ -9,24 +9,43 @@ import Header from './Header/Header';
 import art1 from '../assets/images/art/art1.JPG';
 import art2 from '../assets/images/art/art2.JPG';
 import art4 from '../assets/images/art/art4.jpg';
+import art5 from '../assets/images/art/art5.jpg';
+import art6 from '../assets/images/art/art6.jpg';
+import art7 from '../assets/images/art/art7.jpg';
 import { FaPhone, FaEnvelope, FaInstagram } from 'react-icons/fa';
 
 const artPieces = [
   {
     url: art1,
-    title: 'Temple Mourning',
-    description: "This portrait is of a man at the western wall during Tisha B'Av. It holds a special place in my heart. I started it on October 2nd 2024, working on it between bomb shelter runs. The reference for this piece is part of @_noamphotography's collection."
-  },
-  {
-    url: art2,
-    title: 'The Rebbe',
-    description: 'This portrait is one of my favorites. I created it during a visit to my hometown in the States—where my art journey began. I was twenty when I drew this, and by then I had been drawing portraits for over 7 years. It captures a special moment in my growth as an artist.'
+    title: 'The Mourner',
+    description: ''//"This portrait is of a man at the western wall during Tisha B'Av. It holds a special place in my heart. I started it on October 2nd 2024, working on it between bomb shelter runs. The reference for this piece is part of @_noamphotography's collection."
   },
   {
     url: art4,
     title: 'Anniversary',
-    description: "This portrait is a huge milestone for me as an artist, filled with sentimental value. It celebrates my parents’ love and marks several personal milestones—it’s my first portrait from my first apartment and the first where I really pushed my attention to detail. I know my 12-year-old self would be amazed by how far I’ve come."
+    description: ''//"This portrait is a huge milestone for me as an artist, filled with sentimental value. It celebrates my parents’ love and marks several personal milestones—it’s my first portrait from my first apartment and the first where I really pushed my attention to detail. I know my 12-year-old self would be amazed by how far I’ve come."
+  },
+  {
+    url: art5,
+    title: 'Avi & Olivia',
+    description: ''
+  },
+  {
+    url: art7,
+    title: 'Lily',
+    description: ''//'This portrait is one of my favorites. I created it during a visit to my hometown in the States—where my art journey began. I was twenty when I drew this, and by then I had been drawing portraits for over 7 years. It captures a special moment in my growth as an artist.'
+  },
+  {
+    url: art6,
+    title: 'Yacov & Emunah',
+    description: ''
+  },
+  {
+    url: art2,
+    title: 'The Rebbe',
+    description: ''//'This portrait is one of my favorites. I created it during a visit to my hometown in the States—where my art journey began. I was twenty when I drew this, and by then I had been drawing portraits for over 7 years. It captures a special moment in my growth as an artist.'
   }
+
 ];
 
 function ArtPortfolio() {
