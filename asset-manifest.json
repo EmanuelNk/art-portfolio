@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/art-portfolio/static/css/main.5252cd89.css",
-    "main.js": "/art-portfolio/static/js/main.0807d439.js",
-    "static/js/453.a59e1ba8.chunk.js": "/art-portfolio/static/js/453.a59e1ba8.chunk.js",
-    "static/media/art7.jpg": "/art-portfolio/static/media/art7.6b34a28a09ca6e5ec6fb.jpg",
-    "static/media/art5.jpg": "/art-portfolio/static/media/art5.ff0cd322ec2f456a9698.jpg",
-    "static/media/art6.jpg": "/art-portfolio/static/media/art6.0e69f230bd3b3b514b74.jpg",
-    "static/media/art2.JPG": "/art-portfolio/static/media/art2.017a7656257b1afe4832.JPG",
-    "static/media/art4.jpg": "/art-portfolio/static/media/art4.ff9fd5abdebeef30b92b.jpg",
-    "static/media/art1.JPG": "/art-portfolio/static/media/art1.29d5946018e0f25242c3.JPG",
-    "static/media/profile.jpeg": "/art-portfolio/static/media/profile.feeb6758f13e41c26462.jpeg",
-    "index.html": "/art-portfolio/index.html",
-    "static/media/aboutMe.txt": "/art-portfolio/static/media/aboutMe.7abd3210b93a5af60f1f.txt",
-    "main.5252cd89.css.map": "/art-portfolio/static/css/main.5252cd89.css.map",
-    "main.0807d439.js.map": "/art-portfolio/static/js/main.0807d439.js.map",
-    "453.a59e1ba8.chunk.js.map": "/art-portfolio/static/js/453.a59e1ba8.chunk.js.map"
+    "main.css": "/static/css/main.5252cd89.css",
+    "main.js": "/static/js/main.f2bfd590.js",
+    "static/js/453.a59e1ba8.chunk.js": "/static/js/453.a59e1ba8.chunk.js",
+    "static/media/art7.jpg": "/static/media/art7.6b34a28a09ca6e5ec6fb.jpg",
+    "static/media/art5.jpg": "/static/media/art5.ff0cd322ec2f456a9698.jpg",
+    "static/media/art6.jpg": "/static/media/art6.0e69f230bd3b3b514b74.jpg",
+    "static/media/art2.JPG": "/static/media/art2.017a7656257b1afe4832.JPG",
+    "static/media/art4.jpg": "/static/media/art4.ff9fd5abdebeef30b92b.jpg",
+    "static/media/art1.JPG": "/static/media/art1.29d5946018e0f25242c3.JPG",
+    "static/media/profile.jpeg": "/static/media/profile.feeb6758f13e41c26462.jpeg",
+    "index.html": "/index.html",
+    "static/media/aboutMe.txt": "/static/media/aboutMe.7abd3210b93a5af60f1f.txt",
+    "main.5252cd89.css.map": "/static/css/main.5252cd89.css.map",
+    "main.f2bfd590.js.map": "/static/js/main.f2bfd590.js.map",
+    "453.a59e1ba8.chunk.js.map": "/static/js/453.a59e1ba8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.5252cd89.css",
-    "static/js/main.0807d439.js"
+    "static/js/main.f2bfd590.js"
   ]
 }
