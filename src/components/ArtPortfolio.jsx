@@ -124,7 +124,7 @@ function ArtPortfolio() {
       <Header />
       <div id="title" className="content-wrapper">
         <div className="description" style={{ textAlign: 'center' }}>
-          <h1>Hi, I'm Devorah</h1>
+          <h1>Devorah Morrison Nafcha</h1>
           <h3>portrait artist</h3>
           <p>Swipe or use the arrows to explore the gallery.</p>
           <p> Click on an image to learn more about the piece.</p>
