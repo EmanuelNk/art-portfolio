@@ -18,7 +18,7 @@ function Header() {
         </div>
         <nav className="main-nav">
           <ul>
-            <li><button onClick={() => scrollToSection('title')}>Gallery</button></li>
+            <li><button onClick={() => scrollToSection('gallery')}>Gallery</button></li>
             <li><button onClick={() => scrollToSection('about-me')}>About Me</button></li>
             <li><button onClick={() => scrollToSection('contact')}>Contact</button></li>
           </ul>

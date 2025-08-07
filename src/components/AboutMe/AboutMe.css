@@ -1,63 +1,51 @@
+@import '../../styles/variables.css';
+
 .about-me {
-    margin: 40px auto;
-    padding: 20px;
-    width: 87%;
-    background-color: var(--secondary-color);
-    box-shadow: 0 4px 8px var(--shadow-color);
-    border-radius: 10px;
-  }
-  
-  .about-me h2 {
-    font-size: 24px;
-    color: var(--primary-color);
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .about-me-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap; /* Allows wrapping on smaller screens */
-  }
-  
-  .about-me-description {
-    flex: 1;
-    justify-content: left;
-    padding: 10px;
-  }
-  
-.about-me-description p {
-    font-size: 20px;
-    color: var(--primary-color);
-    text-align: justify;
-    padding-left: 20px;
-    padding: 10px; /* Add space from the border */
+  margin: 56px auto;
+  padding: 28px 22px;
+  width: min(1060px, 92%);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  border-radius: 16px;
 }
-  .about-me-photo {
-    flex: 1;
-    display: flex;
-    justify-content: right;
-    padding: 50px;
-    
-  }
-  
-  .about-me-photo img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    flex: 1;
-    padding: auto;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .about-me-content {
-      flex-direction: column;
-    }
-  
-    .about-me-description {
-      padding-right: 0;
-      margin-bottom: 20px;
-    }
-  }
+
+.about-me h2 {
+  font-size: 24px;
+  color: var(--primary-color);
+  margin: 0 0 18px;
+  text-align: center;
+  font-family: 'Marcellus SC', serif;
+}
+
+.about-me-content {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 20px;
+}
+
+.about-me-description p {
+  font-family: 'Outfit', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin: 0;
+}
+
+.about-me-photo { display: grid; place-items: center; }
+
+.about-me-photo img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 14px;
+  border: 1px solid var(--border-color);
+  background: var(--surface-color);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+/* Responsive */
+@media (max-width: 880px) {
+  .about-me-content { grid-template-columns: 1fr; }
+}
