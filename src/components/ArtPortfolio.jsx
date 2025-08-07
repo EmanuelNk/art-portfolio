@@ -1,53 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ArtPortfolio.css';
 import Modal from './Modal/Modal';
 import AboutMe from './AboutMe/AboutMe';
 import Header from './Header/Header';
-import art1 from '../assets/images/art/art1.JPG';
-import art2 from '../assets/images/art/art2.JPG';
-import art4 from '../assets/images/art/art4.jpg';
-import art5 from '../assets/images/art/art5.jpg';
-import art6 from '../assets/images/art/art6.jpg';
-import art7 from '../assets/images/art/art7.jpg';
+import artworks from '../data/artworks.json';
 import { FaPhone, FaEnvelope, FaInstagram } from 'react-icons/fa';
 
-const artPieces = [
-  {
-    url: art1,
-    title: 'The Mourner',
-    description: ''//"This portrait is of a man at the western wall during Tisha B'Av. It holds a special place in my heart. I started it on October 2nd 2024, working on it between bomb shelter runs. The reference for this piece is part of @_noamphotography's collection."
-  },
-  {
-    url: art4,
-    title: 'Anniversary',
-    description: ''//"This portrait is a huge milestone for me as an artist, filled with sentimental value. It celebrates my parents’ love and marks several personal milestones—it’s my first portrait from my first apartment and the first where I really pushed my attention to detail. I know my 12-year-old self would be amazed by how far I’ve come."
-  },
-  {
-    url: art5,
-    title: 'Avi & Olivia',
-    description: ''
-  },
-  {
-    url: art7,
-    title: 'Lily',
-    description: ''//'This portrait is one of my favorites. I created it during a visit to my hometown in the States—where my art journey began. I was twenty when I drew this, and by then I had been drawing portraits for over 7 years. It captures a special moment in my growth as an artist.'
-  },
-  {
-    url: art6,
-    title: 'Yacov & Emunah',
-    description: ''
-  },
-  {
-    url: art2,
-    title: 'The Rebbe',
-    description: ''//'This portrait is one of my favorites. I created it during a visit to my hometown in the States—where my art journey began. I was twenty when I drew this, and by then I had been drawing portraits for over 7 years. It captures a special moment in my growth as an artist.'
-  }
-
-];
+// Build image map from filenames using require.context for bundlers
+const imageContext = require.context('../assets/images/art', false, /\.(png|jpe?g|JPG)$/);
+const artPieces = artworks.map(({ file, title, description }) => ({
+  url: imageContext(`./${file}`),
+  title,
+  description,
+}));
 
 function ArtPortfolio() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
   const openModalAt = (index) => {
     setSelectedIndex(index);
@@ -56,12 +26,112 @@ function ArtPortfolio() {
 
   const handleCloseModal = () => setIsModalOpen(false);
 
+  const goPrev = () => {
+    setSelectedIndex((prev) => (prev - 1 + artPieces.length) % artPieces.length);
+  };
+
+  const goNext = () => {
+    setSelectedIndex((prev) => (prev + 1) % artPieces.length);
+  };
+
+  // Reveal on scroll
+  useEffect(() => {
+    const elements = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  // Parallax backdrop and scroll progress + back-to-top
+  useEffect(() => {
+    const hero = document.querySelector('.hero');
+    const backdrop = document.querySelector('.hero-backdrop');
+    const progressBar = document.querySelector('.scroll-progress');
+
+    const handleMouseMove = (e) => {
+      if (!hero || !backdrop) return;
+      const rect = hero.getBoundingClientRect();
+      const cx = (e.clientX - rect.left) / rect.width - 0.5;
+      const cy = (e.clientY - rect.top) / rect.height - 0.5;
+      backdrop.style.transform = `translate3d(${cx * 24}px, ${cy * 18}px, 0)`;
+    };
+
+    const handleScroll = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+      if (progressBar) progressBar.style.transform = `scaleX(${progress})`;
+      setShowBackToTop(scrollTop > 500);
+    };
+
+    hero?.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      hero?.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // Mouse tilt for cards
+  useEffect(() => {
+    const cards = Array.from(document.querySelectorAll('.masonry-item'));
+    const enter = (e) => {
+      const el = e.currentTarget;
+      el.style.setProperty('--elev', '1');
+    };
+    const move = (e) => {
+      const el = e.currentTarget;
+      const rect = el.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width;
+      const py = (e.clientY - rect.top) / rect.height;
+      const rotX = (0.5 - py) * 6; // max 6deg
+      const rotY = (px - 0.5) * 8; // max 8deg
+      el.style.setProperty('--rx', `${rotX}deg`);
+      el.style.setProperty('--ry', `${rotY}deg`);
+      el.style.setProperty('--mx', `${px}`);
+      el.style.setProperty('--my', `${py}`);
+    };
+    const leave = (e) => {
+      const el = e.currentTarget;
+      el.style.removeProperty('--rx');
+      el.style.removeProperty('--ry');
+      el.style.removeProperty('--mx');
+      el.style.removeProperty('--my');
+      el.style.setProperty('--elev', '0');
+    };
+
+    cards.forEach((c) => {
+      c.addEventListener('mouseenter', enter);
+      c.addEventListener('mousemove', move);
+      c.addEventListener('mouseleave', leave);
+    });
+    return () => {
+      cards.forEach((c) => {
+        c.removeEventListener('mouseenter', enter);
+        c.removeEventListener('mousemove', move);
+        c.removeEventListener('mouseleave', leave);
+      });
+    };
+  }, [artPieces.length]);
+
   return (
     <div className="art-portfolio">
       <Header />
 
       <section id="title" className="hero">
-        <div className="hero-inner">
+        <div className="hero-inner reveal">
           <h1 className="hero-title">Devorah Morrison Nafcha</h1>
           <p className="hero-subtitle">portrait artist</p>
           <div className="hero-ctas">
@@ -72,13 +142,15 @@ function ArtPortfolio() {
         <div className="hero-backdrop" aria-hidden="true" />
       </section>
 
+      <div className="scroll-progress" aria-hidden="true" />
+
       <section id="gallery" className="gallery-section">
-        <h2 className="section-title">Gallery</h2>
+        <h2 className="section-title reveal">Gallery</h2>
         <div className="masonry-grid">
           {artPieces.map((artPiece, index) => (
             <button
               key={artPiece.title + index}
-              className="masonry-item"
+              className="masonry-item reveal"
               onClick={() => openModalAt(index)}
               aria-label={`Open ${artPiece.title}`}
             >
@@ -95,13 +167,15 @@ function ArtPortfolio() {
         imageUrl={artPieces[selectedIndex].url}
         title={artPieces[selectedIndex].title}
         description={artPieces[selectedIndex].description}
+        onPrev={goPrev}
+        onNext={goNext}
       />
 
-      <div id="about-me">
+      <div id="about-me" className="reveal">
         <AboutMe />
       </div>
 
-      <section id="contact" className="contact-section">
+      <section id="contact" className="contact-section reveal">
         <h2>Contact</h2>
         <div className="contact-icons">
           <a href="tel:+972533464716" title="Call me">
@@ -120,6 +194,14 @@ function ArtPortfolio() {
           </a>
         </div>
       </section>
+
+      <button
+        className={`back-to-top ${showBackToTop ? 'visible' : ''}`}
+        aria-label="Back to top"
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      >
+        ↑
+      </button>
     </div>
   );
 }
