@@ -88,10 +88,10 @@ function Modal({ isOpen, onClose, imageUrl, title, description, onPrev, onNext }
           />
         </div>
         <button className="modal-arrow modal-arrow-right" onClick={onNext} aria-label="Next">&#10095;</button>
-        <div className="modal-description">
-          <h2>{title}</h2>
-          <p>{description}</p>
-        </div>
+        <aside className="modal-info">
+          <h2 className="modal-title">{title}</h2>
+          {description && <p className="modal-text">{description}</p>}
+        </aside>
       </div>
     </div>
   );
