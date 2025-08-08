@@ -3,6 +3,7 @@ import './ArtPortfolio.css';
 import Modal from './Modal/Modal';
 import AboutMe from './AboutMe/AboutMe';
 import Header from './Header/Header';
+import heroPortrait from '../assets/images/profile5.jpg';
 import artworks from '../data/artworks.json';
 import { FaPhone, FaEnvelope, FaInstagram } from 'react-icons/fa';
 
@@ -131,15 +132,24 @@ function ArtPortfolio() {
       <Header />
 
       <section id="title" className="hero">
+        <img className="hero-bg" src={heroPortrait} alt="" aria-hidden="true" />
+        <div className="hero-backdrop" aria-hidden="true" />
+        <div className="hero-fade-left" aria-hidden="true" />
+        <div className="hero-fade-right" aria-hidden="true" />
         <div className="hero-inner reveal">
-          <h1 className="hero-title">Devorah Morrison Nafcha</h1>
-          <p className="hero-subtitle">portrait artist</p>
-          <div className="hero-ctas">
-            <a href="#gallery" className="btn btn-primary">View Gallery</a>
-            <a href="#contact" className="btn btn-ghost">Contact</a>
+          <div className="hero-copy">
+            <h1 className="hero-title">
+              <span>Devorah</span>
+              <span>Morrison</span>
+              <span>Nafcha</span>
+            </h1>
+            <p className="hero-subtitle">portrait artist</p>
+            <div className="hero-ctas">
+              <a href="#gallery" className="btn btn-primary">View Gallery</a>
+              <a href="#contact" className="btn btn-ghost">Contact</a>
+            </div>
           </div>
         </div>
-        <div className="hero-backdrop" aria-hidden="true" />
       </section>
 
       <div className="scroll-progress" aria-hidden="true" />
