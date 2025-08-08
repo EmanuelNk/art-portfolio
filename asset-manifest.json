@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.7416d0b6.css",
-    "main.js": "/static/js/main.64575ab5.js",
-    "static/js/453.a59e1ba8.chunk.js": "/static/js/453.a59e1ba8.chunk.js",
-    "static/media/art7.jpg": "/static/media/art7.6b34a28a09ca6e5ec6fb.jpg",
-    "static/media/art5.jpg": "/static/media/art5.ff0cd322ec2f456a9698.jpg",
-    "static/media/art6.jpg": "/static/media/art6.0e69f230bd3b3b514b74.jpg",
-    "static/media/art2.JPG": "/static/media/art2.017a7656257b1afe4832.JPG",
-    "static/media/profile5.jpg": "/static/media/profile5.1fa66d5f7431db2fb2eb.jpg",
-    "static/media/art4.jpg": "/static/media/art4.ff9fd5abdebeef30b92b.jpg",
-    "static/media/art1.JPG": "/static/media/art1.29d5946018e0f25242c3.JPG",
-    "static/media/profile.jpeg": "/static/media/profile.feeb6758f13e41c26462.jpeg",
-    "index.html": "/index.html",
-    "static/media/aboutMe.txt": "/static/media/aboutMe.7abd3210b93a5af60f1f.txt",
-    "main.7416d0b6.css.map": "/static/css/main.7416d0b6.css.map",
-    "main.64575ab5.js.map": "/static/js/main.64575ab5.js.map",
-    "453.a59e1ba8.chunk.js.map": "/static/js/453.a59e1ba8.chunk.js.map"
+    "main.css": "https://devorah-art.com/static/css/main.7416d0b6.css",
+    "main.js": "https://devorah-art.com/static/js/main.1ca7fd11.js",
+    "static/js/453.a59e1ba8.chunk.js": "https://devorah-art.com/static/js/453.a59e1ba8.chunk.js",
+    "static/media/art7.jpg": "https://devorah-art.com/static/media/art7.6b34a28a09ca6e5ec6fb.jpg",
+    "static/media/art5.jpg": "https://devorah-art.com/static/media/art5.ff0cd322ec2f456a9698.jpg",
+    "static/media/art6.jpg": "https://devorah-art.com/static/media/art6.0e69f230bd3b3b514b74.jpg",
+    "static/media/art2.JPG": "https://devorah-art.com/static/media/art2.017a7656257b1afe4832.JPG",
+    "static/media/profile5.jpg": "https://devorah-art.com/static/media/profile5.1fa66d5f7431db2fb2eb.jpg",
+    "static/media/art4.jpg": "https://devorah-art.com/static/media/art4.ff9fd5abdebeef30b92b.jpg",
+    "static/media/art1.JPG": "https://devorah-art.com/static/media/art1.29d5946018e0f25242c3.JPG",
+    "static/media/profile.jpeg": "https://devorah-art.com/static/media/profile.feeb6758f13e41c26462.jpeg",
+    "index.html": "https://devorah-art.com/index.html",
+    "static/media/aboutMe.txt": "https://devorah-art.com/static/media/aboutMe.7abd3210b93a5af60f1f.txt",
+    "main.7416d0b6.css.map": "https://devorah-art.com/static/css/main.7416d0b6.css.map",
+    "main.1ca7fd11.js.map": "https://devorah-art.com/static/js/main.1ca7fd11.js.map",
+    "453.a59e1ba8.chunk.js.map": "https://devorah-art.com/static/js/453.a59e1ba8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7416d0b6.css",
-    "static/js/main.64575ab5.js"
+    "static/js/main.1ca7fd11.js"
   ]
 }
