@@ -17,7 +17,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "predeploy": "npm run build",
+    "predeploy": "PUBLIC_URL=https://devorah-art.com npm run build",
     "deploy": "gh-pages -d build",
     "start": "HOST=0.0.0.0 react-scripts start",
     "build": "react-scripts build",
