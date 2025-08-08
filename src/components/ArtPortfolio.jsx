@@ -1,203 +1,218 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Carousel } from 'react-responsive-carousel';
+import React, { useEffect, useState } from 'react';
 import './ArtPortfolio.css';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Modal from './Modal/Modal';
-import aboutMeTextURL from '../assets/text/aboutMe.txt';
 import AboutMe from './AboutMe/AboutMe';
 import Header from './Header/Header';
-import art1 from '../assets/images/art/art1.JPG';
-import art2 from '../assets/images/art/art2.JPG';
-import art4 from '../assets/images/art/art4.jpg';
-import art5 from '../assets/images/art/art5.jpg';
-import art6 from '../assets/images/art/art6.jpg';
-import art7 from '../assets/images/art/art7.jpg';
+import heroPortrait from '../assets/images/profile5.jpg';
+import artworks from '../data/artworks.json';
 import { FaPhone, FaEnvelope, FaInstagram } from 'react-icons/fa';
 
-const artPieces = [
-  {
-    url: art1,
-    title: 'The Mourner',
-    description: ''//"This portrait is of a man at the western wall during Tisha B'Av. It holds a special place in my heart. I started it on October 2nd 2024, working on it between bomb shelter runs. The reference for this piece is part of @_noamphotography's collection."
-  },
-  {
-    url: art4,
-    title: 'Anniversary',
-    description: ''//"This portrait is a huge milestone for me as an artist, filled with sentimental value. It celebrates my parents’ love and marks several personal milestones—it’s my first portrait from my first apartment and the first where I really pushed my attention to detail. I know my 12-year-old self would be amazed by how far I’ve come."
-  },
-  {
-    url: art5,
-    title: 'Avi & Olivia',
-    description: ''
-  },
-  {
-    url: art7,
-    title: 'Lily',
-    description: ''//'This portrait is one of my favorites. I created it during a visit to my hometown in the States—where my art journey began. I was twenty when I drew this, and by then I had been drawing portraits for over 7 years. It captures a special moment in my growth as an artist.'
-  },
-  {
-    url: art6,
-    title: 'Yacov & Emunah',
-    description: ''
-  },
-  {
-    url: art2,
-    title: 'The Rebbe',
-    description: ''//'This portrait is one of my favorites. I created it during a visit to my hometown in the States—where my art journey began. I was twenty when I drew this, and by then I had been drawing portraits for over 7 years. It captures a special moment in my growth as an artist.'
-  }
-
-];
+// Build image map from filenames using require.context for bundlers
+const imageContext = require.context('../assets/images/art', false, /\.(png|jpe?g|JPG)$/);
+const artPieces = artworks.map(({ file, title, description }) => ({
+  url: imageContext(`./${file}`),
+  title,
+  description,
+}));
 
 function ArtPortfolio() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [aboutMeText, setAboutMeText] = useState('');
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const carouselRef = useRef(null);
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
-  // Fetch the text file content when the component mounts
+  const openModalAt = (index) => {
+    setSelectedIndex(index);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => setIsModalOpen(false);
+
+  const goPrev = () => {
+    setSelectedIndex((prev) => (prev - 1 + artPieces.length) % artPieces.length);
+  };
+
+  const goNext = () => {
+    setSelectedIndex((prev) => (prev + 1) % artPieces.length);
+  };
+
+  // Reveal on scroll
   useEffect(() => {
-    fetch(aboutMeTextURL)
-      .then((response) => response.text())
-      .then((text) => {
-        setAboutMeText(text);
-      })
-      .catch((error) => {
-        console.error('Error fetching the about me text:', error);
-      });
+    const elements = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
   }, []);
 
-  // Add responsive listener for screen size changes
+  // Parallax backdrop and scroll progress + back-to-top
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+    const hero = document.querySelector('.hero');
+    const backdrop = document.querySelector('.hero-backdrop');
+    const progressBar = document.querySelector('.scroll-progress');
+
+    const handleMouseMove = (e) => {
+      if (!hero || !backdrop) return;
+      const rect = hero.getBoundingClientRect();
+      const cx = (e.clientX - rect.left) / rect.width - 0.5;
+      const cy = (e.clientY - rect.top) / rect.height - 0.5;
+      backdrop.style.transform = `translate3d(${cx * 24}px, ${cy * 18}px, 0)`;
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    const handleScroll = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+      if (progressBar) progressBar.style.transform = `scaleX(${progress})`;
+      setShowBackToTop(scrollTop > 500);
+    };
+
+    hero?.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      hero?.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
-  const handleChange = (index) => {
-    setCurrentIndex(index);
-  };
+  // Mouse tilt for cards
+  useEffect(() => {
+    const cards = Array.from(document.querySelectorAll('.masonry-item'));
+    const enter = (e) => {
+      const el = e.currentTarget;
+      el.style.setProperty('--elev', '1');
+    };
+    const move = (e) => {
+      const el = e.currentTarget;
+      const rect = el.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width;
+      const py = (e.clientY - rect.top) / rect.height;
+      const rotX = (0.5 - py) * 6; // max 6deg
+      const rotY = (px - 0.5) * 8; // max 8deg
+      el.style.setProperty('--rx', `${rotX}deg`);
+      el.style.setProperty('--ry', `${rotY}deg`);
+      el.style.setProperty('--mx', `${px}`);
+      el.style.setProperty('--my', `${py}`);
+    };
+    const leave = (e) => {
+      const el = e.currentTarget;
+      el.style.removeProperty('--rx');
+      el.style.removeProperty('--ry');
+      el.style.removeProperty('--mx');
+      el.style.removeProperty('--my');
+      el.style.setProperty('--elev', '0');
+    };
 
-  const handleImageClick = () => {
-    console.log(`Image at index ${currentIndex} clicked`);
-    setIsModalOpen(true);
-    // Stop the carousel autoplay when opening the modal
-    setIsAutoPlaying(false);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    // Resume the carousel autoplay when closing the modal
-    setIsAutoPlaying(true);
-  };
-
-  const renderArrowPrev = (onClickHandler, hasPrev, label) =>
-    hasPrev && (
-      <button
-        type="button"
-        onClick={onClickHandler}
-        className="custom-arrow custom-arrow-prev"
-        aria-label={label}
-      >
-        &#10094;
-      </button>
-    );
-
-  const renderArrowNext = (onClickHandler, hasNext, label) =>
-    hasNext && (
-      <button
-        type="button"
-        onClick={onClickHandler}
-        className="custom-arrow custom-arrow-next"
-        aria-label={label}
-      >
-        &#10095;
-      </button>
-    );
+    cards.forEach((c) => {
+      c.addEventListener('mouseenter', enter);
+      c.addEventListener('mousemove', move);
+      c.addEventListener('mouseleave', leave);
+    });
+    return () => {
+      cards.forEach((c) => {
+        c.removeEventListener('mouseenter', enter);
+        c.removeEventListener('mousemove', move);
+        c.removeEventListener('mouseleave', leave);
+      });
+    };
+  }, [artPieces.length]);
 
   return (
     <div className="art-portfolio">
       <Header />
-      <div id="title" className="content-wrapper">
-        <div className="description" style={{ textAlign: 'center' }}>
-          <h1>Devorah Morrison Nafcha</h1>
-          <h3>portrait artist</h3>
-          <p>Swipe or use the arrows to explore the gallery.</p>
-          <p> Click on an image to learn more about the piece.</p>
-        </div>
-        <div id="gallery" className="carousel-container">
-          <Carousel
-            ref={carouselRef}
-            showArrows={true}
-            infiniteLoop={true}
-            showThumbs={false}
-            showStatus={false}
-            useKeyboardArrows={true}
-            dynamicHeight={!isMobile}
-            selectedItem={currentIndex}
-            onChange={handleChange}
-            onClickItem={handleImageClick}
-            transitionTime={2000}
-            stopOnHover={true}
-            swipeable={!isModalOpen}
-            emulateTouch={!isModalOpen}
-            autoPlay={isAutoPlaying}
-            interval={7000}
-            centerMode={true}
-            centerSlidePercentage={isMobile ? 85 : 50}
-            verticalSwipe={isModalOpen ? 'none' : 'natural'}
-            labels={{ leftArrow: 'Previous', rightArrow: 'Next' }}
-            renderArrowPrev={renderArrowPrev}
-            renderArrowNext={renderArrowNext}
-            showIndicators={false}
-          >
-            {artPieces.map((artPiece, index) => (
-              <div key={index}>
-                <img
-                  src={artPiece.url}
-                  alt={`Art Piece ${index + 1}`}
-                  onClick={handleImageClick}
-                  style={{ cursor: 'pointer' }}
-                />
-              </div>
-            ))}
-          </Carousel>
-        </div>
-        <div className="description-container">
-          <p className="legend">{artPieces[currentIndex].title}</p>
-        </div>
-        <Modal
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          imageUrl={artPieces[currentIndex].url}
-          title={artPieces[currentIndex].title}
-          description={artPieces[currentIndex].description}
-        />
-        <div id="about-me">
-          <AboutMe text={aboutMeText} />
-        </div>
-        <div id="contact" className="contact-section">
-          <h2>Contact</h2>
-          <div className="contact-icons">
-            <a href="tel:+972533464716" title="Call me">
-              <FaPhone className="contact-icon" />
-              {/* <span>Call</span> */}
-            </a>
-            <a href="mailto:Ariellamorrison03@gmail.com" title="Email me">
-              <FaEnvelope className="contact-icon" />
-              {/* <span>Email</span> */}
-            </a>
-            <a href="https://www.instagram.com/mad_sketched_" target="_blank" rel="noopener noreferrer" title="Follow me on Instagram">
-              <FaInstagram className="contact-icon" />
-              {/* <span>Instagram</span> */}
-            </a>
+
+      <section id="title" className="hero">
+        <img className="hero-bg" src={heroPortrait} alt="" aria-hidden="true" />
+        <div className="hero-backdrop" aria-hidden="true" />
+        <div className="hero-fade-left" aria-hidden="true" />
+        <div className="hero-fade-right" aria-hidden="true" />
+        <div className="hero-inner reveal">
+          <div className="hero-copy">
+            <h1 className="hero-title">
+              <span>Devorah</span>
+              <span>Morrison</span>
+              <span>Nafcha</span>
+            </h1>
+            <p className="hero-subtitle">portrait artist</p>
+            <p className="hero-location">Jerusalem, Israel</p>
+            <div className="hero-ctas">
+              <a href="#gallery" className="btn btn-primary">View Gallery</a>
+              <a href="#contact" className="btn btn-ghost">Contact</a>
+            </div>
           </div>
         </div>
+      </section>
+
+      <div className="scroll-progress" aria-hidden="true" />
+
+      <section id="gallery" className="gallery-section">
+        <h2 className="section-title reveal">Gallery</h2>
+        <div className="masonry-grid">
+          {artPieces.map((artPiece, index) => (
+            <button
+              key={artPiece.title + index}
+              className="masonry-item reveal"
+              onClick={() => openModalAt(index)}
+              aria-label={`Open ${artPiece.title}`}
+            >
+              <img src={artPiece.url} alt={artPiece.title} />
+              <span className="masonry-caption">{artPiece.title}</span>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        imageUrl={artPieces[selectedIndex].url}
+        title={artPieces[selectedIndex].title}
+        description={artPieces[selectedIndex].description}
+        onPrev={goPrev}
+        onNext={goNext}
+      />
+
+      <div id="about-me" className="reveal">
+        <AboutMe />
       </div>
+
+      <section id="contact" className="contact-section reveal">
+        <h2>Contact</h2>
+        <div className="contact-icons">
+          <a href="tel:+972533464716" title="Call me">
+            <FaPhone className="contact-icon" />
+          </a>
+          <a href="mailto:Ariellamorrison03@gmail.com" title="Email me">
+            <FaEnvelope className="contact-icon" />
+          </a>
+          <a
+            href="https://www.instagram.com/mad_sketched_"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Follow me on Instagram"
+          >
+            <FaInstagram className="contact-icon" />
+          </a>
+        </div>
+      </section>
+
+      <button
+        className={`back-to-top ${showBackToTop ? 'visible' : ''}`}
+        aria-label="Back to top"
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      >
+        ↑
+      </button>
     </div>
   );
 }

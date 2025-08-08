@@ -1,11 +1,22 @@
 :root {
-    --primary-color: #6d4f4f;
-    --secondary-color: #b8b0a0;
-    --background-color: rgb(224, 218, 210);
-    --border-color: #ffffff;
-    --shadow-color: rgba(0, 0, 0, 0.1);
-    --blur-opacity: 0.5;
-    --blur-brightness: 0.5;
-    --blur-scale: 0.85;
-    --transition-time: 1s;
-  }
+  /* Core palette */
+  --background-color: #0f0f12;
+  --surface-color: #15151a;
+  --primary-color: #e8d6c3; /* headings and accents */
+  --accent-color: #b69373; /* subtle gold accent */
+  --text-color: #f2f2f2;
+  --text-muted: #c9c9cf;
+
+  /* Strokes and shadows */
+  --border-color: rgba(255, 255, 255, 0.12);
+  --shadow-color: rgba(0, 0, 0, 0.5);
+
+  /* Motion */
+  --blur-opacity: 0.5;
+  --blur-brightness: 0.5;
+  --blur-scale: 0.96;
+  --transition-time: 0.6s;
+
+  /* Layout */
+  --max-width: 1200px;
+}
