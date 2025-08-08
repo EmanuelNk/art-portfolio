@@ -144,6 +144,7 @@ function ArtPortfolio() {
               <span>Nafcha</span>
             </h1>
             <p className="hero-subtitle">portrait artist</p>
+            <p className="hero-location">Jerusalem, Israel</p>
             <div className="hero-ctas">
               <a href="#gallery" className="btn btn-primary">View Gallery</a>
               <a href="#contact" className="btn btn-ghost">Contact</a>

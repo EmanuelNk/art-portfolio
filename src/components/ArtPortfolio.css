@@ -101,6 +101,14 @@ body {
 
 .hero-copy { max-width: 780px; }
 .hero-title span { display: block; }
+.hero-location {
+  margin: 5px 0 25px;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: clamp(0.75rem, 1.6vw, 0.95rem);
+  font-family: 'Outfit', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
 
 /* Hero portrait anchored to the right */
 .hero-portrait {
@@ -127,11 +135,12 @@ body {
 
 .hero-title {
   font-family: 'Cinzel', 'Marcellus SC', serif;
-  font-weight: 600;
+  font-weight: 300;
   font-size: clamp(2.4rem, 7vw, 5rem);
   letter-spacing: 0.015em;
   color: var(--primary-color);
-  margin: 0 0 8px;
+  line-height: 0.9; /* tighter line spacing */
+  margin: 0 0 20px;
 }
 
 /* Removed decorative underline for a cleaner look */
@@ -141,8 +150,8 @@ body {
   font-weight: 300;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--text-muted);
-  margin: 0 0 28px;
+  color: rgba(255,255,255,0.8);
+  margin: 0 0 15px;
 }
 
 .hero-ctas { display: flex; gap: 12px; }
