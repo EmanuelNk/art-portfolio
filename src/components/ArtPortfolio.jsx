@@ -9,10 +9,11 @@ import { FaPhone, FaEnvelope, FaInstagram } from 'react-icons/fa';
 
 // Build image map from filenames using require.context for bundlers
 const imageContext = require.context('../assets/images/art', false, /\.(png|jpe?g|JPG)$/);
-const artPieces = artworks.map(({ file, title, description }) => ({
+const artPieces = artworks.map(({ file, title, description, size }) => ({
   url: imageContext(`./${file}`),
   title,
   description,
+  sizeText: size || '',
 }));
 
 function ArtPortfolio() {
@@ -161,11 +162,14 @@ function ArtPortfolio() {
           {artPieces.map((artPiece, index) => (
             <button
               key={artPiece.title + index}
-              className="masonry-item reveal"
+              className={`masonry-item reveal`}
               onClick={() => openModalAt(index)}
               aria-label={`Open ${artPiece.title}`}
             >
               <img src={artPiece.url} alt={artPiece.title} />
+              {artPiece.sizeText && (
+                <span className="masonry-size" aria-hidden="true">{artPiece.sizeText}</span>
+              )}
               <span className="masonry-caption">{artPiece.title}</span>
             </button>
           ))}
