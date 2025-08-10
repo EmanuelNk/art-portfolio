@@ -199,7 +199,7 @@ body {
   max-width: var(--max-width);
   margin: 0 auto;
   column-count: 2; /* two columns on large screens */
-  column-gap: 20px;
+  column-gap: 28px; /* increased spacing between columns */
 }
 
 @media (max-width: 980px) {
@@ -216,28 +216,45 @@ body {
   background: transparent;
   border: none;
   padding: 0;
-  margin: 0 0 20px;
+  margin: 0 0 28px; /* increased spacing between rows */
   cursor: zoom-in;
   display: block;
   transform: perspective(1000px) rotateX(var(--rx, 0)) rotateY(var(--ry, 0));
+}
+
+/* Frosted glass frame (optional wrapper if used) */
+.masonry-frame {
+  position: relative;
+  padding: 20px; /* narrow frame width */
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: saturate(120%) blur(6px);
 }
 
 .masonry-item img {
   width: 100%;
   height: auto; /* preserve aspect ratio */
   display: block;
-  border-radius: 14px;
+  border-radius: 12px; /* inside the frame */
   background: var(--surface-color);
   border: 1px solid rgba(255,255,255,0.12);
   box-shadow: 0 10px 30px rgba(0,0,0,0.35);
   transition: transform .5s ease, box-shadow .5s ease, filter .5s ease;
 }
 
+/* Restore hover animation */
+.masonry-item:hover img {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+  filter: saturate(1.05);
+}
+
 /* Title badge (bottom-left) */
 .masonry-caption {
   position: absolute;
-  left: 10px;
-  bottom: 10px;
+  left: 18px;
+  bottom: 18px;
   padding: 8px 10px;
   font-family: 'Outfit', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   font-weight: 500;
@@ -252,8 +269,8 @@ body {
 /* Size badge (top-right) */
 .masonry-size {
   position: absolute;
-  right: 10px;
-  top: 10px;
+  right: 18px;
+  top: 18px;
   padding: 6px 10px;
   font-family: 'Outfit', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   font-weight: 500;
