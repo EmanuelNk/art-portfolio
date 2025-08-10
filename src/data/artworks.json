@@ -1,9 +1,9 @@
 [
   { "file": "art1.JPG", "title": "The Mourner", "description": "", "size": "18\"x24\"" },
   { "file": "art5.jpg", "title": "Avi & Olivia", "description": "", "size": "18\"x24\"" },
-  { "file": "art8.jpg", "title": "Tefillin", "description": "", "size": "18\"x24\"" },
-    { "file": "art6.jpg", "title": "Yacov & Emunah", "description": "", "size": "18\"x24\"" },
   { "file": "art7.jpg", "title": "Lily", "description": "", "size": "18\"x24\"" },
+  { "file": "art6.jpg", "title": "Yacov & Emunah", "description": "", "size": "18\"x24\"" },
+  { "file": "art8.jpg", "title": "Tefillin", "description": "", "size": "18\"x24\"" },
   { "file": "art2.JPG", "title": "The Rebbe", "description": "", "size": "18\"x24\"" },
   { "file": "art5.jpg", "title": "Avi & Olivia", "description": "", "size": "18\"x24\"" },
   { "file": "art4.jpg", "title": "Anniversary", "description": "", "size": "11\"x14\"" }

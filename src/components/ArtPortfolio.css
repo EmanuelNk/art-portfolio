@@ -198,8 +198,8 @@ body {
 .masonry-grid {
   max-width: var(--max-width);
   margin: 0 auto;
-  column-count: 3;
-  column-gap: 16px;
+  column-count: 2; /* two columns on large screens */
+  column-gap: 20px;
 }
 
 @media (max-width: 980px) {
@@ -216,7 +216,7 @@ body {
   background: transparent;
   border: none;
   padding: 0;
-  margin: 0 0 16px;
+  margin: 0 0 20px;
   cursor: zoom-in;
   display: block;
   transform: perspective(1000px) rotateX(var(--rx, 0)) rotateY(var(--ry, 0));
