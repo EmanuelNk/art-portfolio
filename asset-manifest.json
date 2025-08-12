@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "https://devorah-art.com/static/css/main.8441936b.css",
-    "main.js": "https://devorah-art.com/static/js/main.3901340c.js",
+    "main.js": "https://devorah-art.com/static/js/main.10f96554.js",
     "static/js/453.a59e1ba8.chunk.js": "https://devorah-art.com/static/js/453.a59e1ba8.chunk.js",
     "static/media/art7.jpg": "https://devorah-art.com/static/media/art7.6b34a28a09ca6e5ec6fb.jpg",
     "static/media/art5.jpg": "https://devorah-art.com/static/media/art5.ff0cd322ec2f456a9698.jpg",
@@ -15,11 +15,11 @@
     "index.html": "https://devorah-art.com/index.html",
     "static/media/aboutMe.txt": "https://devorah-art.com/static/media/aboutMe.7abd3210b93a5af60f1f.txt",
     "main.8441936b.css.map": "https://devorah-art.com/static/css/main.8441936b.css.map",
-    "main.3901340c.js.map": "https://devorah-art.com/static/js/main.3901340c.js.map",
+    "main.10f96554.js.map": "https://devorah-art.com/static/js/main.10f96554.js.map",
     "453.a59e1ba8.chunk.js.map": "https://devorah-art.com/static/js/453.a59e1ba8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8441936b.css",
-    "static/js/main.3901340c.js"
+    "static/js/main.10f96554.js"
   ]
 }
