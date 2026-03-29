@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Marcellus+SC&family=Outfit:wght@300;400;500;600&display=swap');
+@import '../../styles/variables.css';
+
+.oils-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 600px at 10% 0%, rgba(182,147,115,0.12), transparent),
+    radial-gradient(900px 500px at 90% 20%, rgba(232,214,195,0.07), transparent),
+    var(--background-color);
+}
+
+/* Header area */
+.oils-hero {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 140px 40px 56px;
+}
+
+.oils-back-link {
+  display: inline-block;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 32px;
+  transition: color 0.2s ease;
+}
+
+.oils-back-link:hover { color: var(--primary-color); }
+
+.oils-page-title {
+  font-family: 'Cinzel', 'Marcellus SC', serif;
+  font-weight: 300;
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  color: var(--primary-color);
+  letter-spacing: 0.015em;
+  line-height: 1;
+  margin: 0 0 16px;
+}
+
+.oils-page-subtitle {
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-weight: 300;
+  font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin: 0;
+}
+
+/* Category cards */
+.oils-categories {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 40px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.oils-card {
+  display: block;
+  text-decoration: none;
+  color: var(--text-color);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: var(--surface-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.oils-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+  border-color: rgba(255,255,255,0.2);
+}
+
+.oils-card-image {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.oils-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease, filter 0.4s ease;
+  filter: saturate(0.9);
+}
+
+.oils-card:hover .oils-card-image img {
+  transform: scale(1.03);
+  filter: saturate(1.05);
+}
+
+.oils-card-image--empty {
+  background: rgba(255,255,255,0.025);
+  display: grid;
+  place-items: center;
+}
+
+.oils-card-plus {
+  font-size: 2.2rem;
+  color: rgba(255,255,255,0.12);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 200;
+}
+
+.oils-card-label {
+  padding: 20px 24px;
+}
+
+.oils-card-label h2 {
+  font-family: 'Marcellus SC', serif;
+  font-weight: 400;
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  color: var(--primary-color);
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .oils-hero { padding: 130px 20px 40px; }
+  .oils-categories { grid-template-columns: 1fr; padding: 0 20px 60px; }
+}

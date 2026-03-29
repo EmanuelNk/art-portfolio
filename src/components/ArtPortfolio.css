@@ -180,6 +180,14 @@ body {
   background: rgba(255,255,255,0.04);
 }
 
+/* Oil paintings button — warm amber tint over a subtle thumbnail */
+.btn-oil {
+  background:
+    linear-gradient(115deg, rgba(160,100,45,0.72) 0%, rgba(182,147,115,0.55) 100%),
+    var(--oil-bg, none) center / cover;
+  border-color: rgba(182,147,115,0.35);
+}
+
 /* Gallery Section */
 .gallery-section {
   padding: 40px 20px 12px;

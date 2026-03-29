@@ -1,13 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaInstagram, FaEnvelope, FaPhone } from 'react-icons/fa';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Header.css';
 
 function Header() {
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const goToSection = (sectionId) => {
+    if (location.pathname === '/') {
+      scrollToSection(sectionId);
+    } else {
+      navigate('/', { state: { scrollTo: sectionId } });
+    }
+  };
+
+  const goToCharcoal = () => {
+    setGalleryOpen(false);
+    goToSection('gallery');
+  };
+
+  const goToOils = () => {
+    setGalleryOpen(false);
+    navigate('/oils');
   };
 
   return (
@@ -18,9 +41,23 @@ function Header() {
         </div>
         <nav className="main-nav">
           <ul>
-            <li><button onClick={() => scrollToSection('gallery')}>Gallery</button></li>
-            <li><button onClick={() => scrollToSection('about-me')}>About Me</button></li>
-            <li><button onClick={() => scrollToSection('contact')}>Contact</button></li>
+            <li
+              className="nav-dropdown"
+              onMouseEnter={() => setGalleryOpen(true)}
+              onMouseLeave={() => setGalleryOpen(false)}
+            >
+              <button className={galleryOpen ? 'dropdown-active' : ''}>
+                Gallery <span className="dropdown-arrow">▾</span>
+              </button>
+              {galleryOpen && (
+                <ul className="dropdown-menu">
+                  <li><button onClick={goToCharcoal}>Charcoal</button></li>
+                  <li><button onClick={goToOils}>Oil paintings</button></li>
+                </ul>
+              )}
+            </li>
+            <li><button onClick={() => goToSection('about-me')}>About Me</button></li>
+            <li><button onClick={() => goToSection('contact')}>Contact</button></li>
           </ul>
         </nav>
         <div className="contact-icons">
@@ -39,4 +76,4 @@ function Header() {
   );
 }
 
-export default Header; 
+export default Header;

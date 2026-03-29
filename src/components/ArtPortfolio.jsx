@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './ArtPortfolio.css';
 import Modal from './Modal/Modal';
 import AboutMe from './AboutMe/AboutMe';
 import Header from './Header/Header';
 import heroPortrait from '../assets/images/profile5.jpg';
+import oilThumbnail from '../assets/images/art/oil/mini1.jpeg';
 import artworks from '../data/artworks.json';
 import { FaPhone, FaEnvelope, FaInstagram } from 'react-icons/fa';
 
@@ -20,6 +22,20 @@ function ArtPortfolio() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const location = useLocation();
+  // Capture scroll target once on mount — intentionally not in deps
+  const scrollTarget = useRef(location.state?.scrollTo || null);
+
+  // Scroll to section when arriving here from another route
+  useEffect(() => {
+    if (!scrollTarget.current) return;
+    const id = scrollTarget.current;
+    const timer = setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   const openModalAt = (index) => {
     setSelectedIndex(index);
@@ -126,6 +142,7 @@ function ArtPortfolio() {
         c.removeEventListener('mouseleave', leave);
       });
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [artPieces.length]);
 
   return (
@@ -147,7 +164,14 @@ function ArtPortfolio() {
             <p className="hero-subtitle">portrait artist</p>
             <p className="hero-location">Jerusalem, Israel</p>
             <div className="hero-ctas">
-              <a href="#gallery" className="btn btn-primary">View Gallery</a>
+              <a href="#gallery" className="btn btn-primary">Charcoal works</a>
+              <Link
+                to="/oils"
+                className="btn btn-primary btn-oil"
+                style={{ '--oil-bg': `url(${oilThumbnail})` }}
+              >
+                Oil paintings
+              </Link>
               <a href="#contact" className="btn btn-ghost">Contact</a>
             </div>
           </div>
