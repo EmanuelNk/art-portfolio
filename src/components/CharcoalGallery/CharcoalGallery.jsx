@@ -1,34 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 import Modal from '../Modal/Modal';
+import artworks from '../../data/artworks.json';
 import '../ArtPortfolio.css';
-import './OilsGallery.css';
+import './CharcoalGallery.css';
 
-const oilContext = require.context(
-  '../../assets/images/art/oil',
+const imageContext = require.context(
+  '../../assets/images/art',
   false,
-  /\.(png|jpe?g|jpg)$/i
+  /\.(png|jpe?g|JPG)$/
 );
-const oilPieces = oilContext
-  .keys()
-  .sort()
-  .map((key) => ({
-    url: oilContext(key),
-    title: key
-      .replace(/^\.\//, '')
-      .replace(/\.[^.]+$/, '')
-      .replace(/[-_]/g, ' '),
-    description: '',
-    sizeText: '',
-  }));
 
-function OilsGallery({ category }) {
-  const isMinis = category === 'minis';
-  const pieces = isMinis ? oilPieces : [];
+const artPieces = artworks.map(({ file, title, description, size }) => ({
+  url: imageContext(`./${file}`),
+  title,
+  description,
+  sizeText: size || '',
+}));
 
+function CharcoalGallery() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
   const openModalAt = (i) => {
     setSelectedIndex(i);
@@ -36,9 +29,9 @@ function OilsGallery({ category }) {
   };
 
   const goPrev = () =>
-    setSelectedIndex((p) => (p - 1 + oilPieces.length) % oilPieces.length);
+    setSelectedIndex((p) => (p - 1 + artPieces.length) % artPieces.length);
   const goNext = () =>
-    setSelectedIndex((p) => (p + 1) % oilPieces.length);
+    setSelectedIndex((p) => (p + 1) % artPieces.length);
 
   useEffect(() => {
     const els = document.querySelectorAll('.reveal');
@@ -57,7 +50,19 @@ function OilsGallery({ category }) {
   }, []);
 
   useEffect(() => {
-    if (!isMinis) return;
+    const bar = document.querySelector('.scroll-progress');
+    const onScroll = () => {
+      const top = window.scrollY;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      if (bar) bar.style.transform = `scaleX(${max > 0 ? top / max : 0})`;
+      setShowBackToTop(top > 500);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
     const cards = Array.from(document.querySelectorAll('.masonry-item'));
     const enter = (e) => e.currentTarget.style.setProperty('--elev', '1');
     const move = (e) => {
@@ -86,32 +91,17 @@ function OilsGallery({ category }) {
         c.removeEventListener('mouseleave', leave);
       });
     };
-  }, [isMinis]);
-
-  if (!isMinis) {
-    return (
-      <div className="oils-gallery-page">
-        <Header />
-        <div className="oils-gallery-header">
-          <Link to="/oils" className="oils-back-link">← Oil paintings</Link>
-        </div>
-        <div className="oils-large-empty">
-          <p>More works coming soon</p>
-        </div>
-      </div>
-    );
-  }
+  }, []);
 
   return (
-    <div className="oils-gallery-page">
+    <div className="charcoal-page">
       <Header />
-      <div className="oils-gallery-header">
-        <Link to="/oils" className="oils-back-link">← Oil paintings</Link>
-      </div>
+      <div className="scroll-progress" aria-hidden="true" />
 
-      <section className="gallery-section oils-gallery-section">
+      <section className="gallery-section">
+        <h2 className="section-title reveal">Gallery</h2>
         <div className="masonry-grid">
-          {pieces.map((piece, index) => (
+          {artPieces.map((piece, index) => (
             <button
               key={piece.title + index}
               className="masonry-item reveal"
@@ -119,25 +109,36 @@ function OilsGallery({ category }) {
               aria-label={`Open ${piece.title}`}
             >
               <img src={piece.url} alt={piece.title} />
+              {piece.sizeText && (
+                <span className="masonry-size" aria-hidden="true">
+                  {piece.sizeText}
+                </span>
+              )}
               <span className="masonry-caption">{piece.title}</span>
             </button>
           ))}
         </div>
       </section>
 
-      {oilPieces.length > 0 && (
-        <Modal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          imageUrl={oilPieces[selectedIndex]?.url}
-          title={oilPieces[selectedIndex]?.title}
-          description={oilPieces[selectedIndex]?.description}
-          onPrev={goPrev}
-          onNext={goNext}
-        />
-      )}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        imageUrl={artPieces[selectedIndex].url}
+        title={artPieces[selectedIndex].title}
+        description={artPieces[selectedIndex].description}
+        onPrev={goPrev}
+        onNext={goNext}
+      />
+
+      <button
+        className={`back-to-top ${showBackToTop ? 'visible' : ''}`}
+        aria-label="Back to top"
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      >
+        ↑
+      </button>
     </div>
   );
 }
 
-export default OilsGallery;
+export default CharcoalGallery;

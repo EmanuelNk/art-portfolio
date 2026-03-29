@@ -1,76 +1,49 @@
 import React, { useState } from 'react';
-import { FaInstagram, FaEnvelope, FaPhone } from 'react-icons/fa';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { FaInstagram, FaEnvelope, FaPhone, FaBars, FaTimes } from 'react-icons/fa';
 import './Header.css';
 
 function Header() {
-  const [galleryOpen, setGalleryOpen] = useState(false);
-  const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const isHome = location.pathname === '/';
 
-  const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const goToSection = (sectionId) => {
-    if (location.pathname === '/') {
-      scrollToSection(sectionId);
-    } else {
-      navigate('/', { state: { scrollTo: sectionId } });
-    }
-  };
-
-  const goToCharcoal = () => {
-    setGalleryOpen(false);
-    goToSection('gallery');
-  };
-
-  const goToOils = () => {
-    setGalleryOpen(false);
-    navigate('/oils');
-  };
+  const close = () => setMenuOpen(false);
 
   return (
-    <header className="main-header">
-      <div className="header-content">
-        <div className="logo">
-          <h2>Devorah Morrison Nafcha</h2>
-        </div>
-        <nav className="main-nav">
-          <ul>
-            <li
-              className="nav-dropdown"
-              onMouseEnter={() => setGalleryOpen(true)}
-              onMouseLeave={() => setGalleryOpen(false)}
+    <header className={`site-header${isHome ? ' site-header--home' : ''}`}>
+      <div className="header-inner">
+        <Link to="/" className="header-name" onClick={close}>
+          Devorah Morrison Nafcha
+        </Link>
+
+        <button
+          className="header-hamburger"
+          onClick={() => setMenuOpen((o) => !o)}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+        >
+          {menuOpen ? <FaTimes /> : <FaBars />}
+        </button>
+
+        <nav className={`header-nav${menuOpen ? ' header-nav--open' : ''}`}>
+          <Link to="/charcoal" className="header-link" onClick={close}>Charcoal</Link>
+          <Link to="/oils" className="header-link" onClick={close}>Oil paintings</Link>
+          <Link to="/about" className="header-link" onClick={close}>About</Link>
+          <Link to="/contact" className="header-link" onClick={close}>Contact</Link>
+
+          <div className="header-icons">
+            <a href="tel:+972533464716" title="Call me"><FaPhone /></a>
+            <a href="mailto:Ariellamorrison03@gmail.com" title="Email me"><FaEnvelope /></a>
+            <a
+              href="https://www.instagram.com/mad_sketched_"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Instagram"
             >
-              <button className={galleryOpen ? 'dropdown-active' : ''}>
-                Gallery <span className="dropdown-arrow">▾</span>
-              </button>
-              {galleryOpen && (
-                <ul className="dropdown-menu">
-                  <li><button onClick={goToCharcoal}>Charcoal</button></li>
-                  <li><button onClick={goToOils}>Oil paintings</button></li>
-                </ul>
-              )}
-            </li>
-            <li><button onClick={() => goToSection('about-me')}>About Me</button></li>
-            <li><button onClick={() => goToSection('contact')}>Contact</button></li>
-          </ul>
+              <FaInstagram />
+            </a>
+          </div>
         </nav>
-        <div className="contact-icons">
-          <a href="tel:+972533464716" title="Call me">
-            <FaPhone className="contact-icon" />
-          </a>
-          <a href="mailto:Ariellamorrison03@gmail.com" title="Email me">
-            <FaEnvelope className="contact-icon" />
-          </a>
-          <a href="https://www.instagram.com/mad_sketched_" target="_blank" rel="noopener noreferrer" title="Follow me on Instagram">
-            <FaInstagram className="contact-icon" />
-          </a>
-        </div>
       </div>
     </header>
   );

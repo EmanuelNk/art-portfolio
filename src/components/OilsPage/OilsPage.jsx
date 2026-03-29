@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 import './OilsPage.css';
 
-// Load all oil images; use the first as the minis card thumbnail
-const oilContext = require.context('../../assets/images/art/oil', false, /\.(png|jpe?g|jpg)$/i);
-const oilImages = oilContext.keys().sort().map((key) => oilContext(key));
+const oilContext = require.context(
+  '../../assets/images/art/oil',
+  false,
+  /\.(png|jpe?g|jpg)$/i
+);
+const oilImages = oilContext.keys().sort().map((k) => oilContext(k));
 const minisThumbnail = oilImages[0];
 
 function OilsPage() {
@@ -14,8 +17,7 @@ function OilsPage() {
       <Header />
 
       <div className="oils-hero">
-        <Link to="/" className="oils-back-link">← Back</Link>
-        <h1 className="oils-page-title">Oil Paintings</h1>
+        <h1 className="oils-page-title">Oil paintings</h1>
         <p className="oils-page-subtitle">Still life · Landscape</p>
       </div>
 
@@ -24,17 +26,17 @@ function OilsPage() {
           <div className="oils-card-image">
             <img src={minisThumbnail} alt="Mini still lifes" />
           </div>
-          <div className="oils-card-label">
-            <h2>Mini still lifes</h2>
+          <div className="oils-card-body">
+            <h2 className="oils-card-title">Mini still lifes</h2>
+            <p className="oils-card-sub">{oilImages.length} works</p>
           </div>
         </Link>
 
         <Link to="/oils/large" className="oils-card">
-          <div className="oils-card-image oils-card-image--empty">
-            <span className="oils-card-plus">+</span>
-          </div>
-          <div className="oils-card-label">
-            <h2>Large paintings</h2>
+          <div className="oils-card-image oils-card-image--placeholder" />
+          <div className="oils-card-body">
+            <h2 className="oils-card-title">Large paintings</h2>
+            <p className="oils-card-sub">Coming soon</p>
           </div>
         </Link>
       </div>
