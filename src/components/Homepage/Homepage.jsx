@@ -48,6 +48,7 @@ const oilPieces = [
 function FocusCarousel({ images, label, onItemClick }) {
   const trackRef = useRef(null);
   const jumping = useRef(false);
+  const setWRef = useRef(0);
   const count = images.length;
   const tripled = useMemo(() => [...images, ...images, ...images], [images]);
 
@@ -66,23 +67,42 @@ function FocusCarousel({ images, label, onItemClick }) {
     });
   }, []);
 
-  useEffect(() => {
+  const initCarousel = useCallback(() => {
     const track = trackRef.current;
     if (!track) return;
     const items = Array.from(track.querySelectorAll('.fc-item'));
     if (items.length < count * 3) return;
-
     const setW = items[count].offsetLeft - items[0].offsetLeft;
+    if (setW === 0) return;
+    setWRef.current = setW;
     const centerOn = items[count + Math.floor(count / 2)];
     track.style.scrollSnapType = 'none';
     track.scrollLeft =
       centerOn.offsetLeft - track.offsetWidth / 2 + centerOn.offsetWidth / 2;
     updateFocus();
     requestAnimationFrame(() => { track.style.scrollSnapType = ''; });
+  }, [count, updateFocus]);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    initCarousel();
+
+    // Re-init once images have loaded — scroll-snap can silently reposition
+    // the track when image heights resolve, leaving blur/scale stale and
+    // breaking the infinite-loop jump thresholds.
+    const imgs = Array.from(track.querySelectorAll('img'));
+    const onImageLoad = () => {
+      if (imgs.every(img => img.complete)) initCarousel();
+    };
+    imgs.forEach(img => { if (!img.complete) img.addEventListener('load', onImageLoad); });
 
     const onScroll = () => {
       if (jumping.current) return;
       updateFocus();
+      const setW = setWRef.current;
+      if (!setW) return;
       if (track.scrollLeft < setW * 0.4) {
         jumping.current = true;
         track.style.scrollSnapType = 'none';
@@ -99,12 +119,13 @@ function FocusCarousel({ images, label, onItemClick }) {
     };
 
     track.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', updateFocus);
+    window.addEventListener('resize', initCarousel);
     return () => {
       track.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', updateFocus);
+      window.removeEventListener('resize', initCarousel);
+      imgs.forEach(img => img.removeEventListener('load', onImageLoad));
     };
-  }, [count, updateFocus]);
+  }, [count, updateFocus, initCarousel]);
 
   return (
     <div className="fc-row">
@@ -117,7 +138,7 @@ function FocusCarousel({ images, label, onItemClick }) {
             onClick={() => onItemClick(i % count)}
             aria-label={`View ${img.alt}`}
           >
-            <img src={img.src} alt={img.alt} draggable="false" />
+            <img src={img.src} alt={img.alt} draggable="false" loading="eager" />
           </button>
         ))}
       </div>
