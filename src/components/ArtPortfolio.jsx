@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import './ArtPortfolio.css';
 import Modal from './Modal/Modal';
 import Header from './Header/Header';
-import heroPortrait from '../assets/images/profile5.jpg';
+import heroPortrait from '../assets/images/profile6.jpg';
 import artworks from '../data/artworks.json';
 import { FaPhone, FaEnvelope, FaInstagram } from 'react-icons/fa';
 

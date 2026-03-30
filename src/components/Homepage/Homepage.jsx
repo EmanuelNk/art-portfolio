@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useCallback, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 import Modal from '../Modal/Modal';
-import heroImage from '../../assets/images/profile5.jpg';
+import heroImage from '../../assets/images/profile6.jpg';
 import charcoal1 from '../../assets/images/art/art2.JPG';
 import charcoal2 from '../../assets/images/art/art1.JPG';
 import oil1 from '../../assets/images/art/oil-large/couple-in-rome.jpg';
