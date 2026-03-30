@@ -1,0 +1,7 @@
+@import '../../styles/variables.css';
+
+.about-page {
+  min-height: 100vh;
+  background: var(--bg);
+  padding-top: 60px;
+}

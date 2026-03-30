@@ -1,0 +1,41 @@
+@import '../../styles/variables.css';
+
+.oils-gallery-page {
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.oils-gallery-header {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 90px 28px 16px;
+}
+
+.oils-back-link {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.35);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.oils-back-link:hover { color: rgba(255,255,255,0.7); }
+
+.oils-gallery-section { padding-top: 0; }
+
+/* large paintings — empty state */
+.oils-large-empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+}
+
+.oils-large-empty p {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.25);
+}
