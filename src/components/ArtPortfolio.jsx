@@ -2,10 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './ArtPortfolio.css';
 import Modal from './Modal/Modal';
-import AboutMe from './AboutMe/AboutMe';
 import Header from './Header/Header';
 import heroPortrait from '../assets/images/profile5.jpg';
-import oilThumbnail from '../assets/images/art/oil/mini1.jpeg';
 import artworks from '../data/artworks.json';
 import { FaPhone, FaEnvelope, FaInstagram } from 'react-icons/fa';
 
@@ -151,28 +149,21 @@ function ArtPortfolio() {
 
       <section id="title" className="hero">
         <img className="hero-bg" src={heroPortrait} alt="" aria-hidden="true" />
-        <div className="hero-backdrop" aria-hidden="true" />
         <div className="hero-fade-left" aria-hidden="true" />
-        <div className="hero-fade-right" aria-hidden="true" />
-        <div className="hero-inner reveal">
+        <div className="hero-fade-bottom" aria-hidden="true" />
+        <div className="hero-inner">
           <div className="hero-copy">
             <h1 className="hero-title">
               <span>Devorah</span>
               <span>Morrison</span>
               <span>Nafcha</span>
             </h1>
-            <p className="hero-subtitle">portrait artist</p>
+            <p className="hero-subtitle">Portrait Artist</p>
             <p className="hero-location">Jerusalem, Israel</p>
             <div className="hero-ctas">
-              <a href="#gallery" className="btn btn-primary">Charcoal works</a>
-              <Link
-                to="/oils"
-                className="btn btn-primary btn-oil"
-                style={{ '--oil-bg': `url(${oilThumbnail})` }}
-              >
-                Oil paintings
-              </Link>
-              <a href="#contact" className="btn btn-ghost">Contact</a>
+              <Link to="/charcoal" className="btn btn-primary">Charcoal works</Link>
+              <Link to="/oils" className="btn btn-oil">Oil paintings</Link>
+              <Link to="/contact" className="btn btn-ghost">Contact</Link>
             </div>
           </div>
         </div>

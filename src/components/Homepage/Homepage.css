@@ -15,25 +15,34 @@
   background: var(--bg);
 }
 
-/* ── photo ── */
+/* ── photo — shifted right so face zooms into right side ── */
 .hero-bg {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 80% 28%;
+  object-position: 108% 28%;
   filter: grayscale(100%) contrast(105%);
+  transform: translateX(22%);
+  will-change: transform;
+}
+
+@media (max-width: 980px) {
+  .hero-bg { transform: translateX(4%); }
+}
+@media (max-width: 720px) {
+  .hero-bg { transform: none; object-position: center 25%; }
 }
 
 /* ── gradients ── */
 .hero-fade-left {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right,
-    rgba(14,14,13,0.7) 0%,
-    rgba(14,14,13,0.35) 28%,
-    transparent 52%
+  background: linear-gradient(
+    to right,
+    #0e0e0d 25%,
+    transparent 65%
   );
   pointer-events: none;
   z-index: 1;
@@ -41,10 +50,10 @@
 .hero-fade-bottom {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top,
-    rgba(14,14,13,0.75) 0%,
-    rgba(14,14,13,0.35) 22%,
-    transparent 48%
+  background: linear-gradient(
+    to top,
+    #0e0e0d 5%,
+    transparent 35%
   );
   pointer-events: none;
   z-index: 1;
@@ -54,9 +63,12 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 70px;
-  background: rgba(14,14,13,0.5);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  height: 80px;
+  background: linear-gradient(to bottom,
+    rgba(14,14,13,0.55) 0%,
+    rgba(14,14,13,0.3) 60%,
+    transparent 100%
+  );
   pointer-events: none;
   z-index: 1;
 }
@@ -317,8 +329,6 @@
    RESPONSIVE
    ════════════════════════════════════════ */
 @media (max-width: 768px) {
-  .hero-bg { object-position: center 20%; }
-
   .hero-fade-left { display: none; }
 
   .hero-fade-bottom {
