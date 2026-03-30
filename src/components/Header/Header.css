@@ -14,9 +14,9 @@
   padding: 14px 0;
 }
 
-/* ── homepage: same bar but positioned absolute so it overlays the hero ── */
+/* ── homepage: fixed like all other pages — stays visible on scroll ── */
 .site-header--home {
-  position: absolute;
+  position: fixed;
 }
 
 .header-inner {
@@ -40,7 +40,7 @@
 }
 .header-name:hover { color: #fff; }
 
-/* ── nav row (right) ── */
+/* ── desktop nav row (right) ── */
 .header-nav {
   display: flex;
   align-items: center;
@@ -90,7 +90,7 @@
   background: rgba(255,255,255,0.09);
 }
 
-/* ── hamburger (mobile only) ── */
+/* ── hamburger (mobile only, lives inside the header bar) ── */
 .header-hamburger {
   display: none;
   background: none;
@@ -101,54 +101,80 @@
   padding: 4px;
 }
 
-/* ── mobile ── */
+/* ── mobile overlay (portaled to body) ── */
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: #0e0e0d;
+  z-index: 9999;
+  /* always in the DOM but hidden on desktop */
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.mobile-overlay--open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-overlay-close {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.55);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 6px;
+  line-height: 1;
+}
+.mobile-overlay-close:hover { color: #fff; }
+
+/* nav links + icons stacked and centered */
+.mobile-overlay-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+}
+
+.mobile-overlay-nav .header-link {
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+  padding: 16px 28px;
+  color: rgba(255,255,255,0.65);
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: center;
+  display: block;
+}
+.mobile-overlay-nav .header-link:hover {
+  color: #fff;
+  background: none;
+}
+
+.mobile-overlay-nav .header-icons {
+  margin: 28px 0 0;
+  gap: 20px;
+  justify-content: center;
+}
+.mobile-overlay-nav .header-icons a {
+  width: 44px;
+  height: 44px;
+  font-size: 16px;
+}
+
+/* ── mobile breakpoint ── */
 @media (max-width: 768px) {
   .header-inner { padding: 0 20px; }
-
-  .header-hamburger {
-    display: block;
-    position: relative;
-    z-index: 1002;
-  }
-
-  .header-nav {
-    position: fixed;
-    inset: 0;
-    background: rgba(14,14,13,0.97);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    opacity: 0;
-    pointer-events: none;
-    visibility: hidden;
-    transition: opacity 0.3s;
-    z-index: 1001;
-  }
-
-  .header-nav--open {
-    opacity: 1;
-    pointer-events: auto;
-    visibility: visible;
-  }
-
-  .header-link {
-    font-size: 1.1rem;
-    letter-spacing: 0.04em;
-    padding: 12px 20px;
-  }
-
-  .header-icons {
-    margin-left: 0;
-    gap: 18px;
-    margin-top: 8px;
-  }
-
-  .header-icons a {
-    width: 42px;
-    height: 42px;
-    font-size: 16px;
-  }
+  .header-hamburger { display: block; }
+  .header-nav { display: none; }
+  .mobile-overlay { display: flex; }
 }

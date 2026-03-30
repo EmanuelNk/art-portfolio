@@ -36,8 +36,9 @@
   margin: 0 auto;
   padding: 0 40px 80px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  grid-template-columns: 280px 280px;
+  justify-content: start;
+  gap: 20px;
 }
 
 .oils-card {

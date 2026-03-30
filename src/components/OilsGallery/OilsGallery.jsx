@@ -2,30 +2,38 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 import Modal from '../Modal/Modal';
+import oilMinisData from '../../data/oil-minis.json';
+import oilLargeData from '../../data/oil-large.json';
 import '../ArtPortfolio.css';
 import './OilsGallery.css';
 
-const oilContext = require.context(
+const miniContext = require.context(
   '../../assets/images/art/oil',
   false,
   /\.(png|jpe?g|jpg)$/i
 );
-const oilPieces = oilContext
-  .keys()
-  .sort()
-  .map((key) => ({
-    url: oilContext(key),
-    title: key
-      .replace(/^\.\//, '')
-      .replace(/\.[^.]+$/, '')
-      .replace(/[-_]/g, ' '),
-    description: '',
-    sizeText: '',
-  }));
+const oilMiniPieces = oilMinisData.map(({ file, title, description, size }) => ({
+  url: miniContext(`./${file}`),
+  title,
+  description,
+  sizeText: size || '',
+}));
+
+const largeContext = require.context(
+  '../../assets/images/art/oil-large',
+  false,
+  /\.(png|jpe?g|jpg)$/i
+);
+const oilLargePieces = oilLargeData.map(({ file, title, description, size }) => ({
+  url: largeContext(`./${file}`),
+  title,
+  description,
+  sizeText: size || '',
+}));
 
 function OilsGallery({ category }) {
   const isMinis = category === 'minis';
-  const pieces = isMinis ? oilPieces : [];
+  const pieces = isMinis ? oilMiniPieces : oilLargePieces;
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,9 +44,9 @@ function OilsGallery({ category }) {
   };
 
   const goPrev = () =>
-    setSelectedIndex((p) => (p - 1 + oilPieces.length) % oilPieces.length);
+    setSelectedIndex((p) => (p - 1 + pieces.length) % pieces.length);
   const goNext = () =>
-    setSelectedIndex((p) => (p + 1) % oilPieces.length);
+    setSelectedIndex((p) => (p + 1) % pieces.length);
 
   useEffect(() => {
     const els = document.querySelectorAll('.reveal');
@@ -57,7 +65,6 @@ function OilsGallery({ category }) {
   }, []);
 
   useEffect(() => {
-    if (!isMinis) return;
     const cards = Array.from(document.querySelectorAll('.masonry-item'));
     const enter = (e) => e.currentTarget.style.setProperty('--elev', '1');
     const move = (e) => {
@@ -86,21 +93,7 @@ function OilsGallery({ category }) {
         c.removeEventListener('mouseleave', leave);
       });
     };
-  }, [isMinis]);
-
-  if (!isMinis) {
-    return (
-      <div className="oils-gallery-page">
-        <Header />
-        <div className="oils-gallery-header">
-          <Link to="/oils" className="oils-back-link">← Oil paintings</Link>
-        </div>
-        <div className="oils-large-empty">
-          <p>More works coming soon</p>
-        </div>
-      </div>
-    );
-  }
+  }, []);
 
   return (
     <div className="oils-gallery-page">
@@ -119,19 +112,24 @@ function OilsGallery({ category }) {
               aria-label={`Open ${piece.title}`}
             >
               <img src={piece.url} alt={piece.title} />
+              {piece.sizeText && (
+                <span className="masonry-size" aria-hidden="true">
+                  {piece.sizeText}
+                </span>
+              )}
               <span className="masonry-caption">{piece.title}</span>
             </button>
           ))}
         </div>
       </section>
 
-      {oilPieces.length > 0 && (
+      {pieces.length > 0 && (
         <Modal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
-          imageUrl={oilPieces[selectedIndex]?.url}
-          title={oilPieces[selectedIndex]?.title}
-          description={oilPieces[selectedIndex]?.description}
+          imageUrl={pieces[selectedIndex]?.url}
+          title={pieces[selectedIndex]?.title}
+          description={pieces[selectedIndex]?.description}
           onPrev={goPrev}
           onNext={goNext}
         />
