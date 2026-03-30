@@ -61,9 +61,9 @@
   max-height: 70vh;
   object-fit: contain;
   margin: 0; /* avoid extra bottom space */
-  border-radius: 12px;
+  border-radius: 2px;
   background: var(--surface-color);
-  border: 1px solid var(--border-color);
+  border: 8px solid rgba(240,237,232,0.88);
   box-shadow: 0 10px 30px rgba(0,0,0,0.35);
   cursor: grab;
   will-change: transform;

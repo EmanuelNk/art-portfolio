@@ -113,6 +113,50 @@
 }
 
 /* ════════════════════════════════════════
+   MIXED GRID — portfolio overview
+   ════════════════════════════════════════ */
+.mixed-grid-section {
+  background: var(--bg);
+  padding: 72px 28px 64px;
+}
+
+.mixed-grid-heading {
+  font-family: 'Cinzel', 'Marcellus SC', serif;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  color: var(--text-primary);
+  text-align: center;
+  margin: 0 0 40px;
+}
+
+.mixed-grid {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  column-count: 3;
+  column-gap: 20px;
+}
+
+.mixed-grid-item {
+  break-inside: avoid;
+  margin: 0 0 20px;
+}
+
+.mixed-grid-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 8px solid rgba(240,237,232,0.88);
+  border-radius: 2px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.45);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.mixed-grid-item img:hover {
+  transform: translateY(-4px) scale(1.015);
+  box-shadow: 0 14px 38px rgba(0,0,0,0.55);
+}
+
+/* ════════════════════════════════════════
    MEDIUM SPLIT — two halves, 420 px
    ════════════════════════════════════════ */
 .medium-split {
@@ -152,7 +196,7 @@
 }
 .split-half:hover .split-hover-overlay { opacity: 1; }
 
-/* ── image cards ── */
+/* ── image cards (framed) ── */
 .split-cards {
   display: flex;
   justify-content: center;
@@ -166,10 +210,11 @@
 .split-card {
   width: 120px;
   height: 170px;
-  border-radius: 3px;
+  border-radius: 2px;
   overflow: hidden;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.45);
+  box-shadow: 0 6px 22px rgba(0,0,0,0.55);
   flex-shrink: 0;
+  border: 6px solid rgba(240,237,232,0.88);
 }
 .split-card:first-child {
   transform: rotate(-4deg);
@@ -241,106 +286,11 @@
 }
 
 /* ════════════════════════════════════════
-   CAROUSEL — auto-scrolling mixed gallery
-   ════════════════════════════════════════ */
-.carousel-section {
-  background: var(--bg);
-  padding: 56px 0 48px;
-  overflow: hidden;
-}
-
-.carousel-label {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: rgba(255,255,255,0.22);
-  text-align: center;
-  margin: 0 0 28px;
-}
-
-.carousel-track-wrap {
-  position: relative;
-  width: 100%;
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 8%,
-    black 92%,
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 8%,
-    black 92%,
-    transparent 100%
-  );
-}
-
-.carousel-track {
-  display: flex;
-  gap: 16px;
-  width: max-content;
-  animation: carousel-scroll 50s linear infinite;
-}
-
-.carousel-track:hover {
-  animation-play-state: paused;
-}
-
-@keyframes carousel-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.carousel-slide {
-  position: relative;
-  flex-shrink: 0;
-  width: 220px;
-  height: 290px;
-  border-radius: 6px;
-  overflow: hidden;
-  border: 0.5px solid rgba(255,255,255,0.08);
-}
-
-.carousel-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  filter: brightness(0.92);
-  transition: filter 0.3s;
-}
-
-.carousel-slide:hover img {
-  filter: brightness(1);
-}
-
-.carousel-medium {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: rgba(255,255,255,0.5);
-  background: rgba(0,0,0,0.5);
-  backdrop-filter: blur(4px);
-  padding: 4px 10px;
-  border-radius: 20px;
-  border: 0.5px solid rgba(255,255,255,0.1);
-  opacity: 0;
-  transition: opacity 0.25s;
-}
-.carousel-slide:hover .carousel-medium { opacity: 1; }
-
-/* ════════════════════════════════════════
    RESPONSIVE
    ════════════════════════════════════════ */
 @media (max-width: 980px) {
   .hero-bg { transform: translateX(4%); }
+  .mixed-grid { column-count: 2; }
 }
 
 @media (max-width: 768px) {
@@ -354,12 +304,8 @@
 
   .hero-buttons { flex-wrap: wrap; }
 
-  .carousel-slide {
-    width: 160px;
-    height: 210px;
-  }
-
-  .carousel-section { padding: 40px 0 36px; }
+  .mixed-grid { column-count: 1; max-width: 480px; }
+  .mixed-grid-section { padding: 48px 20px 40px; }
 
   .medium-split {
     flex-direction: column;

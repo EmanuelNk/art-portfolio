@@ -45,23 +45,23 @@
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 12px;
+  border-radius: 2px;
   background: var(--surface);
-  border: 1px solid var(--border);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  border: 8px solid rgba(240,237,232,0.88);
+  box-shadow: 0 10px 34px rgba(0,0,0,0.45);
   transition: transform .5s ease, box-shadow .5s ease, filter .5s ease;
 }
 
 .masonry-item:hover img {
   transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+  box-shadow: 0 16px 44px rgba(0,0,0,0.55);
   filter: saturate(1.05);
 }
 
 .masonry-caption {
   position: absolute;
-  left: 18px;
-  bottom: 18px;
+  left: 22px;
+  bottom: 24px;
   padding: 8px 10px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 500;
@@ -75,8 +75,8 @@
 
 .masonry-size {
   position: absolute;
-  right: 18px;
-  top: 18px;
+  right: 22px;
+  top: 24px;
   padding: 6px 10px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 500;

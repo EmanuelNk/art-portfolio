@@ -64,6 +64,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  border-bottom: 8px solid rgba(240,237,232,0.88);
 }
 
 .oils-card-image--placeholder {

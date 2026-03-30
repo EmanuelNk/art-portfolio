@@ -21,19 +21,19 @@ import oMini3 from '../../assets/images/art/oil/mini3.jpeg';
 import oMini4 from '../../assets/images/art/oil/mini4.jpeg';
 import oMini5 from '../../assets/images/art/oil/mini5.jpeg';
 
-const carouselImages = [
-  { src: cArt1, alt: 'The Mourner', medium: 'charcoal' },
-  { src: oMini1, alt: 'Oil mini 1', medium: 'oil' },
-  { src: cArt5, alt: 'Avi & Olivia', medium: 'charcoal' },
-  { src: oMini3, alt: 'Oil mini 3', medium: 'oil' },
-  { src: cArt7, alt: 'Lily', medium: 'charcoal' },
-  { src: oMini2, alt: 'Oil mini 2', medium: 'oil' },
-  { src: cArt6, alt: 'Yacov & Emunah', medium: 'charcoal' },
-  { src: oMini4, alt: 'Oil mini 4', medium: 'oil' },
-  { src: cArt2, alt: 'The Rebbe', medium: 'charcoal' },
-  { src: oMini5, alt: 'Oil mini 5', medium: 'oil' },
-  { src: cArt8, alt: 'Tefillin', medium: 'charcoal' },
-  { src: cArt4, alt: 'Anniversary', medium: 'charcoal' },
+const mixedGallery = [
+  { src: cArt1, alt: 'The Mourner' },
+  { src: oMini1, alt: 'Oil mini 1' },
+  { src: cArt5, alt: 'Avi & Olivia' },
+  { src: oMini3, alt: 'Oil mini 3' },
+  { src: cArt7, alt: 'Lily' },
+  { src: oMini2, alt: 'Oil mini 2' },
+  { src: cArt6, alt: 'Yacov & Emunah' },
+  { src: oMini4, alt: 'Oil mini 4' },
+  { src: cArt2, alt: 'The Rebbe' },
+  { src: oMini5, alt: 'Oil mini 5' },
+  { src: cArt8, alt: 'Tefillin' },
+  { src: cArt4, alt: 'Anniversary' },
 ];
 
 function Homepage() {
@@ -74,18 +74,15 @@ function Homepage() {
         </div>
       </section>
 
-      {/* ── CAROUSEL ── */}
-      <section className="carousel-section">
-        <p className="carousel-label">Selected works</p>
-        <div className="carousel-track-wrap">
-          <div className="carousel-track">
-            {[...carouselImages, ...carouselImages].map((img, i) => (
-              <div className="carousel-slide" key={i}>
-                <img src={img.src} alt={img.alt} />
-                <span className="carousel-medium">{img.medium}</span>
-              </div>
-            ))}
-          </div>
+      {/* ── MIXED GRID ── */}
+      <section className="mixed-grid-section">
+        <h2 className="mixed-grid-heading">Portfolio</h2>
+        <div className="mixed-grid">
+          {mixedGallery.map((img, i) => (
+            <div className="mixed-grid-item" key={i}>
+              <img src={img.src} alt={img.alt} />
+            </div>
+          ))}
         </div>
       </section>
 
