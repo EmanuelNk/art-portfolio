@@ -113,47 +113,58 @@
 }
 
 /* ════════════════════════════════════════
-   MIXED GRID — portfolio overview
+   FOCUS CAROUSELS — center-spotlight scroll
    ════════════════════════════════════════ */
-.mixed-grid-section {
+.fc-section {
   background: var(--bg);
-  padding: 72px 28px 64px;
+  padding: 64px 0 56px;
 }
 
-.mixed-grid-heading {
-  font-family: 'Cinzel', 'Marcellus SC', serif;
-  font-weight: 400;
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
-  color: var(--text-primary);
+.fc-row {
+  margin-bottom: 48px;
+}
+.fc-row:last-child { margin-bottom: 0; }
+
+.fc-label {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.25);
   text-align: center;
-  margin: 0 0 40px;
+  margin: 0 0 24px;
 }
 
-.mixed-grid {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  column-count: 3;
-  column-gap: 20px;
+.fc-track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 20px 0;
+}
+.fc-track::-webkit-scrollbar { display: none; }
+
+.fc-item {
+  flex-shrink: 0;
+  width: 260px;
+  scroll-snap-align: center;
+  transform: scale(var(--fc-scale, 0.85));
+  opacity: var(--fc-opacity, 0.45);
+  filter: blur(var(--fc-blur, 3px));
+  will-change: transform, opacity, filter;
 }
 
-.mixed-grid-item {
-  break-inside: avoid;
-  margin: 0 0 20px;
-}
-
-.mixed-grid-item img {
+.fc-item img {
   width: 100%;
   height: auto;
   display: block;
   border: 8px solid rgba(240,237,232,0.88);
   border-radius: 2px;
   box-shadow: 0 8px 28px rgba(0,0,0,0.45);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.mixed-grid-item img:hover {
-  transform: translateY(-4px) scale(1.015);
-  box-shadow: 0 14px 38px rgba(0,0,0,0.55);
+  pointer-events: none;
+  user-select: none;
 }
 
 /* ════════════════════════════════════════
@@ -290,7 +301,6 @@
    ════════════════════════════════════════ */
 @media (max-width: 980px) {
   .hero-bg { transform: translateX(4%); }
-  .mixed-grid { column-count: 2; }
 }
 
 @media (max-width: 768px) {
@@ -304,8 +314,10 @@
 
   .hero-buttons { flex-wrap: wrap; }
 
-  .mixed-grid { column-count: 1; max-width: 480px; }
-  .mixed-grid-section { padding: 48px 20px 40px; }
+  .fc-section { padding: 40px 0 36px; }
+  .fc-item { width: 200px; }
+  .fc-track { gap: 16px; }
+  .fc-row { margin-bottom: 32px; }
 
   .medium-split {
     flex-direction: column;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 import heroImage from '../../assets/images/profile5.jpg';
@@ -21,20 +21,109 @@ import oMini3 from '../../assets/images/art/oil/mini3.jpeg';
 import oMini4 from '../../assets/images/art/oil/mini4.jpeg';
 import oMini5 from '../../assets/images/art/oil/mini5.jpeg';
 
-const mixedGallery = [
+const charcoalPieces = [
   { src: cArt1, alt: 'The Mourner' },
-  { src: oMini1, alt: 'Oil mini 1' },
   { src: cArt5, alt: 'Avi & Olivia' },
-  { src: oMini3, alt: 'Oil mini 3' },
   { src: cArt7, alt: 'Lily' },
-  { src: oMini2, alt: 'Oil mini 2' },
   { src: cArt6, alt: 'Yacov & Emunah' },
-  { src: oMini4, alt: 'Oil mini 4' },
-  { src: cArt2, alt: 'The Rebbe' },
-  { src: oMini5, alt: 'Oil mini 5' },
   { src: cArt8, alt: 'Tefillin' },
+  { src: cArt2, alt: 'The Rebbe' },
   { src: cArt4, alt: 'Anniversary' },
 ];
+
+const oilPieces = [
+  { src: oMini1, alt: 'Oil mini 1' },
+  { src: oMini2, alt: 'Oil mini 2' },
+  { src: oMini3, alt: 'Oil mini 3' },
+  { src: oMini4, alt: 'Oil mini 4' },
+  { src: oMini5, alt: 'Oil mini 5' },
+];
+
+function FocusCarousel({ images, label }) {
+  const trackRef = useRef(null);
+  const jumping = useRef(false);
+  const count = images.length;
+  const tripled = useMemo(() => [...images, ...images, ...images], [images]);
+
+  const updateFocus = useCallback(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    const center = track.scrollLeft + track.offsetWidth / 2;
+    track.querySelectorAll('.fc-item').forEach((item) => {
+      const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+      const dist = Math.abs(center - itemCenter);
+      const maxDist = track.offsetWidth * 0.28;
+      const ratio = Math.min(dist / maxDist, 1);
+      item.style.setProperty('--fc-scale', 1 - ratio * 0.15);
+      item.style.setProperty('--fc-opacity', 1 - ratio * 0.55);
+      item.style.setProperty('--fc-blur', `${ratio * 3}px`);
+    });
+  }, []);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    const items = Array.from(track.querySelectorAll('.fc-item'));
+    if (items.length < count * 3) return;
+
+    const setW = items[count].offsetLeft - items[0].offsetLeft;
+
+    const centerOn = items[count + Math.floor(count / 2)];
+    track.style.scrollSnapType = 'none';
+    track.scrollLeft =
+      centerOn.offsetLeft - track.offsetWidth / 2 + centerOn.offsetWidth / 2;
+    updateFocus();
+    requestAnimationFrame(() => {
+      track.style.scrollSnapType = '';
+    });
+
+    const onScroll = () => {
+      if (jumping.current) return;
+      updateFocus();
+
+      if (track.scrollLeft < setW * 0.4) {
+        jumping.current = true;
+        track.style.scrollSnapType = 'none';
+        track.scrollLeft += setW;
+        updateFocus();
+        requestAnimationFrame(() => {
+          track.style.scrollSnapType = '';
+          jumping.current = false;
+        });
+      } else if (track.scrollLeft > setW * 1.6) {
+        jumping.current = true;
+        track.style.scrollSnapType = 'none';
+        track.scrollLeft -= setW;
+        updateFocus();
+        requestAnimationFrame(() => {
+          track.style.scrollSnapType = '';
+          jumping.current = false;
+        });
+      }
+    };
+
+    track.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', updateFocus);
+
+    return () => {
+      track.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', updateFocus);
+    };
+  }, [count, updateFocus]);
+
+  return (
+    <div className="fc-row">
+      <p className="fc-label">{label}</p>
+      <div className="fc-track" ref={trackRef}>
+        {tripled.map((img, i) => (
+          <div className="fc-item" key={i}>
+            <img src={img.src} alt={img.alt} draggable="false" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function Homepage() {
   return (
@@ -74,16 +163,10 @@ function Homepage() {
         </div>
       </section>
 
-      {/* ── MIXED GRID ── */}
-      <section className="mixed-grid-section">
-        <h2 className="mixed-grid-heading">Portfolio</h2>
-        <div className="mixed-grid">
-          {mixedGallery.map((img, i) => (
-            <div className="mixed-grid-item" key={i}>
-              <img src={img.src} alt={img.alt} />
-            </div>
-          ))}
-        </div>
+      {/* ── FOCUS CAROUSELS ── */}
+      <section className="fc-section">
+        <FocusCarousel images={charcoalPieces} label="Charcoal" />
+        <FocusCarousel images={oilPieces} label="Oil paintings" />
       </section>
 
       {/* ── MEDIUM SPLIT ── */}
