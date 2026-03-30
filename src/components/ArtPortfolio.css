@@ -28,7 +28,7 @@
   height: 100%;
   object-fit: cover;
   object-position: 108% 28%;
-  filter: grayscale(100%) contrast(105%);
+  filter: contrast(105%);
   transform: translateX(22%);
   will-change: transform;
 }

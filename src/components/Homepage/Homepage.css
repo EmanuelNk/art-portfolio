@@ -8,7 +8,8 @@
 /* ════════════════════════════════════════
    HERO — 100 vh full-bleed
    ════════════════════════════════════════ */
-.hero {
+/* Use .homepage .hero so layout isn’t overridden by ArtPortfolio.css (loaded by galleries) */
+.homepage .hero {
   position: relative;
   height: 100vh;
   overflow: hidden;
@@ -16,27 +17,28 @@
 }
 
 /* ── photo — shifted right so face zooms into right side ── */
-.hero-bg {
+/* Scoped so shared .hero-bg rules in ArtPortfolio.css cannot override color */
+.homepage .hero-bg {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: 108% 28%;
-  filter: grayscale(100%) contrast(105%);
+  filter: none;
   transform: translateX(22%);
   will-change: transform;
 }
 
 @media (max-width: 980px) {
-  .hero-bg { transform: translateX(4%); }
+  .homepage .hero-bg { transform: translateX(4%); }
 }
 @media (max-width: 720px) {
-  .hero-bg { transform: none; object-position: center 25%; }
+  .homepage .hero-bg { transform: none; object-position: center 25%; }
 }
 
-/* ── gradients ── */
-.hero-fade-left {
+/* ── gradients (.homepage … beats ArtPortfolio.css same-class rules) ── */
+.homepage .hero-fade-left {
   position: absolute;
   inset: 0;
   background: linear-gradient(
@@ -47,7 +49,7 @@
   pointer-events: none;
   z-index: 1;
 }
-.hero-fade-bottom {
+.homepage .hero-fade-bottom {
   position: absolute;
   inset: 0;
   background: linear-gradient(
@@ -58,7 +60,7 @@
   pointer-events: none;
   z-index: 1;
 }
-.hero-fade-top {
+.homepage .hero-fade-top {
   position: absolute;
   top: 0;
   left: 0;
@@ -339,9 +341,9 @@
    RESPONSIVE
    ════════════════════════════════════════ */
 @media (max-width: 768px) {
-  .hero-fade-left { display: none; }
+  .homepage .hero-fade-left { display: none; }
 
-  .hero-fade-bottom {
+  .homepage .hero-fade-bottom {
     background: linear-gradient(to top,
       rgba(14,14,13,1) 0%,
       rgba(14,14,13,0.92) 20%,
@@ -352,7 +354,7 @@
     );
   }
 
-  .hero-fade-top { height: 56px; }
+  .homepage .hero-fade-top { height: 56px; }
 
   .hero-name { font-size: clamp(2.4rem, 10vw, 3.2rem); }
 
