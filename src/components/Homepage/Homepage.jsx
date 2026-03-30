@@ -140,6 +140,7 @@ function Homepage() {
         />
         <div className="hero-fade-left" aria-hidden="true" />
         <div className="hero-fade-bottom" aria-hidden="true" />
+        <div className="hero-fade-top" aria-hidden="true" />
 
         <div className="hero-content">
           <h1 className="hero-name">

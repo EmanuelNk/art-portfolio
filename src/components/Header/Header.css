@@ -18,6 +18,25 @@
   border-bottom: none;
 }
 
+.site-header--home .header-link {
+  color: rgba(255,255,255,0.6);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+.site-header--home .header-link:hover { color: rgba(255,255,255,0.9); }
+
+.site-header--home .header-name {
+  color: rgba(255,255,255,0.85);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+.site-header--home .header-icons a {
+  color: rgba(255,255,255,0.55);
+  border-color: rgba(255,255,255,0.18);
+}
+.site-header--home .header-icons a:hover {
+  color: rgba(255,255,255,0.9);
+}
+
 .header-inner {
   max-width: var(--max-width);
   margin: 0 auto;
