@@ -1,8 +1,9 @@
 {
   "files": {
     "main.css": "https://devorah-art.com/static/css/main.63fc9690.css",
-    "main.js": "https://devorah-art.com/static/js/main.40c2f40b.js",
+    "main.js": "https://devorah-art.com/static/js/main.f3102cde.js",
     "static/js/453.a59e1ba8.chunk.js": "https://devorah-art.com/static/js/453.a59e1ba8.chunk.js",
+    "static/media/Emanuel-in-oil.jpg": "https://devorah-art.com/static/media/Emanuel-in-oil.64248ca81daa9dfc4181.jpg",
     "static/media/profile6.jpg": "https://devorah-art.com/static/media/profile6.d7ecd6d2aa358ef657a8.jpg",
     "static/media/art7.jpg": "https://devorah-art.com/static/media/art7.6b34a28a09ca6e5ec6fb.jpg",
     "static/media/art5.jpg": "https://devorah-art.com/static/media/art5.ff0cd322ec2f456a9698.jpg",
@@ -22,11 +23,11 @@
     "index.html": "https://devorah-art.com/index.html",
     "static/media/aboutMe.txt": "https://devorah-art.com/static/media/aboutMe.7abd3210b93a5af60f1f.txt",
     "main.63fc9690.css.map": "https://devorah-art.com/static/css/main.63fc9690.css.map",
-    "main.40c2f40b.js.map": "https://devorah-art.com/static/js/main.40c2f40b.js.map",
+    "main.f3102cde.js.map": "https://devorah-art.com/static/js/main.f3102cde.js.map",
     "453.a59e1ba8.chunk.js.map": "https://devorah-art.com/static/js/453.a59e1ba8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.63fc9690.css",
-    "static/js/main.40c2f40b.js"
+    "static/js/main.f3102cde.js"
   ]
 }
