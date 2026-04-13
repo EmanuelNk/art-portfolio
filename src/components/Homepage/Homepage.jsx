@@ -5,8 +5,9 @@ import Modal from '../Modal/Modal';
 import heroImage from '../../assets/images/profile6.jpg';
 import charcoal1 from '../../assets/images/art/art2.JPG';
 import charcoal2 from '../../assets/images/art/art1.JPG';
-import oil1 from '../../assets/images/art/oil-large/couple-in-rome.jpg';
+import oil1 from '../../assets/images/art/oil-large/Emanuel-in-oil.jpg';
 import oil2 from '../../assets/images/art/oil/blood-orange.jpg';
+import oil3 from '../../assets/images/art/oil-large/couple-in-rome.jpg';
 import './Homepage.css';
 
 import cArt1 from '../../assets/images/art/art1.JPG';
@@ -17,6 +18,7 @@ import cArt6 from '../../assets/images/art/art6.jpg';
 import cArt7 from '../../assets/images/art/art7.jpg';
 import cArt8 from '../../assets/images/art/art8.jpg';
 import oLargeCoupleInRome from '../../assets/images/art/oil-large/couple-in-rome.jpg';
+import oLargeEmanuelInOil from '../../assets/images/art/oil-large/Emanuel-in-oil.jpg';
 import oMini1 from '../../assets/images/art/oil/blood-orange.jpg';
 import oMini2 from '../../assets/images/art/oil/bottles.jpg';
 import oMini3 from '../../assets/images/art/oil/flowers-1.jpg';
@@ -39,10 +41,11 @@ const oilPieces = [
   { src: oMini2, alt: 'Bottles' },
   { src: oMini3, alt: 'Flowers' },
   { src: oMini1, alt: 'Blood Orange' },
-  { src: oLargeCoupleInRome, alt: 'Couple in Rome' }, // First focus carousel piece
-  { src: oMini4, alt: 'Fruits' }, // Second focus carousel piece
-  { src: oMini5, alt: 'Lemons' }, // Fourth focus carousel piece
-  { src: oMini6, alt: 'Pumpkins' }, // Fifth focus carousel piece
+  { src: oMini4, alt: 'Fruits' }, 
+  { src: oLargeEmanuelInOil, alt: 'Emanuel in Oil' }, // First focus carousel piece
+  { src: oLargeCoupleInRome, alt: 'Couple in Rome' }, // Second focus carousel piece
+  { src: oMini5, alt: 'Lemons' }, // Third focus carousel piece
+  { src: oMini6, alt: 'Pumpkins' }, // Fourth focus carousel piece
 ];
 
 function FocusCarousel({ images, label, onItemClick }) {
