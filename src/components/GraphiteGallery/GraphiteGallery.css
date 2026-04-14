@@ -1,6 +1,6 @@
 @import '../../styles/variables.css';
 
-.charcoal-page {
+.graphite-page {
   min-height: 100vh;
   background: var(--bg);
   padding-top: 80px;

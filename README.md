@@ -2,7 +2,7 @@
 
 A React-based portfolio site showcasing artwork with a masonry gallery and fullscreen modal viewer.
 
-Live site: [devorah-art.com](https://devorah-art.com)
+Live site: [madelineclaire.art](https://madelineclaire.art)
 
 ---
 
@@ -45,10 +45,10 @@ Defined in `package.json`:
 
 This repo is configured to deploy to GitHub Pages with a custom domain.
 
-- `homepage` in `package.json` is set to `https://devorah-art.com`
-- `public/CNAME` contains `devorah-art.com`
+- `homepage` in `package.json` is set to `https://madelineclaire.art`
+- `public/CNAME` contains `madelineclaire.art`
 - Scripts:
-  - `predeploy`: sets `PUBLIC_URL=https://devorah-art.com` and runs `build`
+  - `predeploy`: sets `PUBLIC_URL=https://madelineclaire.art` and runs `build`
   - `deploy`: pushes `build/` to the `gh-pages` branch
 
 To deploy:

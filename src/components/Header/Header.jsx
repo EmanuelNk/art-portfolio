@@ -31,7 +31,7 @@ function Header() {
       <header className={`site-header${isHome ? ' site-header--home' : ''}`}>
         <div className="header-inner">
           <Link to="/" className="header-name" onClick={close}>
-            Devorah Morrison Nafcha
+            Madeline Claire Nafcha
           </Link>
 
           <button
@@ -43,7 +43,7 @@ function Header() {
           </button>
 
           <nav className="header-nav">
-            <Link to="/charcoal" className="header-link">Charcoal</Link>
+            <Link to="/graphite" className="header-link">Graphite</Link>
             <Link to="/oils" className="header-link">Oil paintings</Link>
             <Link to="/about" className="header-link">About</Link>
             <Link to="/contact" className="header-link">Contact</Link>
@@ -62,7 +62,7 @@ function Header() {
             <FaTimes />
           </button>
           <nav className="mobile-overlay-nav">
-            <Link to="/charcoal" className="header-link" onClick={close}>Charcoal</Link>
+            <Link to="/graphite" className="header-link" onClick={close}>Graphite</Link>
             <Link to="/oils" className="header-link" onClick={close}>Oil paintings</Link>
             <Link to="/about" className="header-link" onClick={close}>About</Link>
             <Link to="/contact" className="header-link" onClick={close}>Contact</Link>
