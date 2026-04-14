@@ -108,8 +108,7 @@ function GraphiteGallery() {
               <img
                 src={thumb(piece.url)}
                 alt={piece.title}
-                style={{ opacity: 0, transition: 'opacity 0.4s ease' }}
-                onLoad={(e) => { e.target.style.opacity = 1; }}
+                onLoad={(e) => { e.target.setAttribute('data-loaded', 'true'); }}
               />
               {piece.sizeText && (
                 <span className="masonry-size" aria-hidden="true">
