@@ -3,7 +3,7 @@ import Header from '../Header/Header';
 import Modal from '../Modal/Modal';
 import artworks from '../../data/artworks.json';
 import '../ArtPortfolio.css';
-import './CharcoalGallery.css';
+import './GraphiteGallery.css';
 
 const imageContext = require.context(
   '../../assets/images/art',
@@ -18,7 +18,7 @@ const artPieces = artworks.map(({ file, title, description, size }) => ({
   sizeText: size || '',
 }));
 
-function CharcoalGallery() {
+function GraphiteGallery() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -94,7 +94,7 @@ function CharcoalGallery() {
   }, []);
 
   return (
-    <div className="charcoal-page">
+    <div className="graphite-page">
       <Header />
       <div className="scroll-progress" aria-hidden="true" />
 
@@ -141,4 +141,4 @@ function CharcoalGallery() {
   );
 }
 
-export default CharcoalGallery;
+export default GraphiteGallery;

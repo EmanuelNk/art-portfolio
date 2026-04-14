@@ -169,6 +169,40 @@
   margin: 0 0 24px;
 }
 
+.fc-track-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.fc-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 56px;
+  line-height: 1;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.2s, color 0.2s;
+  padding: 0;
+  user-select: none;
+}
+.fc-arrow:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.85);
+}
+.fc-arrow--left  { left: 48px; }
+.fc-arrow--right { right: 48px; }
+
 .fc-track {
   display: flex;
   gap: 24px;
@@ -177,6 +211,7 @@
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   padding: 20px 0;
+  flex: 1;
 }
 .fc-track::-webkit-scrollbar { display: none; }
 
@@ -227,7 +262,7 @@
   cursor: pointer;
 }
 
-.split-half--charcoal { background: #131312; }
+.split-half--graphite { background: #131312; }
 .split-half--oils     { background: #16120a; }
 
 .split-divider {
@@ -379,6 +414,7 @@
   .fc-item { width: 200px; }
   .fc-track { gap: 16px; }
   .fc-row { margin-bottom: 32px; }
+  .fc-arrow { display: none; }
 
   .medium-split {
     flex-direction: column;

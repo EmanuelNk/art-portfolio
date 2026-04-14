@@ -2,7 +2,7 @@
   "name": "art-portfolio",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://devorah-art.com",
+  "homepage": "https://madelineclaire.art",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -17,7 +17,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "predeploy": "PUBLIC_URL=https://devorah-art.com npm run build",
+    "predeploy": "PUBLIC_URL=https://madelineclaire.art npm run build",
     "deploy": "gh-pages -d build",
     "start": "HOST=0.0.0.0 react-scripts start",
     "build": "react-scripts build",

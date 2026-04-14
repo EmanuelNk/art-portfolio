@@ -134,7 +134,7 @@
 }
 .btn:hover { transform: translateY(-1px); opacity: 0.88; }
 
-/* Charcoal / Contact button */
+/* Graphite / Contact button */
 .btn-primary {
   background: rgba(255,255,255,0.07);
   border: 0.5px solid rgba(255,255,255,0.18);
@@ -166,7 +166,7 @@
 
 /* ════════════════════════════════════════
    SHARED GALLERY STYLES
-   Used by CharcoalGallery + OilsGallery
+   Used by GraphiteGallery + OilsGallery
    ════════════════════════════════════════ */
 
 .gallery-section {

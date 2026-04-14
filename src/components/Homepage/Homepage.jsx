@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 import Modal from '../Modal/Modal';
 import heroImage from '../../assets/images/profile6.jpg';
-import charcoal1 from '../../assets/images/art/art2.JPG';
-import charcoal2 from '../../assets/images/art/art1.JPG';
+import graphite1 from '../../assets/images/art/art2.JPG';
+import graphite2 from '../../assets/images/art/art1.JPG';
 import oil1 from '../../assets/images/art/oil-large/Emanuel-in-oil.jpg';
 import oil2 from '../../assets/images/art/oil/blood-orange.jpg';
 import oil3 from '../../assets/images/art/oil-large/couple-in-rome.jpg';
@@ -27,7 +27,7 @@ import oMini5 from '../../assets/images/art/oil/lemons.jpeg';
 import oMini6 from '../../assets/images/art/oil/pumpkins.jpg';
 
 
-const charcoalPieces = [
+const graphitePieces = [
   { src: cArt5, alt: 'Avi & Olivia' },
   { src: cArt7, alt: 'Lily' },
   { src: cArt1, alt: 'The Mourner' },
@@ -130,20 +130,40 @@ function FocusCarousel({ images, label, onItemClick }) {
     };
   }, [count, updateFocus, initCarousel]);
 
+  const scrollLeft = () => {
+    const track = trackRef.current;
+    if (!track) return;
+    track.scrollBy({ left: -(260 + 24), behavior: 'smooth' });
+  };
+
+  const scrollRight = () => {
+    const track = trackRef.current;
+    if (!track) return;
+    track.scrollBy({ left: 260 + 24, behavior: 'smooth' });
+  };
+
   return (
     <div className="fc-row">
       <p className="fc-label">{label}</p>
-      <div className="fc-track" ref={trackRef}>
-        {tripled.map((img, i) => (
-          <button
-            key={i}
-            className="fc-item"
-            onClick={() => onItemClick(i % count)}
-            aria-label={`View ${img.alt}`}
-          >
-            <img src={img.src} alt={img.alt} draggable="false" loading="eager" />
-          </button>
-        ))}
+      <div className="fc-track-wrapper">
+        <button className="fc-arrow fc-arrow--left" onClick={scrollLeft} aria-label="Scroll left">
+          ‹
+        </button>
+        <div className="fc-track" ref={trackRef}>
+          {tripled.map((img, i) => (
+            <button
+              key={i}
+              className="fc-item"
+              onClick={() => onItemClick(i % count)}
+              aria-label={`View ${img.alt}`}
+            >
+              <img src={img.src} alt={img.alt} draggable="false" loading="eager" />
+            </button>
+          ))}
+        </div>
+        <button className="fc-arrow fc-arrow--right" onClick={scrollRight} aria-label="Scroll right">
+          ›
+        </button>
       </div>
     </div>
   );
@@ -184,14 +204,14 @@ function Homepage() {
         <div className="hero-fade-top" aria-hidden="true" />
         <div className="hero-content">
           <h1 className="hero-name">
-            <span>Devorah</span>
-            <span>Morrison</span>
+            <span>Madeline</span>
+            <span>Claire</span>
             <span>Nafcha</span>
           </h1>
           <p className="hero-subtitle">Portrait Artist</p>
           <p className="hero-location">Jerusalem, Israel</p>
           <div className="hero-buttons">
-            <Link to="/charcoal" className="hero-btn hero-btn--default">Charcoal works</Link>
+            <Link to="/graphite" className="hero-btn hero-btn--default">Graphite works</Link>
             <Link to="/oils" className="hero-btn hero-btn--oil">Oil paintings</Link>
             <Link to="/contact" className="hero-btn hero-btn--default">Contact</Link>
           </div>
@@ -201,9 +221,9 @@ function Homepage() {
       {/* ── FOCUS CAROUSELS ── */}
       <section className="fc-section">
         <FocusCarousel
-          images={charcoalPieces}
-          label="Charcoal"
-          onItemClick={(i) => openModal(charcoalPieces, i)}
+          images={graphitePieces}
+          label="Graphite"
+          onItemClick={(i) => openModal(graphitePieces, i)}
         />
         <FocusCarousel
           images={oilPieces}
@@ -214,15 +234,15 @@ function Homepage() {
 
       {/* ── MEDIUM SPLIT ── */}
       <section className="medium-split">
-        <Link to="/charcoal" className="split-half split-half--charcoal">
+        <Link to="/graphite" className="split-half split-half--graphite">
           <div className="split-hover-overlay" />
           <div className="split-cards">
-            <div className="split-card"><img src={charcoal1} alt="Charcoal work" /></div>
-            <div className="split-card"><img src={charcoal2} alt="Charcoal work" /></div>
+            <div className="split-card"><img src={graphite1} alt="Graphite work" /></div>
+            <div className="split-card"><img src={graphite2} alt="Graphite work" /></div>
           </div>
           <div className="split-vignette" />
           <div className="split-label">
-            <h2 className="split-title">Charcoal</h2>
+            <h2 className="split-title">Graphite</h2>
             <p className="split-sub">Portraits &amp; figures</p>
             <p className="split-cta">View gallery&nbsp;→</p>
           </div>

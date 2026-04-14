@@ -1,6 +1,6 @@
 # Adding Artwork to the Portfolio
 
-## Charcoal Drawings
+## Graphite Drawings
 
 ### 1. Add the image file
 
@@ -29,13 +29,13 @@ Open `src/data/artworks.json` and add an entry:
 
 In `src/components/Homepage/Homepage.jsx`:
 
-1. Add an import at the top with the other charcoal imports:
+1. Add an import at the top with the other graphite imports:
 
 ```js
 import cArt9 from '../../assets/images/art/art9.jpg';
 ```
 
-2. Add it to the `charcoalPieces` array:
+2. Add it to the `graphitePieces` array:
 
 ```js
 { src: cArt9, alt: 'My Drawing' },
@@ -135,12 +135,12 @@ import oLargeMyPainting from '../../assets/images/art/oil-large/my-painting.jpg'
 
 How titles and info are managed depends on the gallery:
 
-### Charcoal drawings
+### Graphite drawings
 
 All metadata lives in `src/data/artworks.json`. Edit the entry directly:
 
 ```json
-{ "file": "art1.JPG", "title": "The Mourner", "description": "Charcoal on paper", "size": "18\"x24\"" }
+{ "file": "art1.JPG", "title": "The Mourner", "description": "Graphite on paper", "size": "18\"x24\"" }
 ```
 
 - **title** — shown in the gallery caption and lightbox header
@@ -163,7 +163,7 @@ All metadata lives in `src/data/oil-large.json`. Edit the entry directly:
 { "file": "couple-in-rome.jpg", "title": "Couple in Rome", "description": "Oil on canvas", "size": "24\"x36\"" }
 ```
 
-For both oil JSON files, the fields work the same as charcoal:
+For both oil JSON files, the fields work the same as graphite:
 
 - **title** — shown in the gallery caption and lightbox header
 - **description** — shown in the lightbox below the title
@@ -188,7 +188,7 @@ The `alt` value is used for accessibility (screen readers) and doesn't currently
 
 | Gallery            | Image folder                       | Data source                | Auto-detected? |
 |--------------------|------------------------------------|----------------------------|----------------|
-| Charcoal           | `src/assets/images/art/`           | `src/data/artworks.json`   | No             |
+| Graphite           | `src/assets/images/art/`           | `src/data/artworks.json`   | No             |
 | Oil Minis          | `src/assets/images/art/oil/`       | `src/data/oil-minis.json`  | No             |
 | Oil Large          | `src/assets/images/art/oil-large/` | `src/data/oil-large.json`  | No             |
 | Homepage carousels | *(uses imports from above)*        | Manual arrays in `Homepage.jsx` | No        |

@@ -154,14 +154,14 @@ function ArtPortfolio() {
         <div className="hero-inner">
           <div className="hero-copy">
             <h1 className="hero-title">
-              <span>Devorah</span>
-              <span>Morrison</span>
+              <span>Madeline</span>
+              <span>Claire</span>
               <span>Nafcha</span>
             </h1>
             <p className="hero-subtitle">Portrait Artist</p>
             <p className="hero-location">Jerusalem, Israel</p>
             <div className="hero-ctas">
-              <Link to="/charcoal" className="btn btn-primary">Charcoal works</Link>
+              <Link to="/graphite" className="btn btn-primary">Graphite works</Link>
               <Link to="/oils" className="btn btn-oil">Oil paintings</Link>
               <Link to="/contact" className="btn btn-ghost">Contact</Link>
             </div>

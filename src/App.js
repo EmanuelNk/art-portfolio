@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Homepage from './components/Homepage/Homepage';
-import CharcoalGallery from './components/CharcoalGallery/CharcoalGallery';
+import GraphiteGallery from './components/GraphiteGallery/GraphiteGallery';
 import OilsPage from './components/OilsPage/OilsPage';
 import OilsGallery from './components/OilsGallery/OilsGallery';
 import AboutPage from './components/AboutPage/AboutPage';
@@ -20,7 +20,7 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/charcoal" element={<CharcoalGallery />} />
+        <Route path="/graphite" element={<GraphiteGallery />} />
         <Route path="/oils" element={<OilsPage />} />
         <Route path="/oils/minis" element={<OilsGallery category="minis" />} />
         <Route path="/oils/large" element={<OilsGallery category="large" />} />
