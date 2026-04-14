@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "https://madelineclaire.art/static/css/main.63fc9690.css",
-    "main.js": "https://madelineclaire.art/static/js/main.39b0d993.js",
+    "main.css": "https://madelineclaire.art/static/css/main.7b8e9c6a.css",
+    "main.js": "https://madelineclaire.art/static/js/main.463cb570.js",
     "static/js/453.a59e1ba8.chunk.js": "https://madelineclaire.art/static/js/453.a59e1ba8.chunk.js",
     "static/media/Emanuel-in-oil.jpg": "https://madelineclaire.art/static/media/Emanuel-in-oil.64248ca81daa9dfc4181.jpg",
     "static/media/profile6.jpg": "https://madelineclaire.art/static/media/profile6.d7ecd6d2aa358ef657a8.jpg",
@@ -21,13 +21,13 @@
     "static/media/fruits.jpg": "https://madelineclaire.art/static/media/fruits.87772ff63367955f2a95.jpg",
     "static/media/lemons.jpeg": "https://madelineclaire.art/static/media/lemons.8f18ffea549e720a849b.jpeg",
     "index.html": "https://madelineclaire.art/index.html",
-    "static/media/aboutMe.txt": "https://madelineclaire.art/static/media/aboutMe.7abd3210b93a5af60f1f.txt",
-    "main.63fc9690.css.map": "https://madelineclaire.art/static/css/main.63fc9690.css.map",
-    "main.39b0d993.js.map": "https://madelineclaire.art/static/js/main.39b0d993.js.map",
+    "static/media/aboutMe.txt": "https://madelineclaire.art/static/media/aboutMe.1ff16b3bf6d318c92974.txt",
+    "main.7b8e9c6a.css.map": "https://madelineclaire.art/static/css/main.7b8e9c6a.css.map",
+    "main.463cb570.js.map": "https://madelineclaire.art/static/js/main.463cb570.js.map",
     "453.a59e1ba8.chunk.js.map": "https://madelineclaire.art/static/js/453.a59e1ba8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.63fc9690.css",
-    "static/js/main.39b0d993.js"
+    "static/css/main.7b8e9c6a.css",
+    "static/js/main.463cb570.js"
   ]
 }
