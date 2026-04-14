@@ -7,6 +7,7 @@ function Modal({ isOpen, onClose, imageUrl, title, description, onPrev, onNext }
   const [isDragging, setIsDragging] = useState(false);
   const [lastPoint, setLastPoint] = useState({ x: 0, y: 0 });
   const [transform, setTransform] = useState({ scale: 1, x: 0, y: 0 });
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -63,10 +64,11 @@ function Modal({ isOpen, onClose, imageUrl, title, description, onPrev, onNext }
     };
   }, [isOpen, isDragging, lastPoint.x, lastPoint.y, transform.scale]);
 
-  // Reset zoom when image changes or modal closes
+  // Reset zoom + loading state when image changes or modal closes
   useEffect(() => {
     if (!isOpen) return;
     setTransform({ scale: 1, x: 0, y: 0 });
+    setIsLoading(true);
   }, [imageUrl, isOpen]);
 
   if (!isOpen) return null;
@@ -77,12 +79,18 @@ function Modal({ isOpen, onClose, imageUrl, title, description, onPrev, onNext }
         <button className="modal-close" onClick={onClose}>×</button>
         <button className="modal-arrow modal-arrow-left" onClick={onPrev} aria-label="Previous">&#10094;</button>
         <div className="modal-image-wrap" ref={containerRef}>
+          {isLoading && <div className="modal-spinner" aria-label="Loading" />}
           <img
             ref={imgRef}
             src={imageUrl}
             alt={title}
             className={`modal-image${isDragging ? ' dragging' : ''}`}
-            style={{ transform: `translate(${transform.x}px, ${transform.y}px) scale(${transform.scale})` }}
+            style={{
+              transform: `translate(${transform.x}px, ${transform.y}px) scale(${transform.scale})`,
+              opacity: isLoading ? 0 : 1,
+              transition: 'opacity 0.3s ease',
+            }}
+            onLoad={() => setIsLoading(false)}
             onDoubleClick={() => setTransform((p) => ({ scale: p.scale === 1 ? 2 : 1, x: 0, y: 0 }))}
             onClick={() => transform.scale === 1 && onNext?.()}
           />

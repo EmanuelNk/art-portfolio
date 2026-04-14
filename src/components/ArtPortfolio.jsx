@@ -183,7 +183,12 @@ function ArtPortfolio() {
               onClick={() => openModalAt(index)}
               aria-label={`Open ${artPiece.title}`}
             >
-              <img src={thumb(artPiece.url)} alt={artPiece.title} />
+              <img
+                src={thumb(artPiece.url)}
+                alt={artPiece.title}
+                style={{ opacity: 0, transition: 'opacity 0.4s ease' }}
+                onLoad={(e) => { e.target.style.opacity = 1; }}
+              />
               {artPiece.sizeText && (
                 <span className="masonry-size" aria-hidden="true">{artPiece.sizeText}</span>
               )}

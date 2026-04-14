@@ -105,7 +105,12 @@ function GraphiteGallery() {
               onClick={() => openModalAt(index)}
               aria-label={`Open ${piece.title}`}
             >
-              <img src={thumb(piece.url)} alt={piece.title} />
+              <img
+                src={thumb(piece.url)}
+                alt={piece.title}
+                style={{ opacity: 0, transition: 'opacity 0.4s ease' }}
+                onLoad={(e) => { e.target.style.opacity = 1; }}
+              />
               {piece.sizeText && (
                 <span className="masonry-size" aria-hidden="true">
                   {piece.sizeText}
