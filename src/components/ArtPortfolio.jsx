@@ -8,6 +8,9 @@ import { FaPhone, FaEnvelope, FaInstagram } from 'react-icons/fa';
 
 const heroPortrait = 'https://res.cloudinary.com/djm9plswu/image/upload/profile6.jpg';
 
+const thumb = (url, w = 900) =>
+  url.replace('/upload/', `/upload/w_${w},f_auto,q_auto,c_limit/`);
+
 const artPieces = artworks.map(({ url, title, description, size }) => ({
   url,
   title,
@@ -180,7 +183,7 @@ function ArtPortfolio() {
               onClick={() => openModalAt(index)}
               aria-label={`Open ${artPiece.title}`}
             >
-              <img src={artPiece.url} alt={artPiece.title} />
+              <img src={thumb(artPiece.url)} alt={artPiece.title} />
               {artPiece.sizeText && (
                 <span className="masonry-size" aria-hidden="true">{artPiece.sizeText}</span>
               )}

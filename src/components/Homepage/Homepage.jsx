@@ -5,48 +5,57 @@ import Modal from '../Modal/Modal';
 import heroImage from '../../assets/images/profile6.jpg';
 import './Homepage.css';
 
-// Cloudinary URLs
-const graphite1 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158748/art2_fnm7l6.jpg';
-const graphite2 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158749/art1_ultmoh.jpg';
-const oil1 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158693/BCA00567-3_baunfa.jpg';
-const oil2 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158498/blood-orange_oobmzq.jpg';
+// Inserts Cloudinary transformation params into an upload URL
+const thumb = (url, w = 520) =>
+  url.replace('/upload/', `/upload/w_${w},f_auto,q_auto,c_limit/`);
 
-const cArt1 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158749/art1_ultmoh.jpg';
-const cArt2 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158748/art2_fnm7l6.jpg';
-const cArt4 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158743/art4_alo7td.jpg';
-const cArt5 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158742/art5_obj5ra.jpg';
-const cArt6 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158741/art6_fksbcf.jpg';
-const cArt7 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776159121/art7_y0t29m.jpg';
-const cArt8 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158740/art8_ktadb8.jpg';
-const oLargeCoupleInRome = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158516/couple-in-rome_t84upo.jpg';
-const oLargeEmanuelInOil = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158693/BCA00567-3_baunfa.jpg';
-const oMini1 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158498/blood-orange_oobmzq.jpg';
-const oMini2 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158498/bottles_fskucz.jpg';
-const oMini3 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158497/flowers-1_bvuwp3.jpg';
-const oMini4 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158497/fruits_rz2r1e.jpg';
-const oMini5 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158497/lemons_llzsuh.jpg';
-const oMini6 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158498/pumpkins_nhwkd8.jpg';
+// Cloudinary URLs (full resolution — used for modals)
+const GRAPHITE = {
+  art1: 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158749/art1_ultmoh.jpg',
+  art2: 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158748/art2_fnm7l6.jpg',
+  art4: 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158743/art4_alo7td.jpg',
+  art5: 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158742/art5_obj5ra.jpg',
+  art6: 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158741/art6_fksbcf.jpg',
+  art7: 'https://res.cloudinary.com/djm9plswu/image/upload/v1776159121/art7_y0t29m.jpg',
+  art8: 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158740/art8_ktadb8.jpg',
+};
+const OIL = {
+  emanuelInOil: 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158693/BCA00567-3_baunfa.jpg',
+  coupleInRome: 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158516/couple-in-rome_t84upo.jpg',
+  bloodOrange: 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158498/blood-orange_oobmzq.jpg',
+  bottles:     'https://res.cloudinary.com/djm9plswu/image/upload/v1776158498/bottles_fskucz.jpg',
+  flowers:     'https://res.cloudinary.com/djm9plswu/image/upload/v1776158497/flowers-1_bvuwp3.jpg',
+  fruits:      'https://res.cloudinary.com/djm9plswu/image/upload/v1776158497/fruits_rz2r1e.jpg',
+  lemons:      'https://res.cloudinary.com/djm9plswu/image/upload/v1776158497/lemons_llzsuh.jpg',
+  pumpkins:    'https://res.cloudinary.com/djm9plswu/image/upload/v1776158498/pumpkins_nhwkd8.jpg',
+};
+
+// Split-section preview cards (medium size)
+const graphite1 = thumb(GRAPHITE.art2, 700);
+const graphite2 = thumb(GRAPHITE.art1, 700);
+const oil1 = thumb(OIL.emanuelInOil, 700);
+const oil2 = thumb(OIL.bloodOrange, 700);
 
 
 const graphitePieces = [
-  { src: cArt5, alt: 'Avi & Olivia' },
-  { src: cArt7, alt: 'Lily' },
-  { src: cArt1, alt: 'The Mourner' },
-  { src: cArt2, alt: 'The Rebbe' }, // First focus carousel piece
-  { src: cArt6, alt: 'Yacov & Emunah' }, // Second featured piece
-  { src: cArt8, alt: 'Tefillin' }, // Third featured piece
-  { src: cArt4, alt: 'Anniversary' }, // Fourth featured piece
+  { src: GRAPHITE.art5, thumbSrc: thumb(GRAPHITE.art5), alt: 'Avi & Olivia' },
+  { src: GRAPHITE.art7, thumbSrc: thumb(GRAPHITE.art7), alt: 'Lily' },
+  { src: GRAPHITE.art1, thumbSrc: thumb(GRAPHITE.art1), alt: 'The Mourner' },
+  { src: GRAPHITE.art2, thumbSrc: thumb(GRAPHITE.art2), alt: 'The Rebbe' },
+  { src: GRAPHITE.art6, thumbSrc: thumb(GRAPHITE.art6), alt: 'Yacov & Emunah' },
+  { src: GRAPHITE.art8, thumbSrc: thumb(GRAPHITE.art8), alt: 'Tefillin' },
+  { src: GRAPHITE.art4, thumbSrc: thumb(GRAPHITE.art4), alt: 'Anniversary' },
 ];
 
 const oilPieces = [
-  { src: oMini2, alt: 'Bottles' },
-  { src: oMini3, alt: 'Flowers' },
-  { src: oMini1, alt: 'Blood Orange' },
-  { src: oMini4, alt: 'Fruits' }, 
-  { src: oLargeEmanuelInOil, alt: 'Emanuel in Oil' }, // First focus carousel piece
-  { src: oLargeCoupleInRome, alt: 'Couple in Rome' }, // Second focus carousel piece
-  { src: oMini5, alt: 'Lemons' }, // Third focus carousel piece
-  { src: oMini6, alt: 'Pumpkins' }, // Fourth focus carousel piece
+  { src: OIL.bottles,      thumbSrc: thumb(OIL.bottles),      alt: 'Bottles' },
+  { src: OIL.flowers,      thumbSrc: thumb(OIL.flowers),      alt: 'Flowers' },
+  { src: OIL.bloodOrange,  thumbSrc: thumb(OIL.bloodOrange),  alt: 'Blood Orange' },
+  { src: OIL.fruits,       thumbSrc: thumb(OIL.fruits),       alt: 'Fruits' },
+  { src: OIL.emanuelInOil, thumbSrc: thumb(OIL.emanuelInOil), alt: 'Emanuel in Oil' },
+  { src: OIL.coupleInRome, thumbSrc: thumb(OIL.coupleInRome), alt: 'Couple in Rome' },
+  { src: OIL.lemons,       thumbSrc: thumb(OIL.lemons),       alt: 'Lemons' },
+  { src: OIL.pumpkins,     thumbSrc: thumb(OIL.pumpkins),     alt: 'Pumpkins' },
 ];
 
 function FocusCarousel({ images, label, onItemClick }) {
@@ -158,7 +167,7 @@ function FocusCarousel({ images, label, onItemClick }) {
               onClick={() => onItemClick(i % count)}
               aria-label={`View ${img.alt}`}
             >
-              <img src={img.src} alt={img.alt} draggable="false" loading="eager" />
+              <img src={img.thumbSrc || img.src} alt={img.alt} draggable="false" loading="eager" />
             </button>
           ))}
         </div>

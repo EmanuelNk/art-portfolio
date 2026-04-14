@@ -7,6 +7,9 @@ import oilLargeData from '../../data/oil-large.json';
 import '../ArtPortfolio.css';
 import './OilsGallery.css';
 
+const thumb = (url, w = 900) =>
+  url.replace('/upload/', `/upload/w_${w},f_auto,q_auto,c_limit/`);
+
 const oilMiniPieces = oilMinisData.map(({ url, title, description, size }) => ({
   url,
   title,
@@ -101,7 +104,7 @@ function OilsGallery({ category }) {
               onClick={() => openModalAt(index)}
               aria-label={`Open ${piece.title}`}
             >
-              <img src={piece.url} alt={piece.title} />
+              <img src={thumb(piece.url)} alt={piece.title} />
               {piece.sizeText && (
                 <span className="masonry-size" aria-hidden="true">
                   {piece.sizeText}
