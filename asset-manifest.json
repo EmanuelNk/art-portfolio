@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "https://madelineclaire.art/static/css/main.7b8e9c6a.css",
-    "main.js": "https://madelineclaire.art/static/js/main.e4105174.js",
+    "main.css": "https://madelineclaire.art/static/css/main.5aebbccf.css",
+    "main.js": "https://madelineclaire.art/static/js/main.3967faa0.js",
     "static/js/453.a59e1ba8.chunk.js": "https://madelineclaire.art/static/js/453.a59e1ba8.chunk.js",
     "static/media/profile6.jpg": "https://madelineclaire.art/static/media/profile6.d7ecd6d2aa358ef657a8.jpg",
     "static/media/profile.jpeg": "https://madelineclaire.art/static/media/profile.333460e73ed4a4390ccd.jpeg",
     "index.html": "https://madelineclaire.art/index.html",
     "static/media/aboutMe.txt": "https://madelineclaire.art/static/media/aboutMe.1ff16b3bf6d318c92974.txt",
-    "main.7b8e9c6a.css.map": "https://madelineclaire.art/static/css/main.7b8e9c6a.css.map",
-    "main.e4105174.js.map": "https://madelineclaire.art/static/js/main.e4105174.js.map",
+    "main.5aebbccf.css.map": "https://madelineclaire.art/static/css/main.5aebbccf.css.map",
+    "main.3967faa0.js.map": "https://madelineclaire.art/static/js/main.3967faa0.js.map",
     "453.a59e1ba8.chunk.js.map": "https://madelineclaire.art/static/js/453.a59e1ba8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7b8e9c6a.css",
-    "static/js/main.e4105174.js"
+    "static/css/main.5aebbccf.css",
+    "static/js/main.3967faa0.js"
   ]
 }
