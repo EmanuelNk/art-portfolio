@@ -1,10 +1,10 @@
 [
-  { "file": "art1.JPG", "title": "The Mourner", "description": "", "size": "18\"x24\"" },
-  { "file": "art5.jpg", "title": "Avi & Olivia", "description": "", "size": "18\"x24\"" },
-  { "file": "art7.jpg", "title": "Lily", "description": "", "size": "18\"x24\"" },
-  { "file": "art6.jpg", "title": "Yacov & Emunah", "description": "", "size": "18\"x24\"" },
-  { "file": "art8.jpg", "title": "Tefillin", "description": "", "size": "18\"x24\"" },
-  { "file": "art2.JPG", "title": "The Rebbe", "description": "", "size": "18\"x24\"" },
-  { "file": "art5.jpg", "title": "Avi & Olivia", "description": "", "size": "18\"x24\"" },
-  { "file": "art4.jpg", "title": "Anniversary", "description": "", "size": "11\"x14\"" }
+  { "url": "https://res.cloudinary.com/djm9plswu/image/upload/v1776158749/art1_ultmoh.jpg", "title": "The Mourner", "description": "", "size": "18\"x24\"" },
+  { "url": "https://res.cloudinary.com/djm9plswu/image/upload/v1776158742/art5_obj5ra.jpg", "title": "Avi & Olivia", "description": "", "size": "18\"x24\"" },
+  { "url": "https://res.cloudinary.com/djm9plswu/image/upload/v1776159121/art7_y0t29m.jpg", "title": "Lily", "description": "", "size": "18\"x24\"" },
+  { "url": "https://res.cloudinary.com/djm9plswu/image/upload/v1776158741/art6_fksbcf.jpg", "title": "Yacov & Emunah", "description": "", "size": "18\"x24\"" },
+  { "url": "https://res.cloudinary.com/djm9plswu/image/upload/v1776158740/art8_ktadb8.jpg", "title": "Tefillin", "description": "", "size": "18\"x24\"" },
+  { "url": "https://res.cloudinary.com/djm9plswu/image/upload/v1776158748/art2_fnm7l6.jpg", "title": "The Rebbe", "description": "", "size": "18\"x24\"" },
+  { "url": "https://res.cloudinary.com/djm9plswu/image/upload/v1776158742/art5_obj5ra.jpg", "title": "Avi & Olivia", "description": "", "size": "18\"x24\"" },
+  { "url": "https://res.cloudinary.com/djm9plswu/image/upload/v1776158743/art4_alo7td.jpg", "title": "Anniversary", "description": "", "size": "11\"x14\"" }
 ]

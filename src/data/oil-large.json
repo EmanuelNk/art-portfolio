@@ -1,4 +1,4 @@
 [
-  { "file": "Emanuel-in-oil.jpg", "title": "Emanuel in Oil", "description": "Oil on canvas", "size": "16\"x12\"" },
-  { "file": "couple-in-rome.jpg", "title": "Couple in Rome", "description": "Oil on canvas", "size": "" }
+  { "url": "https://res.cloudinary.com/djm9plswu/image/upload/v1776158693/BCA00567-3_baunfa.jpg", "title": "Emanuel in Oil", "description": "Oil on canvas", "size": "16\"x12\"" },
+  { "url": "https://res.cloudinary.com/djm9plswu/image/upload/v1776158516/couple-in-rome_t84upo.jpg", "title": "Couple in Rome", "description": "Oil on canvas", "size": "" }
 ]

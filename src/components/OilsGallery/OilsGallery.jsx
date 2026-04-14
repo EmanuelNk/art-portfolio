@@ -7,25 +7,15 @@ import oilLargeData from '../../data/oil-large.json';
 import '../ArtPortfolio.css';
 import './OilsGallery.css';
 
-const miniContext = require.context(
-  '../../assets/images/art/oil',
-  false,
-  /\.(png|jpe?g|jpg)$/i
-);
-const oilMiniPieces = oilMinisData.map(({ file, title, description, size }) => ({
-  url: miniContext(`./${file}`),
+const oilMiniPieces = oilMinisData.map(({ url, title, description, size }) => ({
+  url,
   title,
   description,
   sizeText: size || '',
 }));
 
-const largeContext = require.context(
-  '../../assets/images/art/oil-large',
-  false,
-  /\.(png|jpe?g|jpg)$/i
-);
-const oilLargePieces = oilLargeData.map(({ file, title, description, size }) => ({
-  url: largeContext(`./${file}`),
+const oilLargePieces = oilLargeData.map(({ url, title, description, size }) => ({
+  url,
   title,
   description,
   sizeText: size || '',

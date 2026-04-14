@@ -1,8 +1,8 @@
 [
-  { "file": "blood-orange.jpg", "title": "Blood Orange", "description": "", "size": "" },
-  { "file": "bottles.jpg", "title": "Bottles", "description": "", "size": "" },
-  { "file": "flowers-1.jpg", "title": "Flowers", "description": "", "size": "" },
-  { "file": "fruits.jpg", "title": "Fruits", "description": "", "size": "" },
-  { "file": "lemons.jpeg", "title": "Lemons", "description": "", "size": "" },
-  { "file": "pumpkins.jpg", "title": "Pumpkins", "description": "", "size": "" }
+  { "url": "https://res.cloudinary.com/djm9plswu/image/upload/v1776158498/blood-orange_oobmzq.jpg", "title": "Blood Orange", "description": "", "size": "" },
+  { "url": "https://res.cloudinary.com/djm9plswu/image/upload/v1776158498/bottles_fskucz.jpg", "title": "Bottles", "description": "", "size": "" },
+  { "url": "https://res.cloudinary.com/djm9plswu/image/upload/v1776158497/flowers-1_bvuwp3.jpg", "title": "Flowers", "description": "", "size": "" },
+  { "url": "https://res.cloudinary.com/djm9plswu/image/upload/v1776158497/fruits_rz2r1e.jpg", "title": "Fruits", "description": "", "size": "" },
+  { "url": "https://res.cloudinary.com/djm9plswu/image/upload/v1776158497/lemons_llzsuh.jpg", "title": "Lemons", "description": "", "size": "" },
+  { "url": "https://res.cloudinary.com/djm9plswu/image/upload/v1776158498/pumpkins_nhwkd8.jpg", "title": "Pumpkins", "description": "", "size": "" }
 ]

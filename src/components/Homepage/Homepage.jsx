@@ -3,28 +3,29 @@ import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 import Modal from '../Modal/Modal';
 import heroImage from '../../assets/images/profile6.jpg';
-import graphite1 from '../../assets/images/art/art2.JPG';
-import graphite2 from '../../assets/images/art/art1.JPG';
-import oil1 from '../../assets/images/art/oil-large/Emanuel-in-oil.jpg';
-import oil2 from '../../assets/images/art/oil/blood-orange.jpg';
-import oil3 from '../../assets/images/art/oil-large/couple-in-rome.jpg';
 import './Homepage.css';
 
-import cArt1 from '../../assets/images/art/art1.JPG';
-import cArt2 from '../../assets/images/art/art2.JPG';
-import cArt4 from '../../assets/images/art/art4.jpg';
-import cArt5 from '../../assets/images/art/art5.jpg';
-import cArt6 from '../../assets/images/art/art6.jpg';
-import cArt7 from '../../assets/images/art/art7.jpg';
-import cArt8 from '../../assets/images/art/art8.jpg';
-import oLargeCoupleInRome from '../../assets/images/art/oil-large/couple-in-rome.jpg';
-import oLargeEmanuelInOil from '../../assets/images/art/oil-large/Emanuel-in-oil.jpg';
-import oMini1 from '../../assets/images/art/oil/blood-orange.jpg';
-import oMini2 from '../../assets/images/art/oil/bottles.jpg';
-import oMini3 from '../../assets/images/art/oil/flowers-1.jpg';
-import oMini4 from '../../assets/images/art/oil/fruits.jpg';
-import oMini5 from '../../assets/images/art/oil/lemons.jpeg';
-import oMini6 from '../../assets/images/art/oil/pumpkins.jpg';
+// Cloudinary URLs
+const graphite1 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158748/art2_fnm7l6.jpg';
+const graphite2 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158749/art1_ultmoh.jpg';
+const oil1 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158693/BCA00567-3_baunfa.jpg';
+const oil2 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158498/blood-orange_oobmzq.jpg';
+
+const cArt1 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158749/art1_ultmoh.jpg';
+const cArt2 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158748/art2_fnm7l6.jpg';
+const cArt4 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158743/art4_alo7td.jpg';
+const cArt5 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158742/art5_obj5ra.jpg';
+const cArt6 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158741/art6_fksbcf.jpg';
+const cArt7 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776159121/art7_y0t29m.jpg';
+const cArt8 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158740/art8_ktadb8.jpg';
+const oLargeCoupleInRome = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158516/couple-in-rome_t84upo.jpg';
+const oLargeEmanuelInOil = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158693/BCA00567-3_baunfa.jpg';
+const oMini1 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158498/blood-orange_oobmzq.jpg';
+const oMini2 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158498/bottles_fskucz.jpg';
+const oMini3 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158497/flowers-1_bvuwp3.jpg';
+const oMini4 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158497/fruits_rz2r1e.jpg';
+const oMini5 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158497/lemons_llzsuh.jpg';
+const oMini6 = 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158498/pumpkins_nhwkd8.jpg';
 
 
 const graphitePieces = [

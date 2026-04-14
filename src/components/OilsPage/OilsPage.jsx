@@ -5,19 +5,8 @@ import oilMinisData from '../../data/oil-minis.json';
 import oilLargeData from '../../data/oil-large.json';
 import './OilsPage.css';
 
-const miniContext = require.context(
-  '../../assets/images/art/oil',
-  false,
-  /\.(png|jpe?g|jpg)$/i
-);
-const minisThumbnail = miniContext(`./${oilMinisData[0].file}`);
-
-const largeContext = require.context(
-  '../../assets/images/art/oil-large',
-  false,
-  /\.(png|jpe?g|jpg)$/i
-);
-const largeThumbnail = largeContext(`./${oilLargeData[0].file}`);
+const minisThumbnail = oilMinisData[0].url;
+const largeThumbnail = oilLargeData[0].url;
 
 function OilsPage() {
   return (

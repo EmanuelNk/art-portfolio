@@ -5,14 +5,8 @@ import artworks from '../../data/artworks.json';
 import '../ArtPortfolio.css';
 import './GraphiteGallery.css';
 
-const imageContext = require.context(
-  '../../assets/images/art',
-  false,
-  /\.(png|jpe?g|JPG)$/
-);
-
-const artPieces = artworks.map(({ file, title, description, size }) => ({
-  url: imageContext(`./${file}`),
+const artPieces = artworks.map(({ url, title, description, size }) => ({
+  url,
   title,
   description,
   sizeText: size || '',
