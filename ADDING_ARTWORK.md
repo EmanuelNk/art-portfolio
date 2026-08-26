@@ -85,15 +85,15 @@ Then add it to `oilPieces`:
 
 ---
 
-## Oil Paintings — Large
+## Oil Paintings — Medium
 
-### 1. Upload to Cloudinary (Large)
+### 1. Upload to Cloudinary (Medium)
 
-Upload your image to the **`art/oil-large`** folder in the Cloudinary Media Library.
+Upload your image to the **`art/oil-Medium`** folder in the Cloudinary Media Library.
 
-### 2. Register it in the data file (Large)
+### 2. Register it in the data file (Medium)
 
-Open `src/data/oil-large.json` and add an entry:
+Open `src/data/oil-medium.json` and add an entry:
 
 ```json
 { "url": "https://res.cloudinary.com/djm9plswu/image/upload/v.../your-filename_randomid.jpg", "title": "My Painting", "description": "Oil on canvas", "size": "24\"x36\"" }
@@ -115,7 +115,7 @@ Edit the relevant JSON file directly:
 |---------------|-----------------------------|
 | Graphite      | `src/data/artworks.json`    |
 | Oil Minis     | `src/data/oil-minis.json`   |
-| Oil Large     | `src/data/oil-large.json`   |
+| Oil Medium     | `src/data/oil-medium.json`   |
 
 Fields:
 
@@ -148,4 +148,4 @@ Cloudinary serves optimised versions automatically — you don't need to resize 
 |--------------------|---------------------|-----------------------------|-------------------|
 | Graphite           | `art/graphite`      | `src/data/artworks.json`    | `graphitePieces`  |
 | Oil Minis          | `art/oil`           | `src/data/oil-minis.json`   | `oilPieces`       |
-| Oil Large          | `art/oil-large`     | `src/data/oil-large.json`   | `oilPieces`       |
+| Oil Medium          | `art/oil-Medium`     | `src/data/oil-medium.json`   | `oilPieces`       |
