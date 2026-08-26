@@ -102,7 +102,7 @@ function OilsGallery({ category }) {
       </div>
 
       <section className="gallery-section oils-gallery-section">
-        <div className="masonry-grid">
+        <div className={`masonry-grid${['minis', 'coffee'].includes(category) ? ' masonry-grid--dense' : ''}`}>
           {pieces.map((piece, index) => (
             <button
               key={piece.title + index}
