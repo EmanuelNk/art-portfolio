@@ -43,8 +43,8 @@ function Header() {
           </button>
 
           <nav className="header-nav">
-            <Link to="/graphite" className="header-link">Graphite</Link>
             <Link to="/oils" className="header-link">Oil paintings</Link>
+            <Link to="/graphite" className="header-link">Graphite</Link>
             <Link to="/about" className="header-link">About</Link>
             <Link to="/contact" className="header-link">Contact</Link>
             {icons}
@@ -62,8 +62,8 @@ function Header() {
             <FaTimes />
           </button>
           <nav className="mobile-overlay-nav">
-            <Link to="/graphite" className="header-link" onClick={close}>Graphite</Link>
             <Link to="/oils" className="header-link" onClick={close}>Oil paintings</Link>
+            <Link to="/graphite" className="header-link" onClick={close}>Graphite</Link>
             <Link to="/about" className="header-link" onClick={close}>About</Link>
             <Link to="/contact" className="header-link" onClick={close}>Contact</Link>
             {icons}
