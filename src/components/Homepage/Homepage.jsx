@@ -220,11 +220,11 @@ function Homepage() {
             <span>Claire</span>
             <span>Nafcha</span>
           </h1>
-          <p className="hero-subtitle">Portrait Artist</p>
+          <p className="hero-subtitle">Oil Painter</p>
           <p className="hero-location">Jerusalem, Israel</p>
           <div className="hero-buttons">
-            <Link to="/graphite" className="hero-btn hero-btn--default">Graphite works</Link>
             <Link to="/oils" className="hero-btn hero-btn--oil">Oil paintings</Link>
+            <Link to="/graphite" className="hero-btn hero-btn--default">Graphite works</Link>
             <Link to="/contact" className="hero-btn hero-btn--default">Contact</Link>
           </div>
         </div>
@@ -246,20 +246,6 @@ function Homepage() {
 
       {/* ── MEDIUM SPLIT ── */}
       <section className="medium-split">
-        <Link to="/graphite" className="split-half split-half--graphite">
-          <div className="split-hover-overlay" />
-          <div className="split-cards">
-            <div className="split-card"><img src={graphite1} alt="Graphite work" /></div>
-            <div className="split-card"><img src={graphite2} alt="Graphite work" /></div>
-          </div>
-          <div className="split-vignette" />
-          <div className="split-label">
-            <h2 className="split-title">Graphite</h2>
-            <p className="split-sub">Portraits &amp; figures</p>
-            <p className="split-cta">View gallery&nbsp;→</p>
-          </div>
-        </Link>
-        <div className="split-divider" />
         <Link to="/oils" className="split-half split-half--oils">
           <div className="split-hover-overlay" />
           <div className="split-cards">
@@ -270,6 +256,20 @@ function Homepage() {
           <div className="split-label">
             <h2 className="split-title">Oil paintings</h2>
             <p className="split-sub">Still life · Portraits · Scenery</p>
+            <p className="split-cta">View gallery&nbsp;→</p>
+          </div>
+        </Link>
+        <div className="split-divider" />
+        <Link to="/graphite" className="split-half split-half--graphite">
+          <div className="split-hover-overlay" />
+          <div className="split-cards">
+            <div className="split-card"><img src={graphite1} alt="Graphite work" /></div>
+            <div className="split-card"><img src={graphite2} alt="Graphite work" /></div>
+          </div>
+          <div className="split-vignette" />
+          <div className="split-label">
+            <h2 className="split-title">Graphite</h2>
+            <p className="split-sub">Portraits &amp; figures</p>
             <p className="split-cta">View gallery&nbsp;→</p>
           </div>
         </Link>
