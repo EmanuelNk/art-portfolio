@@ -8,6 +8,11 @@ function ContactPage() {
     <div className="contact-page">
       <Header />
       <section className="contact-page-section">
+        <img
+          className="contact-artwork"
+          src="https://res.cloudinary.com/djm9plswu/image/upload/w_700,f_auto,q_auto,c_limit/v1787744814/BCA00785-2_ygkfb5.jpg"
+          alt="Wallet Man — oil painting"
+        />
         <h2>Contact</h2>
         <div className="contact-icons">
           <a href="tel:+972533464716" title="Call me">
