@@ -36,7 +36,7 @@
   margin: 0 auto;
   padding: 0 40px 80px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 280px);
+  grid-template-columns: repeat(auto-fill, 240px);
   justify-content: start;
   gap: 20px;
 }
@@ -56,7 +56,7 @@
 }
 
 .oils-card-image {
-  height: 200px;
+  height: 320px;
   overflow: hidden;
 }
 
@@ -69,7 +69,7 @@
 }
 
 .oils-card-image--placeholder {
-  height: 200px;
+  height: 320px;
   background: var(--surface);
 }
 

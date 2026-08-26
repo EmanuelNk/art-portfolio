@@ -25,7 +25,8 @@ function App() {
         <Route path="/oils/vienna" element={<OilsGallery category="vienna" />} />
         <Route path="/oils/portraits" element={<OilsGallery category="portraits" />} />
         <Route path="/oils/fall" element={<OilsGallery category="fall" />} />
-        <Route path="/oils/large" element={<OilsGallery category="large" />} />
+        <Route path="/oils/coffee" element={<OilsGallery category="coffee" />} />
+        <Route path="/oils/medium" element={<OilsGallery category="medium" />} />
         <Route path="/oils/minis" element={<OilsGallery category="minis" />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />

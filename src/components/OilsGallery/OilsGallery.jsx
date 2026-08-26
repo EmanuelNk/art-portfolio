@@ -5,7 +5,8 @@ import Modal from '../Modal/Modal';
 import viennaData from '../../data/vienna.json';
 import portraitsData from '../../data/portraits.json';
 import fallData from '../../data/fall.json';
-import oilLargeData from '../../data/oil-large.json';
+import coffeeData from '../../data/coffee.json';
+import oilMediumData from '../../data/oil-medium.json';
 import oilMinisData from '../../data/oil-minis.json';
 import '../ArtPortfolio.css';
 import './OilsGallery.css';
@@ -25,7 +26,8 @@ const CATEGORY_PIECES = {
   vienna: toPieces(viennaData),
   portraits: toPieces(portraitsData),
   fall: toPieces(fallData),
-  large: toPieces(oilLargeData),
+  coffee: toPieces(coffeeData),
+  medium: toPieces(oilMediumData),
   minis: toPieces(oilMinisData),
 };
 
