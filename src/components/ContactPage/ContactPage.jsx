@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaPhone, FaEnvelope, FaInstagram } from 'react-icons/fa';
+import { FaPhone, FaEnvelope, FaInstagram, FaTiktok, FaFacebook } from 'react-icons/fa';
 import Header from '../Header/Header';
 import './ContactPage.css';
 
@@ -23,6 +23,22 @@ function ContactPage() {
             title="Follow me on Instagram"
           >
             <FaInstagram className="contact-icon" />
+          </a>
+          <a
+            href="https://www.tiktok.com/@mad_sketched_"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Follow me on TikTok"
+          >
+            <FaTiktok className="contact-icon" />
+          </a>
+          <a
+            href="https://www.facebook.com/devorah.madeline.morrison.nk"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Follow me on Facebook"
+          >
+            <FaFacebook className="contact-icon" />
           </a>
         </div>
       </section>
