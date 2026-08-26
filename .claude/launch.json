@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "art-portfolio",
+      "runtimeExecutable": "env",
+      "runtimeArgs": ["PORT=3002", "BROWSER=none", "npm", "run", "start"],
+      "port": 3002
+    }
+  ]
+}
