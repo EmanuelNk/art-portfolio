@@ -20,21 +20,21 @@ const GRAPHITE = {
   art8: 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158740/art8_ktadb8.jpg',
 };
 const OIL = {
-  emanuelInOil: 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158693/BCA00567-3_baunfa.jpg',
-  coupleInRome: 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158516/couple-in-rome_t84upo.jpg',
-  bloodOrange: 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158498/blood-orange_oobmzq.jpg',
-  bottles:     'https://res.cloudinary.com/djm9plswu/image/upload/v1776158498/bottles_fskucz.jpg',
-  flowers:     'https://res.cloudinary.com/djm9plswu/image/upload/v1776158497/flowers-1_bvuwp3.jpg',
-  fruits:      'https://res.cloudinary.com/djm9plswu/image/upload/v1776158497/fruits_rz2r1e.jpg',
-  lemons:      'https://res.cloudinary.com/djm9plswu/image/upload/v1776158497/lemons_llzsuh.jpg',
-  pumpkins:    'https://res.cloudinary.com/djm9plswu/image/upload/v1776158498/pumpkins_nhwkd8.jpg',
+  walletMan:        'https://res.cloudinary.com/djm9plswu/image/upload/v1787744814/BCA00785-2_ygkfb5.jpg',
+  viennaRestaurant: 'https://res.cloudinary.com/djm9plswu/image/upload/v1787744815/BCA00653_vha16l.jpg',
+  selfPortrait2026: 'https://res.cloudinary.com/djm9plswu/image/upload/v1787744889/BCA00713_aaxbbj.jpg',
+  emanuel2026:      'https://res.cloudinary.com/djm9plswu/image/upload/v1776158693/BCA00567-3_baunfa.jpg',
+  amicalolaFalls:   'https://res.cloudinary.com/djm9plswu/image/upload/v1787744609/BCA00754_on3wne.jpg',
+  ashevilleFall:    'https://res.cloudinary.com/djm9plswu/image/upload/v1787744609/BCA00736_qgckg6.jpg',
+  georgiaHouse:     'https://res.cloudinary.com/djm9plswu/image/upload/v1787744609/BCA00733_hif1dk.jpg',
+  pinkFlowers:      'https://res.cloudinary.com/djm9plswu/image/upload/v1787744916/BCA00694_lkihad.jpg',
 };
 
 // Split-section preview cards (medium size)
 const graphite1 = thumb(GRAPHITE.art2, 700);
 const graphite2 = thumb(GRAPHITE.art1, 700);
-const oil1 = thumb(OIL.emanuelInOil, 700);
-const oil2 = thumb(OIL.bloodOrange, 700);
+const oil1 = thumb(OIL.walletMan, 700);
+const oil2 = thumb(OIL.viennaRestaurant, 700);
 
 
 const graphitePieces = [
@@ -47,15 +47,17 @@ const graphitePieces = [
   { src: GRAPHITE.art4, thumbSrc: thumb(GRAPHITE.art4), alt: 'Anniversary' },
 ];
 
+// The carousel centers on the middle item (index floor(count/2)) at load,
+// so Wallet Man sits there; cyclic order from it: Vienna → portraits → fall → Pink Flowers.
 const oilPieces = [
-  { src: OIL.bottles,      thumbSrc: thumb(OIL.bottles),      alt: 'Bottles' },
-  { src: OIL.flowers,      thumbSrc: thumb(OIL.flowers),      alt: 'Flowers' },
-  { src: OIL.bloodOrange,  thumbSrc: thumb(OIL.bloodOrange),  alt: 'Blood Orange' },
-  { src: OIL.fruits,       thumbSrc: thumb(OIL.fruits),       alt: 'Fruits' },
-  { src: OIL.emanuelInOil, thumbSrc: thumb(OIL.emanuelInOil), alt: 'Emanuel in Oil' },
-  { src: OIL.coupleInRome, thumbSrc: thumb(OIL.coupleInRome), alt: 'Couple in Rome' },
-  { src: OIL.lemons,       thumbSrc: thumb(OIL.lemons),       alt: 'Lemons' },
-  { src: OIL.pumpkins,     thumbSrc: thumb(OIL.pumpkins),     alt: 'Pumpkins' },
+  { src: OIL.amicalolaFalls,   thumbSrc: thumb(OIL.amicalolaFalls),   alt: 'Amicalola Falls' },
+  { src: OIL.ashevilleFall,    thumbSrc: thumb(OIL.ashevilleFall),    alt: 'Asheville Fall' },
+  { src: OIL.georgiaHouse,     thumbSrc: thumb(OIL.georgiaHouse),     alt: 'Georgia House' },
+  { src: OIL.pinkFlowers,      thumbSrc: thumb(OIL.pinkFlowers),      alt: 'Pink Flowers' },
+  { src: OIL.walletMan,        thumbSrc: thumb(OIL.walletMan),        alt: 'Wallet Man' },
+  { src: OIL.viennaRestaurant, thumbSrc: thumb(OIL.viennaRestaurant), alt: 'Vienna Restaurant' },
+  { src: OIL.selfPortrait2026, thumbSrc: thumb(OIL.selfPortrait2026), alt: 'Self Portrait 2026' },
+  { src: OIL.emanuel2026,      thumbSrc: thumb(OIL.emanuel2026),      alt: 'Emanuel 2026' },
 ];
 
 function FocusCarousel({ images, label, onItemClick }) {
@@ -231,14 +233,14 @@ function Homepage() {
       {/* ── FOCUS CAROUSELS ── */}
       <section className="fc-section">
         <FocusCarousel
-          images={graphitePieces}
-          label="Graphite"
-          onItemClick={(i) => openModal(graphitePieces, i)}
-        />
-        <FocusCarousel
           images={oilPieces}
           label="Oil paintings"
           onItemClick={(i) => openModal(oilPieces, i)}
+        />
+        <FocusCarousel
+          images={graphitePieces}
+          label="Graphite"
+          onItemClick={(i) => openModal(graphitePieces, i)}
         />
       </section>
 
