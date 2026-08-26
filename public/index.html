@@ -79,5 +79,30 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+    <!-- GoatCounter analytics; hash-router SPA, so pageviews are counted
+         manually from the hash on load and on every route change. -->
+    <script>
+      window.goatcounter = { no_onload: true };
+      (function () {
+        function countView() {
+          if (window.goatcounter && window.goatcounter.count) {
+            window.goatcounter.count({
+              path: location.hash.replace(/^#/, '') || '/',
+            });
+          }
+        }
+        window.addEventListener('hashchange', countView);
+        var poll = setInterval(function () {
+          if (window.goatcounter && window.goatcounter.count) {
+            clearInterval(poll);
+            countView();
+          }
+        }, 100);
+        setTimeout(function () { clearInterval(poll); }, 15000);
+      })();
+    </script>
+    <script data-goatcounter="https://madelineclaireart.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
   </body>
 </html>
