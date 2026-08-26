@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FaPhone, FaEnvelope, FaInstagram, FaTiktok, FaFacebook } from 'react-icons/fa';
 import Header from '../Header/Header';
 import './ContactPage.css';
@@ -46,6 +47,7 @@ function ContactPage() {
             <FaFacebook className="contact-icon" />
           </a>
         </div>
+        <Link to="/" className="contact-home-btn">Explore the gallery</Link>
       </section>
     </div>
   );
