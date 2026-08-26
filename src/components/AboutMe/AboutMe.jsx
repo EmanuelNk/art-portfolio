@@ -20,9 +20,9 @@ function AboutMe() {
   
   return (
     <div className="about-me">
-      <h2>About Me</h2>
       <div className="about-me-content">
         <div className="about-me-description">
+          <h2>About Me</h2>
           {aboutMeText.split(/\r?\n\s*\r?\n/).map((paragraph, i) => (
             <p key={i}>{paragraph}</p>
           ))}
