@@ -3,49 +3,61 @@ import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 import Modal from '../Modal/Modal';
 import heroImage from '../../assets/images/profile6.jpg';
-import graphite1 from '../../assets/images/art/art2.JPG';
-import graphite2 from '../../assets/images/art/art1.JPG';
-import oil1 from '../../assets/images/art/oil-large/Emanuel-in-oil.jpg';
-import oil2 from '../../assets/images/art/oil/blood-orange.jpg';
-import oil3 from '../../assets/images/art/oil-large/couple-in-rome.jpg';
 import './Homepage.css';
 
-import cArt1 from '../../assets/images/art/art1.JPG';
-import cArt2 from '../../assets/images/art/art2.JPG';
-import cArt4 from '../../assets/images/art/art4.jpg';
-import cArt5 from '../../assets/images/art/art5.jpg';
-import cArt6 from '../../assets/images/art/art6.jpg';
-import cArt7 from '../../assets/images/art/art7.jpg';
-import cArt8 from '../../assets/images/art/art8.jpg';
-import oLargeCoupleInRome from '../../assets/images/art/oil-large/couple-in-rome.jpg';
-import oLargeEmanuelInOil from '../../assets/images/art/oil-large/Emanuel-in-oil.jpg';
-import oMini1 from '../../assets/images/art/oil/blood-orange.jpg';
-import oMini2 from '../../assets/images/art/oil/bottles.jpg';
-import oMini3 from '../../assets/images/art/oil/flowers-1.jpg';
-import oMini4 from '../../assets/images/art/oil/fruits.jpg';
-import oMini5 from '../../assets/images/art/oil/lemons.jpeg';
-import oMini6 from '../../assets/images/art/oil/pumpkins.jpg';
+// Inserts Cloudinary transformation params into an upload URL
+const thumb = (url, w = 520) =>
+  url.replace('/upload/', `/upload/w_${w},f_auto,q_auto,c_limit/`);
+
+// Cloudinary URLs (full resolution — used for modals)
+const GRAPHITE = {
+  art1: 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158749/art1_ultmoh.jpg',
+  art2: 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158748/art2_fnm7l6.jpg',
+  art4: 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158743/art4_alo7td.jpg',
+  art5: 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158742/art5_obj5ra.jpg',
+  art6: 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158741/art6_fksbcf.jpg',
+  art7: 'https://res.cloudinary.com/djm9plswu/image/upload/v1776159121/art7_y0t29m.jpg',
+  art8: 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158740/art8_ktadb8.jpg',
+};
+const OIL = {
+  walletMan:        'https://res.cloudinary.com/djm9plswu/image/upload/v1787744814/BCA00785-2_ygkfb5.jpg',
+  viennaRestaurant: 'https://res.cloudinary.com/djm9plswu/image/upload/v1787744815/BCA00653_vha16l.jpg',
+  selfPortrait2026: 'https://res.cloudinary.com/djm9plswu/image/upload/v1787744889/BCA00713_aaxbbj.jpg',
+  emanuel2026:      'https://res.cloudinary.com/djm9plswu/image/upload/v1776158693/BCA00567-3_baunfa.jpg',
+  amicalolaFalls:   'https://res.cloudinary.com/djm9plswu/image/upload/v1787744609/BCA00754_on3wne.jpg',
+  ashevilleFall:    'https://res.cloudinary.com/djm9plswu/image/upload/v1787744609/BCA00736_qgckg6.jpg',
+  georgiaHouse:     'https://res.cloudinary.com/djm9plswu/image/upload/v1787744609/BCA00733_hif1dk.jpg',
+  pinkFlowers:      'https://res.cloudinary.com/djm9plswu/image/upload/v1787744916/BCA00694_lkihad.jpg',
+};
+
+// Split-section preview cards (medium size)
+const graphite1 = thumb(GRAPHITE.art2, 700);
+const graphite2 = thumb(GRAPHITE.art1, 700);
+const oil1 = thumb(OIL.walletMan, 700);
+const oil2 = thumb(OIL.viennaRestaurant, 700);
 
 
 const graphitePieces = [
-  { src: cArt5, alt: 'Avi & Olivia' },
-  { src: cArt7, alt: 'Lily' },
-  { src: cArt1, alt: 'The Mourner' },
-  { src: cArt2, alt: 'The Rebbe' }, // First focus carousel piece
-  { src: cArt6, alt: 'Yacov & Emunah' }, // Second featured piece
-  { src: cArt8, alt: 'Tefillin' }, // Third featured piece
-  { src: cArt4, alt: 'Anniversary' }, // Fourth featured piece
+  { src: GRAPHITE.art5, thumbSrc: thumb(GRAPHITE.art5), alt: 'Avi & Olivia' },
+  { src: GRAPHITE.art7, thumbSrc: thumb(GRAPHITE.art7), alt: 'Lily' },
+  { src: GRAPHITE.art1, thumbSrc: thumb(GRAPHITE.art1), alt: 'The Mourner' },
+  { src: GRAPHITE.art2, thumbSrc: thumb(GRAPHITE.art2), alt: 'The Rebbe' },
+  { src: GRAPHITE.art6, thumbSrc: thumb(GRAPHITE.art6), alt: 'Yacov & Emunah' },
+  { src: GRAPHITE.art8, thumbSrc: thumb(GRAPHITE.art8), alt: 'Tefillin' },
+  { src: GRAPHITE.art4, thumbSrc: thumb(GRAPHITE.art4), alt: 'Anniversary' },
 ];
 
+// The carousel centers on the middle item (index floor(count/2)) at load,
+// so Wallet Man sits there; cyclic order from it: Vienna → portraits → fall → Pink Flowers.
 const oilPieces = [
-  { src: oMini2, alt: 'Bottles' },
-  { src: oMini3, alt: 'Flowers' },
-  { src: oMini1, alt: 'Blood Orange' },
-  { src: oMini4, alt: 'Fruits' }, 
-  { src: oLargeEmanuelInOil, alt: 'Emanuel in Oil' }, // First focus carousel piece
-  { src: oLargeCoupleInRome, alt: 'Couple in Rome' }, // Second focus carousel piece
-  { src: oMini5, alt: 'Lemons' }, // Third focus carousel piece
-  { src: oMini6, alt: 'Pumpkins' }, // Fourth focus carousel piece
+  { src: OIL.amicalolaFalls,   thumbSrc: thumb(OIL.amicalolaFalls),   alt: 'Amicalola Falls' },
+  { src: OIL.ashevilleFall,    thumbSrc: thumb(OIL.ashevilleFall),    alt: 'Asheville Fall' },
+  { src: OIL.georgiaHouse,     thumbSrc: thumb(OIL.georgiaHouse),     alt: 'Georgia House' },
+  { src: OIL.pinkFlowers,      thumbSrc: thumb(OIL.pinkFlowers),      alt: 'Pink Flowers' },
+  { src: OIL.walletMan,        thumbSrc: thumb(OIL.walletMan),        alt: 'Wallet Man' },
+  { src: OIL.viennaRestaurant, thumbSrc: thumb(OIL.viennaRestaurant), alt: 'Vienna Restaurant' },
+  { src: OIL.selfPortrait2026, thumbSrc: thumb(OIL.selfPortrait2026), alt: 'Self Portrait 2026' },
+  { src: OIL.emanuel2026,      thumbSrc: thumb(OIL.emanuel2026),      alt: 'Emanuel 2026' },
 ];
 
 function FocusCarousel({ images, label, onItemClick }) {
@@ -157,7 +169,7 @@ function FocusCarousel({ images, label, onItemClick }) {
               onClick={() => onItemClick(i % count)}
               aria-label={`View ${img.alt}`}
             >
-              <img src={img.src} alt={img.alt} draggable="false" loading="eager" />
+              <img src={img.thumbSrc || img.src} alt={img.alt} draggable="false" loading="eager" />
             </button>
           ))}
         </div>
@@ -221,14 +233,14 @@ function Homepage() {
       {/* ── FOCUS CAROUSELS ── */}
       <section className="fc-section">
         <FocusCarousel
-          images={graphitePieces}
-          label="Graphite"
-          onItemClick={(i) => openModal(graphitePieces, i)}
-        />
-        <FocusCarousel
           images={oilPieces}
           label="Oil paintings"
           onItemClick={(i) => openModal(oilPieces, i)}
+        />
+        <FocusCarousel
+          images={graphitePieces}
+          label="Graphite"
+          onItemClick={(i) => openModal(graphitePieces, i)}
         />
       </section>
 

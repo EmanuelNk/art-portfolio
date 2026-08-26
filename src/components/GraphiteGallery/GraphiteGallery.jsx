@@ -5,14 +5,11 @@ import artworks from '../../data/artworks.json';
 import '../ArtPortfolio.css';
 import './GraphiteGallery.css';
 
-const imageContext = require.context(
-  '../../assets/images/art',
-  false,
-  /\.(png|jpe?g|JPG)$/
-);
+const thumb = (url, w = 900) =>
+  url.replace('/upload/', `/upload/w_${w},f_auto,q_auto,c_limit/`);
 
-const artPieces = artworks.map(({ file, title, description, size }) => ({
-  url: imageContext(`./${file}`),
+const artPieces = artworks.map(({ url, title, description, size }) => ({
+  url,
   title,
   description,
   sizeText: size || '',
@@ -108,7 +105,11 @@ function GraphiteGallery() {
               onClick={() => openModalAt(index)}
               aria-label={`Open ${piece.title}`}
             >
-              <img src={piece.url} alt={piece.title} />
+              <img
+                src={thumb(piece.url)}
+                alt={piece.title}
+                onLoad={(e) => { e.target.setAttribute('data-loaded', 'true'); }}
+              />
               {piece.sizeText && (
                 <span className="masonry-size" aria-hidden="true">
                   {piece.sizeText}

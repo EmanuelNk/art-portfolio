@@ -2,38 +2,35 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 import Modal from '../Modal/Modal';
-import oilMinisData from '../../data/oil-minis.json';
+import viennaData from '../../data/vienna.json';
+import portraitsData from '../../data/portraits.json';
+import fallData from '../../data/fall.json';
 import oilLargeData from '../../data/oil-large.json';
+import oilMinisData from '../../data/oil-minis.json';
 import '../ArtPortfolio.css';
 import './OilsGallery.css';
 
-const miniContext = require.context(
-  '../../assets/images/art/oil',
-  false,
-  /\.(png|jpe?g|jpg)$/i
-);
-const oilMiniPieces = oilMinisData.map(({ file, title, description, size }) => ({
-  url: miniContext(`./${file}`),
-  title,
-  description,
-  sizeText: size || '',
-}));
+const thumb = (url, w = 900) =>
+  url.replace('/upload/', `/upload/w_${w},f_auto,q_auto,c_limit/`);
 
-const largeContext = require.context(
-  '../../assets/images/art/oil-large',
-  false,
-  /\.(png|jpe?g|jpg)$/i
-);
-const oilLargePieces = oilLargeData.map(({ file, title, description, size }) => ({
-  url: largeContext(`./${file}`),
-  title,
-  description,
-  sizeText: size || '',
-}));
+const toPieces = (data) =>
+  data.map(({ url, title, description, size }) => ({
+    url,
+    title,
+    description,
+    sizeText: size || '',
+  }));
+
+const CATEGORY_PIECES = {
+  vienna: toPieces(viennaData),
+  portraits: toPieces(portraitsData),
+  fall: toPieces(fallData),
+  large: toPieces(oilLargeData),
+  minis: toPieces(oilMinisData),
+};
 
 function OilsGallery({ category }) {
-  const isMinis = category === 'minis';
-  const pieces = isMinis ? oilMiniPieces : oilLargePieces;
+  const pieces = CATEGORY_PIECES[category] || [];
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -111,7 +108,11 @@ function OilsGallery({ category }) {
               onClick={() => openModalAt(index)}
               aria-label={`Open ${piece.title}`}
             >
-              <img src={piece.url} alt={piece.title} />
+              <img
+                src={thumb(piece.url)}
+                alt={piece.title}
+                onLoad={(e) => { e.target.setAttribute('data-loaded', 'true'); }}
+              />
               {piece.sizeText && (
                 <span className="masonry-size" aria-hidden="true">
                   {piece.sizeText}

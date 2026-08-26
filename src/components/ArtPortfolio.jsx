@@ -3,14 +3,16 @@ import { Link, useLocation } from 'react-router-dom';
 import './ArtPortfolio.css';
 import Modal from './Modal/Modal';
 import Header from './Header/Header';
-import heroPortrait from '../assets/images/profile6.jpg';
 import artworks from '../data/artworks.json';
 import { FaPhone, FaEnvelope, FaInstagram } from 'react-icons/fa';
 
-// Build image map from filenames using require.context for bundlers
-const imageContext = require.context('../assets/images/art', false, /\.(png|jpe?g|JPG)$/);
-const artPieces = artworks.map(({ file, title, description, size }) => ({
-  url: imageContext(`./${file}`),
+const heroPortrait = 'https://res.cloudinary.com/djm9plswu/image/upload/profile6.jpg';
+
+const thumb = (url, w = 900) =>
+  url.replace('/upload/', `/upload/w_${w},f_auto,q_auto,c_limit/`);
+
+const artPieces = artworks.map(({ url, title, description, size }) => ({
+  url,
   title,
   description,
   sizeText: size || '',
@@ -181,7 +183,11 @@ function ArtPortfolio() {
               onClick={() => openModalAt(index)}
               aria-label={`Open ${artPiece.title}`}
             >
-              <img src={artPiece.url} alt={artPiece.title} />
+              <img
+                src={thumb(artPiece.url)}
+                alt={artPiece.title}
+                onLoad={(e) => { e.target.setAttribute('data-loaded', 'true'); }}
+              />
               {artPiece.sizeText && (
                 <span className="masonry-size" aria-hidden="true">{artPiece.sizeText}</span>
               )}
