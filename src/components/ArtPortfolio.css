@@ -202,7 +202,6 @@
   margin: 0 0 28px;
   cursor: zoom-in;
   display: block;
-  transform: perspective(1000px) rotateX(var(--rx, 0)) rotateY(var(--ry, 0));
 }
 
 .masonry-item img {
@@ -323,6 +322,14 @@
 .reveal.in-view {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Safari mis-paints transformed elements inside CSS columns (the item at a
+   column boundary turns invisible but stays clickable) — fade only here. */
+.masonry-item.reveal,
+.masonry-item.reveal.in-view {
+  transform: none;
+  transition: opacity .7s ease;
 }
 
 .masonry-item.reveal { transition-delay: .05s; }
