@@ -39,3 +39,15 @@
   letter-spacing: 0.12em;
   color: rgba(255,255,255,0.25);
 }
+
+/* Minis and coffee are small works — denser grid: three columns on desktop, two on phones */
+.masonry-grid.masonry-grid--dense {
+  column-count: 3;
+  column-gap: 20px;
+}
+.masonry-grid.masonry-grid--dense .masonry-item { margin-bottom: 20px; }
+
+@media (max-width: 640px) {
+  .masonry-grid.masonry-grid--dense { column-count: 2; column-gap: 14px; }
+  .masonry-grid.masonry-grid--dense .masonry-item { margin-bottom: 14px; }
+}
