@@ -23,7 +23,9 @@ function AboutMe() {
       <h2>About Me</h2>
       <div className="about-me-content">
         <div className="about-me-description">
-          <p>{aboutMeText}</p>
+          {aboutMeText.split(/\r?\n\s*\r?\n/).map((paragraph, i) => (
+            <p key={i}>{paragraph}</p>
+          ))}
         </div>
         <div className="about-me-photo">
           <img src={aboutMePhoto} alt="Profile" />
