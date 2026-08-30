@@ -63,6 +63,7 @@ const oilPieces = [
 function FocusCarousel({ images, label, onItemClick }) {
   const trackRef = useRef(null);
   const jumping = useRef(false);
+  const idleTimer = useRef(null);
   const setWRef = useRef(0);
   const count = images.length;
   const tripled = useMemo(() => [...images, ...images, ...images], [images]);
@@ -113,29 +114,32 @@ function FocusCarousel({ images, label, onItemClick }) {
     };
     imgs.forEach(img => { if (!img.complete) img.addEventListener('load', onImageLoad); });
 
+    // Teleporting by one set width mid-scroll cancels the momentum and reads
+    // as a stutter at the wrap seam (last item -> first item). Wait until the
+    // track is at rest — there is a full copy of the set as runway either side.
     const onScroll = () => {
       if (jumping.current) return;
       updateFocus();
       const setW = setWRef.current;
       if (!setW) return;
-      if (track.scrollLeft < setW * 0.4) {
+      clearTimeout(idleTimer.current);
+      idleTimer.current = setTimeout(() => {
+        let target = track.scrollLeft;
+        while (target < setW * 0.4) target += setW;
+        while (target > setW * 1.6) target -= setW;
+        if (target === track.scrollLeft) return;
         jumping.current = true;
         track.style.scrollSnapType = 'none';
-        track.scrollLeft += setW;
+        track.scrollLeft = target;
         updateFocus();
         requestAnimationFrame(() => { track.style.scrollSnapType = ''; jumping.current = false; });
-      } else if (track.scrollLeft > setW * 1.6) {
-        jumping.current = true;
-        track.style.scrollSnapType = 'none';
-        track.scrollLeft -= setW;
-        updateFocus();
-        requestAnimationFrame(() => { track.style.scrollSnapType = ''; jumping.current = false; });
-      }
+      }, 100);
     };
 
     track.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', initCarousel);
     return () => {
+      clearTimeout(idleTimer.current);
       track.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', initCarousel);
       imgs.forEach(img => img.removeEventListener('load', onImageLoad));
@@ -228,6 +232,15 @@ function Homepage() {
             <Link to="/contact" className="hero-btn hero-btn--default">Contact</Link>
           </div>
         </div>
+        <button
+          className="hero-scroll-cue"
+          onClick={() =>
+            document.querySelector('.fc-section')?.scrollIntoView({ behavior: 'smooth' })
+          }
+          aria-label="Scroll down to the galleries"
+        >
+          <span className="hero-scroll-chevron" />
+        </button>
       </section>
 
       {/* ── FOCUS CAROUSELS ── */}
