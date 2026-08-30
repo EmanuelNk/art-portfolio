@@ -196,6 +196,28 @@
 }
 .fc-row:last-child { margin-bottom: 0; }
 
+/* rows arrive gathered and spread open — the horizontal cousin of the card fan */
+.fc-row {
+  opacity: 0;
+  transform: translateY(46px);
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.fc-row .fc-track {
+  transform: scaleX(0.92);
+  transform-origin: 50% 50%;
+  transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.fc-row.fc-row-open { opacity: 1; transform: translateY(0); }
+.fc-row.fc-row-open .fc-track { transform: scaleX(1); }
+.fc-row:nth-of-type(2),
+.fc-row:nth-of-type(2) .fc-track { transition-delay: 0.12s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fc-row, .fc-row .fc-track { opacity: 1; transform: none; transition: none; }
+}
+
 .fc-label {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 10px;
@@ -286,7 +308,8 @@
 .medium-split {
   display: flex;
   width: 100%;
-  height: 420px;
+  height: 100vh;
+  height: 100svh;
 }
 
 .split-half {
@@ -299,8 +322,9 @@
   cursor: pointer;
 }
 
-.split-half--graphite { background: #131312; }
-.split-half--oils     { background: #16120a; }
+/* blend up from the page background so the section doesn't start with a hard edge */
+.split-half--graphite { background: linear-gradient(to bottom, var(--bg) 0%, #131312 30%); }
+.split-half--oils     { background: linear-gradient(to bottom, var(--bg) 0%, #16120a 30%); }
 
 .split-divider {
   width: 0.5px;
@@ -332,21 +356,33 @@
 }
 
 .split-card {
-  width: 120px;
-  height: 170px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 150px;
+  height: 212px;
   border-radius: 2px;
   overflow: hidden;
   box-shadow: 0 6px 22px rgba(0,0,0,0.55);
   flex-shrink: 0;
   border: 6px solid rgba(240,237,232,0.88);
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.split-card:first-child {
-  transform: rotate(-4deg);
-  z-index: 1;
-}
-.split-card:last-child {
-  transform: rotate(3deg);
-  margin-left: -14px;
+
+/* closed: a loose deck — first (leftmost) card on top */
+.split-card:nth-child(1) { transform: translate(calc(-50% - 8px), -50%) rotate(-4deg); z-index: 4; }
+.split-card:nth-child(2) { transform: translate(calc(-50% - 3px), -50%) rotate(-1deg); z-index: 3; }
+.split-card:nth-child(3) { transform: translate(calc(-50% + 3px), -50%) rotate(2deg);  z-index: 2; }
+.split-card:nth-child(4) { transform: translate(calc(-50% + 8px), -50%) rotate(4deg);  z-index: 1; }
+
+/* open: fanned like a hand of cards, staggered */
+.split-open .split-card:nth-child(1) { transform: translate(calc(-50% - 150px), -44%) rotate(-15deg); transition-delay: 0s; }
+.split-open .split-card:nth-child(2) { transform: translate(calc(-50% - 52px), -51%) rotate(-5deg);  transition-delay: 0.06s; }
+.split-open .split-card:nth-child(3) { transform: translate(calc(-50% + 52px), -51%) rotate(5deg);   transition-delay: 0.12s; }
+.split-open .split-card:nth-child(4) { transform: translate(calc(-50% + 150px), -44%) rotate(15deg); transition-delay: 0.18s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .split-card { transition: none; }
 }
 
 .split-card img {
@@ -382,6 +418,13 @@
   font-weight: 400;
   color: #e0dbd2;
   margin: 0 0 5px;
+  transform-origin: left bottom;
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) 0.15s;
+}
+
+/* desktop: titles grow as the fans open */
+@media (min-width: 769px) {
+  .split-open .split-title { transform: scale(1.6); }
 }
 
 .split-sub {
@@ -458,7 +501,21 @@
     height: auto;
   }
 
-  .split-half { height: 300px; }
+  .split-half {
+    flex: none;
+    height: 50vh;
+    height: 50svh;
+    min-height: 300px;
+  }
+
+  .split-card {
+    width: 118px;
+    height: 167px;
+  }
+  .split-open .split-card:nth-child(1) { transform: translate(calc(-50% - 92px), -44%) rotate(-13deg); }
+  .split-open .split-card:nth-child(2) { transform: translate(calc(-50% - 32px), -51%) rotate(-4deg); }
+  .split-open .split-card:nth-child(3) { transform: translate(calc(-50% + 32px), -51%) rotate(4deg); }
+  .split-open .split-card:nth-child(4) { transform: translate(calc(-50% + 92px), -44%) rotate(13deg); }
 
   .split-divider {
     width: 100%;
