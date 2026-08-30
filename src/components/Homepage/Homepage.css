@@ -112,6 +112,44 @@
   50% { transform: translateX(-50%) translateY(8px); }
 }
 
+/* under each carousel: link that scrolls to that medium's full-gallery fan */
+.fc-see-all {
+  display: block;
+  margin: 20px auto 0;
+  background: none;
+  border: none;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.4);
+  transition: color 0.2s;
+}
+.fc-see-all:hover { color: var(--oil-accent); }
+
+/* per-section scroll cue — shown on the mobile page-snap flow */
+.section-cue {
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  z-index: 6;
+  background: none;
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  opacity: 0.5;
+  transform: translateX(-50%);
+  animation: hero-cue-bob 2.4s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+  .section-cue { display: block; }
+  .fc-row { position: relative; }
+}
+
 /* ── text block — lower-left ── */
 .hero-content {
   position: absolute;
@@ -214,8 +252,15 @@
 .fc-row:nth-of-type(2),
 .fc-row:nth-of-type(2) .fc-track { transition-delay: 0.12s; }
 
+@keyframes fc-peek {
+  0%, 100% { transform: translateX(0); }
+  35% { transform: translateX(-30px); }
+  65% { transform: translateX(12px); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .fc-row, .fc-row .fc-track { opacity: 1; transform: none; transition: none; }
+  .fc-row.fc-row-open .fc-track-wrapper { animation: none; }
 }
 
 .fc-label {
@@ -277,7 +322,9 @@
 .fc-item {
   flex-shrink: 0;
   width: 260px;
-  scroll-snap-align: center;
+  /* center on the horizontal track only — `none` on the block axis keeps
+     these from becoming vertical snap points for the page */
+  scroll-snap-align: none center;
   transform: scale(var(--fc-scale, 0.82));
   opacity: var(--fc-opacity, 0.15);
   filter: blur(var(--fc-blur, 5px));
@@ -376,10 +423,10 @@
 .split-card:nth-child(4) { transform: translate(calc(-50% + 8px), -50%) rotate(4deg);  z-index: 1; }
 
 /* open: fanned like a hand of cards, staggered */
-.split-open .split-card:nth-child(1) { transform: translate(calc(-50% - 150px), -44%) rotate(-15deg); transition-delay: 0s; }
-.split-open .split-card:nth-child(2) { transform: translate(calc(-50% - 52px), -51%) rotate(-5deg);  transition-delay: 0.06s; }
-.split-open .split-card:nth-child(3) { transform: translate(calc(-50% + 52px), -51%) rotate(5deg);   transition-delay: 0.12s; }
-.split-open .split-card:nth-child(4) { transform: translate(calc(-50% + 150px), -44%) rotate(15deg); transition-delay: 0.18s; }
+.half-open .split-card:nth-child(1) { transform: translate(calc(-50% - 150px), -44%) rotate(-15deg); transition-delay: 0s; }
+.half-open .split-card:nth-child(2) { transform: translate(calc(-50% - 52px), -51%) rotate(-5deg);  transition-delay: 0.06s; }
+.half-open .split-card:nth-child(3) { transform: translate(calc(-50% + 52px), -51%) rotate(5deg);   transition-delay: 0.12s; }
+.half-open .split-card:nth-child(4) { transform: translate(calc(-50% + 150px), -44%) rotate(15deg); transition-delay: 0.18s; }
 
 @media (prefers-reduced-motion: reduce) {
   .split-card { transition: none; }
@@ -409,7 +456,7 @@
   position: absolute;
   bottom: 26px;
   left: 28px;
-  z-index: 3;
+  z-index: 5; /* above the fanned cards */
 }
 
 .split-title {
@@ -424,7 +471,7 @@
 
 /* desktop: titles grow as the fans open */
 @media (min-width: 769px) {
-  .split-open .split-title { transform: scale(1.6); }
+  .half-open .split-title { transform: scale(1.6); }
 }
 
 .split-sub {
@@ -490,10 +537,23 @@
 
   .hero-buttons { flex-wrap: wrap; }
 
-  .fc-section { padding: 40px 0 36px; }
-  .fc-item { width: 200px; }
+  /* each carousel row is its own full-screen page, content centered */
+  .fc-section { padding: 0; }
+  .fc-item { width: 205px; }
   .fc-track { gap: 16px; }
-  .fc-row { margin-bottom: 32px; }
+
+  /* one-time nudge after the row snaps in — hints that the strip swipes */
+  .fc-row.fc-row-open .fc-track-wrapper {
+    animation: fc-peek 1.5s cubic-bezier(0.2, 0.7, 0.2, 1) 1s 1;
+  }
+  .fc-row {
+    height: 100vh;
+    height: 100svh;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
   .fc-arrow { display: none; }
 
   .medium-split {
@@ -501,21 +561,35 @@
     height: auto;
   }
 
+  /* page-snap flow: hero → each carousel → oils fan → graphite fan */
+  html { scroll-snap-type: y proximity; }
+  .homepage .hero,
+  .homepage .fc-row,
+  .split-half { scroll-snap-align: start; }
+
   .split-half {
     flex: none;
-    height: 50vh;
-    height: 50svh;
-    min-height: 300px;
+    height: 100vh;
+    height: 100svh;
+    min-height: 480px;
   }
 
+  /* fan + title as one centered composition — no dead band between them */
   .split-card {
-    width: 118px;
-    height: 167px;
+    width: 132px;
+    height: 187px;
+    top: 38%;
   }
-  .split-open .split-card:nth-child(1) { transform: translate(calc(-50% - 92px), -44%) rotate(-13deg); }
-  .split-open .split-card:nth-child(2) { transform: translate(calc(-50% - 32px), -51%) rotate(-4deg); }
-  .split-open .split-card:nth-child(3) { transform: translate(calc(-50% + 32px), -51%) rotate(4deg); }
-  .split-open .split-card:nth-child(4) { transform: translate(calc(-50% + 92px), -44%) rotate(13deg); }
+  .split-label {
+    top: 64%;
+    bottom: auto;
+  }
+
+  .split-title { font-size: 28px; }
+  .half-open .split-card:nth-child(1) { transform: translate(calc(-50% - 88px), -44%) rotate(-13deg); }
+  .half-open .split-card:nth-child(2) { transform: translate(calc(-50% - 31px), -51%) rotate(-4deg); }
+  .half-open .split-card:nth-child(3) { transform: translate(calc(-50% + 31px), -51%) rotate(4deg); }
+  .half-open .split-card:nth-child(4) { transform: translate(calc(-50% + 88px), -44%) rotate(13deg); }
 
   .split-divider {
     width: 100%;
