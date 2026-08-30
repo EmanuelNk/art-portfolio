@@ -68,7 +68,7 @@ const oilPieces = [
   { src: OIL.emanuel2026,      thumbSrc: thumb(OIL.emanuel2026),      alt: 'Emanuel 2026' },
 ];
 
-function FocusCarousel({ images, label, onItemClick }) {
+function FocusCarousel({ images, label, onItemClick, cueTarget, seeAllLabel, seeAllTarget }) {
   const trackRef = useRef(null);
   const jumping = useRef(false);
   const idleTimer = useRef(null);
@@ -79,15 +79,17 @@ function FocusCarousel({ images, label, onItemClick }) {
   const updateFocus = useCallback(() => {
     const track = trackRef.current;
     if (!track) return;
+    // On phones keep neighbours clearly visible so the row reads as a carousel
+    const gentle = window.innerWidth <= 768;
     const center = track.scrollLeft + track.offsetWidth / 2;
     track.querySelectorAll('.fc-item').forEach((item) => {
       const itemCenter = item.offsetLeft + item.offsetWidth / 2;
       const dist = Math.abs(center - itemCenter);
       const maxDist = track.offsetWidth * 0.28;
       const ratio = Math.min(dist / maxDist, 1);
-      item.style.setProperty('--fc-scale', 1 - ratio * 0.18);
-      item.style.setProperty('--fc-opacity', 1 - ratio * 0.85);
-      item.style.setProperty('--fc-blur', `${ratio * 6}px`);
+      item.style.setProperty('--fc-scale', 1 - ratio * (gentle ? 0.12 : 0.18));
+      item.style.setProperty('--fc-opacity', 1 - ratio * (gentle ? 0.5 : 0.85));
+      item.style.setProperty('--fc-blur', `${ratio * (gentle ? 2 : 6)}px`);
     });
   }, []);
 
@@ -189,6 +191,27 @@ function FocusCarousel({ images, label, onItemClick }) {
           ›
         </button>
       </div>
+      {seeAllTarget && (
+        <button
+          className="fc-see-all"
+          onClick={() =>
+            document.querySelector(seeAllTarget)?.scrollIntoView({ behavior: 'smooth' })
+          }
+        >
+          {seeAllLabel} ↓
+        </button>
+      )}
+      {cueTarget && (
+        <button
+          className="section-cue"
+          aria-label="Scroll to the next section"
+          onClick={() =>
+            document.querySelector(cueTarget)?.scrollIntoView({ behavior: 'smooth' })
+          }
+        >
+          <span className="hero-scroll-chevron" />
+        </button>
+      )}
     </div>
   );
 }
@@ -234,15 +257,19 @@ function Homepage() {
     };
   }, []);
 
-  // Fan the split-section cards open when the section fills the view
+  // Fan each half's cards open when that half fills the view (per-half so it
+  // works when the halves stack full-screen on mobile)
   useEffect(() => {
-    const split = document.querySelector('.medium-split');
-    if (!split) return;
+    const halves = document.querySelectorAll('.split-half');
+    if (!halves.length) return;
     const obs = new IntersectionObserver(
-      ([entry]) => split.classList.toggle('split-open', entry.intersectionRatio >= 0.5),
-      { threshold: [0, 0.5, 1] }
+      (entries) =>
+        entries.forEach((entry) =>
+          entry.target.classList.toggle('half-open', entry.intersectionRatio >= 0.5)
+        ),
+      { threshold: [0, 0.5] }
     );
-    obs.observe(split);
+    halves.forEach((half) => obs.observe(half));
     return () => obs.disconnect();
   }, []);
 
@@ -303,11 +330,17 @@ function Homepage() {
           images={oilPieces}
           label="Oil paintings"
           onItemClick={(i) => openModal(oilPieces, i)}
+          cueTarget=".fc-section .fc-row:nth-of-type(2)"
+          seeAllLabel="See all oil paintings"
+          seeAllTarget=".split-half--oils"
         />
         <FocusCarousel
           images={graphitePieces}
           label="Graphite"
           onItemClick={(i) => openModal(graphitePieces, i)}
+          cueTarget=".split-half--oils"
+          seeAllLabel="See all graphite works"
+          seeAllTarget=".split-half--graphite"
         />
       </section>
 
@@ -326,6 +359,17 @@ function Homepage() {
             <p className="split-sub">Still life · Portraits · Scenery</p>
             <p className="split-cta">View gallery&nbsp;→</p>
           </div>
+          <button
+            className="section-cue"
+            aria-label="Scroll to the graphite section"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              document.querySelector('.split-half--graphite')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            <span className="hero-scroll-chevron" />
+          </button>
         </Link>
         <div className="split-divider" />
         <Link to="/graphite" className="split-half split-half--graphite">
