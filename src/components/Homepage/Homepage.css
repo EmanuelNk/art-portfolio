@@ -75,6 +75,43 @@
   z-index: 1;
 }
 
+/* Hero fills the visible viewport on iOS (bars shown) so the scroll cue stays on screen */
+.homepage .hero {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+/* ── scroll cue — bottom center ── */
+.hero-scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  z-index: 2;
+  background: none;
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  opacity: 0.55;
+  transform: translateX(-50%);
+  animation: hero-cue-bob 2.4s ease-in-out infinite;
+  transition: opacity 0.3s;
+}
+.hero-scroll-cue:hover { opacity: 0.9; }
+
+.hero-scroll-chevron {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-right: 1.5px solid var(--text-primary);
+  border-bottom: 1.5px solid var(--text-primary);
+  transform: rotate(45deg);
+}
+
+@keyframes hero-cue-bob {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
 /* ── text block — lower-left ── */
 .hero-content {
   position: absolute;
