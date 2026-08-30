@@ -31,10 +31,18 @@ const OIL = {
 };
 
 // Split-section preview cards (medium size)
-const graphite1 = thumb(GRAPHITE.art2, 700);
-const graphite2 = thumb(GRAPHITE.art1, 700);
-const oil1 = thumb(OIL.walletMan, 700);
-const oil2 = thumb(OIL.viennaRestaurant, 700);
+const graphiteCards = [
+  thumb(GRAPHITE.art2, 700),
+  thumb(GRAPHITE.art1, 700),
+  thumb(GRAPHITE.art6, 700),
+  thumb(GRAPHITE.art7, 700),
+];
+const oilCards = [
+  thumb(OIL.walletMan, 700),
+  thumb(OIL.viennaRestaurant, 700),
+  thumb(OIL.amicalolaFalls, 700),
+  thumb(OIL.georgiaHouse, 700),
+];
 
 
 const graphitePieces = [
@@ -195,16 +203,62 @@ function Homepage() {
   const goNext = () =>
     setModal((m) => ({ ...m, index: (m.index + 1) % m.images.length }));
 
-  // Scroll progress bar
+  // Scroll progress bar + hero parallax (text drifts slower than the page
+  // and fades, separating it from the background image)
   useEffect(() => {
     const bar = document.querySelector('.scroll-progress');
+    const content = document.querySelector('.hero-content');
+    const cue = document.querySelector('.hero-scroll-cue');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let raf = 0;
     const onScroll = () => {
-      const top = window.scrollY;
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      if (bar) bar.style.transform = `scaleX(${max > 0 ? top / max : 0})`;
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const top = window.scrollY;
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        if (bar) bar.style.transform = `scaleX(${max > 0 ? top / max : 0})`;
+        if (reduceMotion) return;
+        const p = Math.min(top / window.innerHeight, 1);
+        if (content) {
+          content.style.transform = `translateY(${top * 0.35}px)`;
+          content.style.opacity = String(Math.max(1 - p * 1.2, 0));
+        }
+        if (cue) cue.style.opacity = String(Math.max(0.55 - p * 2.5, 0));
+      });
     };
+    onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, []);
+
+  // Fan the split-section cards open when the section fills the view
+  useEffect(() => {
+    const split = document.querySelector('.medium-split');
+    if (!split) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => split.classList.toggle('split-open', entry.intersectionRatio >= 0.5),
+      { threshold: [0, 0.5, 1] }
+    );
+    obs.observe(split);
+    return () => obs.disconnect();
+  }, []);
+
+  // Carousel rows spread open (same gesture as the fans) as they enter the view
+  useEffect(() => {
+    const rows = document.querySelectorAll('.fc-row');
+    if (!rows.length) return;
+    const obs = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((entry) =>
+          entry.target.classList.toggle('fc-row-open', entry.intersectionRatio >= 0.3)
+        ),
+      { threshold: [0, 0.3] }
+    );
+    rows.forEach((row) => obs.observe(row));
+    return () => obs.disconnect();
   }, []);
 
   return (
@@ -262,8 +316,9 @@ function Homepage() {
         <Link to="/oils" className="split-half split-half--oils">
           <div className="split-hover-overlay" />
           <div className="split-cards">
-            <div className="split-card"><img src={oil1} alt="Oil painting" /></div>
-            <div className="split-card"><img src={oil2} alt="Oil painting" /></div>
+            {oilCards.map((src, i) => (
+              <div className="split-card" key={i}><img src={src} alt="Oil painting" /></div>
+            ))}
           </div>
           <div className="split-vignette" />
           <div className="split-label">
@@ -276,8 +331,9 @@ function Homepage() {
         <Link to="/graphite" className="split-half split-half--graphite">
           <div className="split-hover-overlay" />
           <div className="split-cards">
-            <div className="split-card"><img src={graphite1} alt="Graphite work" /></div>
-            <div className="split-card"><img src={graphite2} alt="Graphite work" /></div>
+            {graphiteCards.map((src, i) => (
+              <div className="split-card" key={i}><img src={src} alt="Graphite work" /></div>
+            ))}
           </div>
           <div className="split-vignette" />
           <div className="split-label">
