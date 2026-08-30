@@ -561,12 +561,9 @@
     height: auto;
   }
 
-  /* page-snap flow: hero → each carousel → oils fan → graphite fan */
-  html { scroll-snap-type: y proximity; }
-  .homepage .hero,
-  .homepage .fc-row,
-  .split-half { scroll-snap-align: start; }
-
+  /* full-screen pages, free scrolling — iOS root scroll-snap stalls and kills
+     momentum (toolbar collapse shifts svh snap points), so no snapping here;
+     the chevron cues page precisely instead */
   .split-half {
     flex: none;
     height: 100vh;
