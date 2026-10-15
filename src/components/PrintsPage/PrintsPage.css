@@ -124,6 +124,14 @@
   margin-top: 14px;
 }
 .pc-custom input { width: 110px; }
+.pc-custom-note { font-size: 0.85rem; color: var(--text-muted); }
+
+/* Print size: two options side by side */
+.pc-print-sizes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 240px));
+  gap: 10px;
+}
 
 /* ── Portrait faces ── */
 .pc-faces {
