@@ -161,7 +161,7 @@ function PrintForm() {
           <div className="pc-note">
             <strong>Fine-art giclée prints on canvas</strong>
             <p>
-              Scanned and printed by a professional fine-art print studio in Jerusalem. Each print
+              Scanned and printed by a professional fine-art print studio. Each print
               starts from a high-resolution, colour-calibrated scan of the original painting, so its
               colours, tones and brushwork come through true to the original, and is printed with
               archival pigment inks on museum-grade canvas, made to last for generations without fading.

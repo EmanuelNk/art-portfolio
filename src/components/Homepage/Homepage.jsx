@@ -316,7 +316,6 @@ function Homepage() {
             <span>Nafcha</span>
           </h1>
           <p className="hero-subtitle">Oil Painter</p>
-          <p className="hero-location">Jerusalem, Israel</p>
           <div className="hero-buttons">
             <Link to="/oils" className="hero-btn hero-btn--oil">Oil paintings</Link>
             <Link to="/graphite" className="hero-btn hero-btn--default">Graphite works</Link>
