@@ -15,11 +15,13 @@ const thumb = (url, w = 900) =>
   url.replace('/upload/', `/upload/w_${w},f_auto,q_auto,c_limit/`);
 
 const toPieces = (data) =>
-  data.map(({ url, title, description, size }) => ({
+  data.map(({ url, title, description, size, scale, prints }) => ({
     url,
     title,
     description,
     sizeText: size || '',
+    scale,
+    prints: Boolean(prints),
   }));
 
 const CATEGORY_PIECES = {
@@ -107,14 +109,20 @@ function OilsGallery({ category }) {
             <button
               key={piece.title + index}
               className="masonry-item reveal"
+              style={piece.scale ? { width: `${piece.scale * 100}%`, marginInline: 'auto' } : undefined}
               onClick={() => openModalAt(index)}
-              aria-label={`Open ${piece.title}`}
+              aria-label={`Open ${piece.title}${piece.prints ? ' (prints available)' : ''}`}
             >
               <img
                 src={thumb(piece.url)}
                 alt={piece.title}
                 onLoad={(e) => { e.target.setAttribute('data-loaded', 'true'); }}
               />
+              {piece.prints && (
+                <span className="masonry-ribbon" aria-hidden="true">
+                  <span>Prints available</span>
+                </span>
+              )}
               {piece.sizeText && (
                 <span className="masonry-size" aria-hidden="true">
                   {piece.sizeText}
