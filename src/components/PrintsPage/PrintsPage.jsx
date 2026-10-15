@@ -6,6 +6,8 @@ import {
   otherPaintings,
   COMMISSION_SIZES,
   SUBJECTS,
+  formatSize,
+  scaleToLongSide,
 } from '../../data/commissions';
 import './PrintsPage.css';
 
@@ -93,8 +95,22 @@ function Status({ status }) {
 function PrintForm() {
   const [mode, setMode] = useState('available');
   const [painting, setPainting] = useState(null);
+  const [printSize, setPrintSize] = useState('');
+  const [longSide, setLongSide] = useState({ length: '', unit: 'cm' });
   const [contact, setContact] = useState(emptyContact);
   const [status, setStatus] = useState('idle');
+
+  const original = painting?.original;
+  const scaled = original && longSide.length > 0
+    ? scaleToLongSide(original, Number(longSide.length), longSide.unit)
+    : '';
+  let sizeText = '';
+  if (printSize === 'original') {
+    sizeText = original ? `True to original, ${formatSize(original)}` : 'True to original';
+  } else if (printSize === 'custom' && longSide.length > 0) {
+    sizeText = `Long side ${longSide.length} ${longSide.unit}${scaled ? ` (about ${scaled})` : ''}`;
+  }
+  const ready = painting && sizeText;
 
   const switchMode = (m) => {
     setMode(m);
@@ -103,7 +119,7 @@ function PrintForm() {
 
   const submit = async (e) => {
     e.preventDefault();
-    if (!painting) return;
+    if (!ready) return;
     setStatus('sending');
     try {
       await sendRequest(
@@ -112,6 +128,7 @@ function PrintForm() {
           Type: mode === 'available' ? 'Order an available print' : 'Request a print of another painting',
           Painting: `${painting.title} (${painting.collection})`,
           Image: painting.url,
+          'Print size': sizeText,
           Name: contact.name,
           Email: contact.email,
           Phone: contact.phone || '-',
@@ -120,6 +137,8 @@ function PrintForm() {
       );
       setStatus('sent');
       setPainting(null);
+      setPrintSize('');
+      setLongSide({ length: '', unit: 'cm' });
       setContact(emptyContact);
     } catch {
       setStatus('error');
@@ -146,20 +165,59 @@ function PrintForm() {
       </fieldset>
 
       <fieldset className="pc-step">
-        <legend>2. Your details</legend>
+        <legend>2. Print size</legend>
+        <div className="pc-print-sizes">
+          <button
+            type="button"
+            className={`pc-size${printSize === 'original' ? ' is-selected' : ''}`}
+            onClick={() => setPrintSize('original')}
+            aria-pressed={printSize === 'original'}
+          >
+            <span>True to original</span>
+            <small>{original ? formatSize(original) : 'same size as the painting'}</small>
+          </button>
+          <button
+            type="button"
+            className={`pc-size${printSize === 'custom' ? ' is-selected' : ''}`}
+            onClick={() => setPrintSize('custom')}
+            aria-pressed={printSize === 'custom'}
+          >
+            <span>Choose the long side</span>
+            <small>type the length you want</small>
+          </button>
+        </div>
+        {printSize === 'custom' && (
+          <div className="pc-custom">
+            <input
+              type="number" min="1" inputMode="decimal" required placeholder="Long side" aria-label="Long side length"
+              value={longSide.length} onChange={(e) => setLongSide({ ...longSide, length: e.target.value })}
+            />
+            <select aria-label="Unit" value={longSide.unit} onChange={(e) => setLongSide({ ...longSide, unit: e.target.value })}>
+              <option value="cm">cm</option>
+              <option value="in">in</option>
+            </select>
+            {scaled && <span className="pc-custom-note">Print size about {scaled}</span>}
+          </div>
+        )}
+      </fieldset>
+
+      <fieldset className="pc-step">
+        <legend>3. Your details</legend>
         <ContactFields
           contact={contact}
           setContact={setContact}
           messageLabel="Notes"
-          messagePlaceholder="Preferred print size, framing, shipping country…"
+          messagePlaceholder="Framing, shipping country, anything else…"
         />
       </fieldset>
 
       <div className="pc-submit-row">
         <p className="pc-summary">
-          {painting ? <>Selected: <strong>{painting.title}</strong></> : 'Select a painting above'}
+          {ready
+            ? <><strong>{painting.title}</strong>, {sizeText.charAt(0).toLowerCase() + sizeText.slice(1)}</>
+            : painting ? <>Selected: <strong>{painting.title}</strong>. Choose a print size</> : 'Select a painting above'}
         </p>
-        <button className="pc-submit" type="submit" disabled={!painting || status === 'sending'}>
+        <button className="pc-submit" type="submit" disabled={!ready || status === 'sending'}>
           {status === 'sending' ? 'Sending…' : mode === 'available' ? 'Order print' : 'Request print'}
         </button>
       </div>
