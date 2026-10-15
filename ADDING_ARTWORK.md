@@ -114,7 +114,7 @@ Optional fields on any oil-painting entry:
 
 | Field    | Example | Effect |
 |----------|---------|--------|
-| `prints` | `true`  | Shows a "Prints available" corner strip in the gallery, and lists the painting under **Prints available** on the Prints & Commissions page (`/prints`). Paintings without it are listed under **Request a print**. |
+| `prints` | `true`  | Shows a "Prints available" corner strip in the gallery, and lists the painting under **Prints available** on the Prints & Commissions page (`/prints`). Paintings without it are listed under **Request a print**; `false` hides the painting from the page entirely. |
 | `scale`  | `0.8`   | Shrinks the gallery card to that fraction of the column width (used to order Vienna cards by painting size). |
 
 For the homepage carousel strip, add `prints: true` to the painting's entry in `oilPieces` in `src/components/Homepage/Homepage.jsx`.

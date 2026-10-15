@@ -19,9 +19,13 @@ const COLLECTIONS = [
   { name: 'Graphite', data: graphiteData },
 ];
 
-// A painting flagged for prints in any gallery counts as available.
+// "prints": true in any gallery = print available; "prints": false = never offered;
+// no flag = visitors can request a print.
 const printUrls = new Set(
   COLLECTIONS.flatMap(({ data }) => data.filter((p) => p.prints).map((p) => p.url))
+);
+const noPrintUrls = new Set(
+  COLLECTIONS.flatMap(({ data }) => data.filter((p) => p.prints === false).map((p) => p.url))
 );
 
 // Every painting on the site once (some appear in more than one gallery),
@@ -30,7 +34,7 @@ const allPaintings = [];
 const seen = new Set();
 COLLECTIONS.forEach(({ name, data }) =>
   data.forEach(({ url, title }) => {
-    if (seen.has(url)) return;
+    if (seen.has(url) || noPrintUrls.has(url)) return;
     seen.add(url);
     allPaintings.push({ url, title, collection: name, prints: printUrls.has(url) });
   })
