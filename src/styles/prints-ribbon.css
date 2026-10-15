@@ -1,0 +1,26 @@
+/* "Prints available" diagonal strip across a painting's top-left corner.
+   Place inside a position: relative card; the wrapper clips the strip to it. */
+.prints-ribbon {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.prints-ribbon span {
+  position: absolute;
+  top: 26px;
+  left: -50px;
+  width: 180px;
+  padding: 4px 0;
+  transform: rotate(-45deg);
+  text-align: center;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--oil-accent);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}

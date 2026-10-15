@@ -338,6 +338,11 @@
 }
 .fc-item:focus { outline: none; }
 
+/* wraps the image so the prints strip tracks the image, not the (taller) button;
+   the strip sits inside the white frame, on the painting itself */
+.fc-frame { position: relative; display: block; }
+.fc-frame .prints-ribbon { inset: 8px; }
+
 .fc-item img {
   width: 100%;
   height: auto;

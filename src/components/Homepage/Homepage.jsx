@@ -4,6 +4,7 @@ import Header from '../Header/Header';
 import Modal from '../Modal/Modal';
 import heroImage from '../../assets/images/profile6.jpg';
 import './Homepage.css';
+import '../../styles/prints-ribbon.css';
 
 // Inserts Cloudinary transformation params into an upload URL
 const thumb = (url, w = 520) =>
@@ -62,9 +63,9 @@ const oilPieces = [
   { src: OIL.amicalolaFalls,   thumbSrc: thumb(OIL.amicalolaFalls),   alt: 'Amicalola Falls' },
   { src: OIL.ashevilleFall,    thumbSrc: thumb(OIL.ashevilleFall),    alt: 'Asheville Fall' },
   { src: OIL.georgiaHouse,     thumbSrc: thumb(OIL.georgiaHouse),     alt: 'Georgia House' },
-  { src: OIL.smokingLady,      thumbSrc: thumb(OIL.smokingLady),      alt: 'The Smoking Lady' },
-  { src: OIL.walletMan,        thumbSrc: thumb(OIL.walletMan),        alt: 'Wallet Man' },
-  { src: OIL.viennaRestaurant, thumbSrc: thumb(OIL.viennaRestaurant), alt: 'Vienna Restaurant' },
+  { src: OIL.smokingLady,      thumbSrc: thumb(OIL.smokingLady),      alt: 'The Smoking Lady', prints: true },
+  { src: OIL.walletMan,        thumbSrc: thumb(OIL.walletMan),        alt: 'Wallet Man', prints: true },
+  { src: OIL.viennaRestaurant, thumbSrc: thumb(OIL.viennaRestaurant), alt: 'Vienna Restaurant', prints: true },
   { src: OIL.selfPortrait2026, thumbSrc: thumb(OIL.selfPortrait2026), alt: 'Self Portrait 2026' },
   { src: OIL.emanuel2026,      thumbSrc: thumb(OIL.emanuel2026),      alt: 'Emanuel 2026' },
   { src: OIL.pinkFlowers,      thumbSrc: thumb(OIL.pinkFlowers),      alt: 'Pink Flowers' },
@@ -183,9 +184,16 @@ function FocusCarousel({ images, label, onItemClick, cueTarget, seeAllLabel, see
               key={i}
               className="fc-item"
               onClick={() => onItemClick(i % count)}
-              aria-label={`View ${img.alt}`}
+              aria-label={`View ${img.alt}${img.prints ? ' (prints available)' : ''}`}
             >
-              <img src={img.thumbSrc || img.src} alt={img.alt} draggable="false" loading="eager" />
+              <span className="fc-frame">
+                <img src={img.thumbSrc || img.src} alt={img.alt} draggable="false" loading="eager" />
+                {img.prints && (
+                  <span className="prints-ribbon" aria-hidden="true">
+                    <span>Prints available</span>
+                  </span>
+                )}
+              </span>
             </button>
           ))}
         </div>

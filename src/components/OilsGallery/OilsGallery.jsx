@@ -10,6 +10,7 @@ import oilMediumData from '../../data/oil-medium.json';
 import oilMinisData from '../../data/oil-minis.json';
 import '../ArtPortfolio.css';
 import './OilsGallery.css';
+import '../../styles/prints-ribbon.css';
 
 const thumb = (url, w = 900) =>
   url.replace('/upload/', `/upload/w_${w},f_auto,q_auto,c_limit/`);
@@ -119,7 +120,7 @@ function OilsGallery({ category }) {
                 onLoad={(e) => { e.target.setAttribute('data-loaded', 'true'); }}
               />
               {piece.prints && (
-                <span className="masonry-ribbon" aria-hidden="true">
+                <span className="prints-ribbon" aria-hidden="true">
                   <span>Prints available</span>
                 </span>
               )}
