@@ -6,6 +6,7 @@ import OilsPage from './components/OilsPage/OilsPage';
 import OilsGallery from './components/OilsGallery/OilsGallery';
 import AboutPage from './components/AboutPage/AboutPage';
 import ContactPage from './components/ContactPage/ContactPage';
+import PrintsPage from './components/PrintsPage/PrintsPage';
 import './App.css';
 
 function ScrollToTop() {
@@ -29,6 +30,7 @@ function App() {
         <Route path="/oils/medium" element={<OilsGallery category="medium" />} />
         <Route path="/oils/minis" element={<OilsGallery category="minis" />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/prints" element={<PrintsPage />} />
         <Route path="/contact" element={<ContactPage />} />
       </Routes>
     </div>

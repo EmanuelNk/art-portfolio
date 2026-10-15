@@ -105,6 +105,22 @@ The Oils landing page (`/oils`) will automatically update the thumbnail and coun
 
 In `src/components/Homepage/Homepage.jsx`, add to the `OIL` object and `oilPieces` array (same pattern as minis above).
 
+
+---
+
+## Prints available, card size & the Prints & Commissions page
+
+Optional fields on any oil-painting entry:
+
+| Field    | Example | Effect |
+|----------|---------|--------|
+| `prints` | `true`  | Shows a "Prints available" corner strip in the gallery, and lists the painting under **Prints available** on the Prints & Commissions page (`/prints`). Paintings without it are listed under **Request a print**; `false` hides the painting from the page entirely. |
+| `scale`  | `0.8`   | Shrinks the gallery card to that fraction of the column width (used to order Vienna cards by painting size). |
+
+For the homepage carousel strip, add `prints: true` to the painting's entry in `oilPieces` in `src/components/Homepage/Homepage.jsx`.
+
+Print orders and commission requests from `/prints` are emailed through [FormSubmit](https://formsubmit.co) to the address in `src/data/commissions.js` (`ORDERS_EMAIL`). The commission sizes and subjects are also set there. The very first submission sends an activation email to that inbox; click **Activate** in it once, or requests won't be delivered.
+
 ---
 
 ## Changing a Painting's Name or Info

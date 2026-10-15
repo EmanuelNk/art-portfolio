@@ -45,6 +45,7 @@ function Header() {
           <nav className="header-nav">
             <Link to="/oils" className="header-link">Oil paintings</Link>
             <Link to="/graphite" className="header-link">Graphite</Link>
+            <Link to="/prints" className="header-link">Prints &amp; Commissions</Link>
             <Link to="/about" className="header-link">About</Link>
             <Link to="/contact" className="header-link">Contact</Link>
             {icons}
@@ -64,6 +65,7 @@ function Header() {
           <nav className="mobile-overlay-nav">
             <Link to="/oils" className="header-link" onClick={close}>Oil paintings</Link>
             <Link to="/graphite" className="header-link" onClick={close}>Graphite</Link>
+            <Link to="/prints" className="header-link" onClick={close}>Prints &amp; Commissions</Link>
             <Link to="/about" className="header-link" onClick={close}>About</Link>
             <Link to="/contact" className="header-link" onClick={close}>Contact</Link>
             {icons}
