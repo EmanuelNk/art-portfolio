@@ -169,13 +169,14 @@
 }
 .hero-name span { display: block; }
 
-.hero-subtitle {
+/* .homepage scope beats the .hero-subtitle rule in ArtPortfolio.css (loaded by galleries) */
+.homepage .hero-subtitle {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.2em;
   color: rgba(255,255,255,0.3);
-  margin: 0 0 26px;
+  margin: 0 0 28px;
   text-shadow: 0 1px 8px rgba(0,0,0,0.6);
 }
 
