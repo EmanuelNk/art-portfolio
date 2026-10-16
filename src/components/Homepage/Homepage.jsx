@@ -21,6 +21,7 @@ const GRAPHITE = {
   art8: 'https://res.cloudinary.com/djm9plswu/image/upload/v1776158740/art8_ktadb8.jpg',
 };
 const OIL = {
+  corinne:          'https://res.cloudinary.com/djm9plswu/image/upload/v1792172878/BCA00827_mp9zme.jpg',
   smokingLady:      'https://res.cloudinary.com/djm9plswu/image/upload/v1792080268/DN_001_eob6y9.jpg',
   walletMan:        'https://res.cloudinary.com/djm9plswu/image/upload/v1787744814/BCA00785-2_ygkfb5.jpg',
   viennaRestaurant: 'https://res.cloudinary.com/djm9plswu/image/upload/v1787744815/BCA00653_vha16l.jpg',
@@ -58,17 +59,18 @@ const graphitePieces = [
 ];
 
 // The carousel centers on the middle item (index floor(count/2)) at load,
-// so Wallet Man sits there, flanked by The Smoking Lady (left) and Vienna Restaurant (right).
+// so Corinne sits there: Vienna Restaurant on her left, then Wallet Man and The Smoking Lady on her right.
 const oilPieces = [
   { src: OIL.amicalolaFalls,   thumbSrc: thumb(OIL.amicalolaFalls),   alt: 'Amicalola Falls' },
   { src: OIL.ashevilleFall,    thumbSrc: thumb(OIL.ashevilleFall),    alt: 'Asheville Fall' },
   { src: OIL.georgiaHouse,     thumbSrc: thumb(OIL.georgiaHouse),     alt: 'Georgia House' },
-  { src: OIL.smokingLady,      thumbSrc: thumb(OIL.smokingLady),      alt: 'The Smoking Lady', prints: true },
-  { src: OIL.walletMan,        thumbSrc: thumb(OIL.walletMan),        alt: 'Wallet Man', prints: true },
+  { src: OIL.pinkFlowers,      thumbSrc: thumb(OIL.pinkFlowers),      alt: 'Pink Flowers' },
   { src: OIL.viennaRestaurant, thumbSrc: thumb(OIL.viennaRestaurant), alt: 'Vienna Restaurant', prints: true },
+  { src: OIL.corinne,          thumbSrc: thumb(OIL.corinne),          alt: 'Corinne' },
+  { src: OIL.walletMan,        thumbSrc: thumb(OIL.walletMan),        alt: 'Wallet Man', prints: true },
+  { src: OIL.smokingLady,      thumbSrc: thumb(OIL.smokingLady),      alt: 'The Smoking Lady', prints: true },
   { src: OIL.selfPortrait2026, thumbSrc: thumb(OIL.selfPortrait2026), alt: 'Self Portrait 2026' },
   { src: OIL.emanuel2026,      thumbSrc: thumb(OIL.emanuel2026),      alt: 'Emanuel 2026' },
-  { src: OIL.pinkFlowers,      thumbSrc: thumb(OIL.pinkFlowers),      alt: 'Pink Flowers' },
 ];
 
 function FocusCarousel({ images, label, onItemClick, cueTarget, seeAllLabel, seeAllTarget }) {
