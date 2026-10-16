@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 import Modal from '../Modal/Modal';
+import { useUnit, formatSizeIn } from '../../units';
 import viennaData from '../../data/vienna.json';
 import portraitsData from '../../data/portraits.json';
 import fallData from '../../data/fall.json';
@@ -35,6 +36,7 @@ const CATEGORY_PIECES = {
 };
 
 function OilsGallery({ category }) {
+  const [unit] = useUnit();
   const pieces = CATEGORY_PIECES[category] || [];
 
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -126,7 +128,7 @@ function OilsGallery({ category }) {
               )}
               {piece.sizeText && (
                 <span className="masonry-size" aria-hidden="true">
-                  {piece.sizeText}
+                  {formatSizeIn(piece.sizeText, unit)}
                 </span>
               )}
               <span className="masonry-caption">{piece.title}</span>

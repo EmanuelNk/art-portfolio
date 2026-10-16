@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../Header/Header';
 import {
   ORDERS_EMAIL,
@@ -9,6 +9,7 @@ import {
   formatSize,
   scaleToLongSide,
 } from '../../data/commissions';
+import { useUnit, formatDims, otherUnit } from '../../units';
 import './PrintsPage.css';
 
 const thumb = (url) => url.replace('/upload/', '/upload/w_360,f_auto,q_auto,c_limit/');
@@ -96,9 +97,13 @@ function PrintForm() {
   const [mode, setMode] = useState('available');
   const [painting, setPainting] = useState(null);
   const [printSize, setPrintSize] = useState('');
-  const [longSide, setLongSide] = useState({ length: '', unit: 'cm' });
+  const [unit] = useUnit();
+  const [longSide, setLongSide] = useState({ length: '', unit });
   const [contact, setContact] = useState(emptyContact);
   const [status, setStatus] = useState('idle');
+
+  // Follow the site-wide in/cm switch; the dropdown can still override it.
+  useEffect(() => setLongSide((ls) => ({ ...ls, unit })), [unit]);
 
   const original = painting?.original;
   const scaled = original && longSide.length > 0
@@ -106,7 +111,7 @@ function PrintForm() {
     : '';
   let sizeText = '';
   if (printSize === 'original') {
-    sizeText = original ? `True to original, ${formatSize(original)}` : 'True to original';
+    sizeText = original ? `True to original, ${formatSize(original, unit)}` : 'True to original';
   } else if (printSize === 'custom' && longSide.length > 0) {
     sizeText = `Long side ${longSide.length} ${longSide.unit}${scaled ? ` (about ${scaled})` : ''}`;
   }
@@ -138,7 +143,7 @@ function PrintForm() {
       setStatus('sent');
       setPainting(null);
       setPrintSize('');
-      setLongSide({ length: '', unit: 'cm' });
+      setLongSide({ length: '', unit });
       setContact(emptyContact);
     } catch {
       setStatus('error');
@@ -185,7 +190,7 @@ function PrintForm() {
             aria-pressed={printSize === 'original'}
           >
             <span>True to original</span>
-            <small>{original ? formatSize(original) : 'same size as the painting'}</small>
+            <small>{original ? formatSize(original, unit) : 'same size as the painting'}</small>
           </button>
           <button
             type="button"
@@ -239,17 +244,20 @@ function PrintForm() {
 
 function CommissionForm() {
   const [size, setSize] = useState('');
-  const [custom, setCustom] = useState({ width: '', height: '', unit: 'cm' });
+  const [unit] = useUnit();
+  const [custom, setCustom] = useState({ width: '', height: '', unit });
   const [subject, setSubject] = useState('');
   const [faces, setFaces] = useState(1);
   const [contact, setContact] = useState(emptyContact);
   const [status, setStatus] = useState('idle');
 
+  useEffect(() => setCustom((c) => ({ ...c, unit })), [unit]);
+
   const isCustom = size === 'custom';
   const customReady = custom.width && custom.height;
   const sizeText = isCustom
     ? customReady && `${custom.width}x${custom.height} ${custom.unit} (custom)`
-    : size && `${size.cm} (${size.inches})`;
+    : size && `${formatDims(size.w, size.h, 'cm', unit)} (${formatDims(size.w, size.h, 'cm', otherUnit(unit))})`;
   const ready = sizeText && subject;
 
   const submit = async (e) => {
@@ -269,7 +277,7 @@ function CommissionForm() {
       });
       setStatus('sent');
       setSize('');
-      setCustom({ width: '', height: '', unit: 'cm' });
+      setCustom({ width: '', height: '', unit });
       setSubject('');
       setFaces(1);
       setContact(emptyContact);
@@ -286,13 +294,13 @@ function CommissionForm() {
           {COMMISSION_SIZES.map((s) => (
             <button
               type="button"
-              key={s.cm}
+              key={`${s.w}x${s.h}`}
               className={`pc-size${size === s ? ' is-selected' : ''}`}
               onClick={() => setSize(s)}
               aria-pressed={size === s}
             >
-              <span>{s.cm}</span>
-              <small>{s.inches}</small>
+              <span>{formatDims(s.w, s.h, 'cm', unit)}</span>
+              <small>{formatDims(s.w, s.h, 'cm', otherUnit(unit))}</small>
             </button>
           ))}
           <button

@@ -4,12 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { HashRouter } from 'react-router-dom';
+import { UnitProvider } from './units';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <HashRouter>
-      <App />
+      <UnitProvider>
+        <App />
+      </UnitProvider>
     </HashRouter>
   </React.StrictMode>
 );
