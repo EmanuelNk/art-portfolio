@@ -29,7 +29,7 @@ Open `src/data/artworks.json` and add an entry:
 | `url`         | Yes      | Full Cloudinary `secure_url` from the upload |
 | `title`       | Yes      | Display name in the gallery & lightbox       |
 | `description` | No       | Shown in the lightbox (can be `""`)          |
-| `size`        | No       | Dimensions badge, e.g. `"18\"x24\""`         |
+| `size`        | No       | Dimensions badge, e.g. `"30x40 cm"` or `"18\"x24\""`. Shown in inches or cm depending on the visitor's in/cm switch in the header (inches by default). |
 
 The gallery will pick it up automatically. No code changes needed.
 

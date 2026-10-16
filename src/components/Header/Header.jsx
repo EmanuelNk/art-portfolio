@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useLocation } from 'react-router-dom';
 import { FaInstagram, FaEnvelope, FaPhone, FaBars, FaTimes } from 'react-icons/fa';
+import { UnitToggle } from '../../units';
 import './Header.css';
 
 function Header() {
@@ -48,6 +49,7 @@ function Header() {
             <Link to="/prints" className="header-link">Prints &amp; Commissions</Link>
             <Link to="/about" className="header-link">About</Link>
             <Link to="/contact" className="header-link">Contact</Link>
+            <UnitToggle />
             {icons}
           </nav>
         </div>
@@ -68,6 +70,7 @@ function Header() {
             <Link to="/prints" className="header-link" onClick={close}>Prints &amp; Commissions</Link>
             <Link to="/about" className="header-link" onClick={close}>About</Link>
             <Link to="/contact" className="header-link" onClick={close}>Contact</Link>
+            <UnitToggle />
             {icons}
           </nav>
         </div>,

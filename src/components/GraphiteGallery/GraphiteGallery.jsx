@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../Header/Header';
 import Modal from '../Modal/Modal';
+import { useUnit, formatSizeIn } from '../../units';
 import artworks from '../../data/artworks.json';
 import '../ArtPortfolio.css';
 import './GraphiteGallery.css';
@@ -16,6 +17,7 @@ const artPieces = artworks.map(({ url, title, description, size }) => ({
 }));
 
 function GraphiteGallery() {
+  const [unit] = useUnit();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -112,7 +114,7 @@ function GraphiteGallery() {
               />
               {piece.sizeText && (
                 <span className="masonry-size" aria-hidden="true">
-                  {piece.sizeText}
+                  {formatSizeIn(piece.sizeText, unit)}
                 </span>
               )}
               <span className="masonry-caption">{piece.title}</span>
